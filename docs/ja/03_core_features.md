@@ -1,6 +1,6 @@
 ## アーキテクチャ概要
 
-![Image](https://github.com/user-attachments/assets/9538433a-79ea-4034-b23a-16a580503495)
+![Image](https://github.com/user-attachments/assets/d248dce0-7152-4c53-b7f5-a48e0ee20828)
 
 ### レイヤー構成
 
