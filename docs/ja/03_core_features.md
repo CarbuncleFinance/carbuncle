@@ -1,7 +1,5 @@
 ## アーキテクチャ概要
 
-![Image](https://github.com/user-attachments/assets/d248dce0-7152-4c53-b7f5-a48e0ee20828)
-
 ### レイヤー構成
 
 | レイヤー | 目的 | 対応チェーン |
