@@ -7,6 +7,8 @@ import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { APP_NAME } from '@/constants/app'
+import LangSwitchButton from '@/components/ui/buttons/LangSwitchButton'
+import WalletConnectButton from '@/components/ui/buttons/WalletConnectButton'
 
 const AppBar = dynamic(
   () => import('@mui/material/AppBar').then((mod) => mod.default),
@@ -41,9 +43,8 @@ export default function TopBar() {
           </Button>
         </Box>
         <Box sx={{ display: 'flex', gap: 1 }}>
-          <Button variant="outlined" color="inherit">
-            Connect
-          </Button>
+          <LangSwitchButton />
+          <WalletConnectButton />
         </Box>
       </Toolbar>
     </AppBar>

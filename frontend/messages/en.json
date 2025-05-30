@@ -14,5 +14,8 @@
       "title": "Flexible asset management",
       "description": "Realize automatic asset management and seamless asset movement through smart contracts."
     }
+  },
+  "WalletConnectButton": {
+    "label": "Connect"
   }
 }
