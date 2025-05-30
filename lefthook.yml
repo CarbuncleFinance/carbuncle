@@ -7,10 +7,10 @@ pre-push:
   commands:
     check:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
-      run: bun biome check --no-errors-on-unmatched --files-ignore-unknown=true <files>
+      run: 'if [ -n "$files" ]; then bun biome check --no-errors-on-unmatched --files-ignore-unknown=true $files; fi'
 
 pre-commit:
   commands:
     check:
       glob: "**/*.{js,ts,jsx,tsx,json,md,yml,yaml}"
-      run: bun biome check --apply --no-errors-on-unmatched --files-ignore-unknown=true <files> && git update-index --again
+      run: 'if [ -n "$files" ]; then bun biome check --apply --no-errors-on-unmatched --files-ignore-unknown=true $files && git update-index --again; fi'
