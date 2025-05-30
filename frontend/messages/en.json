@@ -1,0 +1,18 @@
+{
+  "HomePage": {
+    "title1": "Legendary carbanker leads the way to",
+    "title2": "a new world of assets",
+    "card1": {
+      "title": "Web3 Real-World Bridge",
+      "description": "Recreate the experience of banks and wallets in Web2 in Web3, providing a financial service that anyone can use intuitively."
+    },
+    "card2": {
+      "title": "Familiar business flow",
+      "description": "Recreate existing financial transaction flows in Web3. With intuitive operability, anyone can use it with confidence."
+    },
+    "card3": {
+      "title": "Flexible asset management",
+      "description": "Realize automatic asset management and seamless asset movement through smart contracts."
+    }
+  }
+}

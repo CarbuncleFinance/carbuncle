@@ -1,0 +1,10 @@
+{
+  "name": "carbuncle",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "private": true,
+  "workspaces": [
+    "frontend/*"
+  ]
+}
