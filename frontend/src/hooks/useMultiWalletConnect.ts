@@ -12,7 +12,7 @@ export function useMultiWalletConnect() {
   const connect = async (walletType: WalletType) => {
     try {
       const adapter = WalletFactory.createAdapter(walletType)
-      
+
       const installed = await adapter.isInstalled()
       if (!installed) {
         throw createError(AppErrorCode.WALLET_NOT_INSTALLED)

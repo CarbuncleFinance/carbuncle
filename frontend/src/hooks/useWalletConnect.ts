@@ -25,7 +25,7 @@ export function useWalletConnect() {
       }
 
       const adapter = WalletFactory.createAdapter(adapterWalletType)
-      
+
       const installed = await adapter.isInstalled()
       if (!installed) {
         throw createError(AppErrorCode.WALLET_NOT_INSTALLED)
