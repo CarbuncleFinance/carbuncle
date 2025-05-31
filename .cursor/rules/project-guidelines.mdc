@@ -1,0 +1,14 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# This file is for summarizing project-wide development guidelines and policies.
+# Example related documents:
+# - docs/component_design.md (Component Design)
+# - docs/architecture.md (System Architecture Design)
+# - docs/development_flow.md (Development Flow & Rules)
+# More documents may be added in the future.
+
+[component_design.md](mdc:docs/component_design.md)
+The component design policy is described in docs/component_design.md.

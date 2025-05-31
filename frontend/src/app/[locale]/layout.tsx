@@ -2,13 +2,9 @@ import type { Metadata } from 'next'
 import { Noto_Sans } from 'next/font/google'
 import { APP_NAME, APP_DESCRIPTION } from '@/constants/app'
 import TopBar from '@/components/features/navigation/TopBar'
-import { ThemeProvider } from '@mui/material/styles'
-import SnackbarProvider from '@/components/providers/SnackbarProvider'
-import WagmiProvider from '@/components/providers/WagmiProvider'
-import QueryClientProvider from '@/components/providers/QueryClientProvider'
-import theme from '@/utils/theme'
+import AppProviders from '@/components/providers'
 // i18n
-import { NextIntlClientProvider, hasLocale } from 'next-intl'
+import { hasLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 // CSS
@@ -48,18 +44,10 @@ export default async function RootLayout({
         className={`${notoSans.variable} antialiased`}
         suppressHydrationWarning
       >
-        <NextIntlClientProvider>
-          <SnackbarProvider>
-            <ThemeProvider theme={theme}>
-              <WagmiProvider>
-                <QueryClientProvider>
-                  <TopBar />
-                  {children}
-                </QueryClientProvider>
-              </WagmiProvider>
-            </ThemeProvider>
-          </SnackbarProvider>
-        </NextIntlClientProvider>
+        <AppProviders locale={locale}>
+          <TopBar />
+          {children}
+        </AppProviders>
       </body>
     </html>
   )
