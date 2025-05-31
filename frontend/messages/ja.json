@@ -15,7 +15,15 @@
       "description": "スマートコントラクトによる自動化された資産管理とシームレスな資産移動を実現します。"
     }
   },
-  "WalletConnectButton": {
-    "label": "ウォレット接続"
+  "Buttons": {
+    "walletConnectButton": {
+      "label": "ウォレット接続"
+    }
+  },
+  "Dialogs": {
+    "walletSelectDialog": {
+      "title": "ウォレットを選択してください",
+      "closeButton": "閉じる"
+    }
   }
 }

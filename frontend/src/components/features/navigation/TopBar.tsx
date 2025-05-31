@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import Box from '@mui/material/Box'
@@ -9,6 +10,7 @@ import Typography from '@mui/material/Typography'
 import { APP_NAME } from '@/constants/app'
 import LangSwitchButton from '@/components/ui/buttons/LangSwitchButton'
 import WalletConnectButton from '@/components/ui/buttons/WalletConnectButton'
+import WalletSelectDialog from '@/components/ui/dialogs/WalletSelectDialog'
 
 const AppBar = dynamic(
   () => import('@mui/material/AppBar').then((mod) => mod.default),
@@ -18,8 +20,34 @@ const AppBar = dynamic(
 export default function TopBar() {
   const router = useRouter()
 
+  /* Router */
   const handleGoTo = (path: string) => {
     router.push(path)
+  }
+
+  /* Wallet Select Dialog */
+  const [openWalletSelectDialog, setOpenWalletSelectDialog] = useState(false)
+
+  const handleOpenWalletSelectDialog = () => {
+    setOpenWalletSelectDialog(true)
+  }
+
+  const handleCloseWalletSelectDialog = () => {
+    setOpenWalletSelectDialog(false)
+  }
+
+  /* UI Link Button */
+  const LinkButton = ({ href, label }: { href: string; label: string }) => {
+    return (
+      <Button
+        variant="text"
+        color="inherit"
+        sx={{ display: 'block' }}
+        onClick={() => handleGoTo(href)}
+      >
+        {label}
+      </Button>
+    )
   }
 
   return (
@@ -33,18 +61,26 @@ export default function TopBar() {
           {APP_NAME}
         </Typography>
         <Box sx={{ flexGrow: 1, display: 'flex', gap: 1 }}>
-          <Button
-            variant="text"
-            color="inherit"
-            sx={{ display: 'block' }}
-            onClick={() => handleGoTo('/dev')}
-          >
-            Dev
-          </Button>
+          {[
+            {
+              href: '/bridge',
+              label: 'Bridge'
+            },
+            {
+              href: '/dev',
+              label: 'Dev'
+            }
+          ].map(({ href, label }) => (
+            <LinkButton key={href} href={href} label={label} />
+          ))}
         </Box>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <LangSwitchButton />
-          <WalletConnectButton />
+          <WalletConnectButton onClick={handleOpenWalletSelectDialog} />
+          <WalletSelectDialog
+            open={openWalletSelectDialog}
+            onClose={handleCloseWalletSelectDialog}
+          />
         </Box>
       </Toolbar>
     </AppBar>

@@ -49,7 +49,16 @@ export default function HomeView() {
                   title={t(`card${index + 1}.title`)}
                 />
                 <CardContent>
-                  <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#fff', textAlign: 'center', mt: 1, mb: 2 }}>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      fontWeight: 'bold',
+                      color: '#fff',
+                      textAlign: 'center',
+                      mt: 1,
+                      mb: 2
+                    }}
+                  >
                     {t(`card${index + 1}.title`)}
                   </Typography>
                   <Typography variant="body1" sx={{ color: 'gray' }}>

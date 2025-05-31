@@ -15,7 +15,15 @@
       "description": "Realize automatic asset management and seamless asset movement through smart contracts."
     }
   },
-  "WalletConnectButton": {
-    "label": "Connect"
+  "Buttons": {
+    "walletConnectButton": {
+      "label": "Connect"
+    }
+  },
+  "Dialogs": {
+    "walletSelectDialog": {
+      "title": "Please select a wallet.",
+      "closeButton": "Close"
+    }
   }
 }

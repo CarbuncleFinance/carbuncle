@@ -3,26 +3,27 @@ import { style, keyframes } from '@vanilla-extract/css'
 
 const shine = keyframes({
   '0%': {
-    backgroundPosition: '200% center',
+    backgroundPosition: '200% center'
   },
   '100%': {
-    backgroundPosition: '-200% center',
-  },
+    backgroundPosition: '-200% center'
+  }
 })
 
 const fadeInUp = keyframes({
   '0%': {
     opacity: 0,
-    transform: 'translateY(20px)',
+    transform: 'translateY(20px)'
   },
   '100%': {
     opacity: 1,
-    transform: 'translateY(0)',
-  },
+    transform: 'translateY(0)'
+  }
 })
 
 export const animatedTitle = style({
-  background: 'linear-gradient(90deg, #00e676 0%, #00bfae 40%, #7affbc 70%, #00e676 100%)',
+  background:
+    'linear-gradient(90deg, #00e676 0%, #00bfae 40%, #7affbc 70%, #00e676 100%)',
   backgroundSize: '200% auto',
   color: '#fff',
   backgroundClip: 'text',
@@ -33,6 +34,6 @@ export const animatedTitle = style({
   display: 'inline-block',
   transition: 'transform 0.3s ease',
   ':hover': {
-    transform: 'scale(1.05)',
-  },
+    transform: 'scale(1.05)'
+  }
 })

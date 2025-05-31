@@ -1,17 +1,20 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import BaseButton from '@/components/ui/buttons/BaseButton'
 
-export default function WalletConnectButton() {
-  const t = useTranslations('WalletConnectButton')
+interface WalletConnectButtonProps {
+  onClick: () => void
+}
 
+export default function WalletConnectButton({
+  onClick
+}: WalletConnectButtonProps) {
   return (
     <BaseButton
-      translations="WalletConnectButton"
-      label="label"
+      label="Buttons.walletConnectButton"
       variant="outlined"
       color="inherit"
+      onClick={onClick}
     />
   )
 }
