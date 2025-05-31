@@ -1,7 +1,6 @@
 import { WalletType, WalletAdapter } from '@/types/wallet'
 import { XrplGemWalletAdapter } from './wallets/xrplGemWalletAdapter'
 import { EvmWalletAdapter } from './wallets/evmWalletAdapter'
-import { SuiWalletAdapter } from './wallets/suiWalletAdapter'
 
 export class WalletFactory {
   static createAdapter(walletType: WalletType): WalletAdapter {
@@ -11,7 +10,7 @@ export class WalletFactory {
       case WalletType.EVM_INJECTED:
         return new EvmWalletAdapter()
       case WalletType.SUI_WALLET:
-        return new SuiWalletAdapter()
+        throw new Error('Sui wallet support is not yet implemented')
       default:
         throw new Error(`Unsupported wallet type: ${walletType}`)
     }
