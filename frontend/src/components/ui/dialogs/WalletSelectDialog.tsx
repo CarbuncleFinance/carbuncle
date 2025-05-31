@@ -8,7 +8,9 @@ import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import { useWalletConnect } from '@/hooks/useWalletConnect'
+import { useMultiWalletConnect } from '@/hooks/useMultiWalletConnect'
 import { XrplWalletTypes, XrplWalletType } from '@/types/enums'
+import { WalletType } from '@/types/wallet'
 
 interface WalletSelectDialogProps {
   open: boolean
@@ -24,10 +26,27 @@ export default function WalletSelectDialog({
   const { enqueueSnackbar } = useSnackbar()
 
   const { connect } = useWalletConnect()
+  const { connect: multiConnect, getSupportedWallets } = useMultiWalletConnect()
 
   const handleConnect = async (walletType: XrplWalletType) => {
     try {
       await connect(walletType)
+      enqueueSnackbar('Connected to wallet', {
+        variant: 'success'
+      })
+    } catch (error) {
+      console.error(error)
+      enqueueSnackbar('Failed to connect to wallet', {
+        variant: 'error'
+      })
+    } finally {
+      onClose()
+    }
+  }
+
+  const handleMultiWalletConnect = async (walletType: WalletType) => {
+    try {
+      await multiConnect(walletType)
       enqueueSnackbar('Connected to wallet', {
         variant: 'success'
       })
