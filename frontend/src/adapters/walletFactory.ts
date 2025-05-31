@@ -3,16 +3,16 @@ import { XrplGemWalletAdapter } from './wallets/xrplGemWalletAdapter'
 import { EvmWalletAdapter } from './wallets/evmWalletAdapter'
 
 /**
- * Factory class for creating wallet adapter instances.
- * Implements the factory pattern to provide a centralized way to instantiate
- * different wallet adapters based on wallet type.
+ * ウォレットアダプターインスタンスを作成するためのファクトリークラス。
+ * ファクトリーパターンを実装し、ウォレットタイプに基づいて
+ * 異なるウォレットアダプターをインスタンス化する一元的な方法を提供します。
  */
 export class WalletFactory {
   /**
-   * Creates a wallet adapter instance based on the specified wallet type.
-   * @param walletType - The type of wallet to create an adapter for
-   * @returns A wallet adapter instance
-   * @throws Error if the wallet type is not supported
+   * 指定されたウォレットタイプに基づいてウォレットアダプターインスタンスを作成します。
+   * @param walletType - アダプターを作成するウォレットのタイプ
+   * @returns ウォレットアダプターインスタンス
+   * @throws サポートされていないウォレットタイプの場合はエラーをスローします
    */
   static createAdapter(walletType: WalletType): WalletAdapter {
     switch (walletType) {
@@ -26,8 +26,8 @@ export class WalletFactory {
   }
 
   /**
-   * Returns an array of all supported wallet types.
-   * @returns Array of supported wallet types
+   * サポートされているすべてのウォレットタイプの配列を返します。
+   * @returns サポートされているウォレットタイプの配列
    */
   static getSupportedWallets(): WalletType[] {
     return [WalletType.XRPL_GEM, WalletType.EVM_INJECTED]
