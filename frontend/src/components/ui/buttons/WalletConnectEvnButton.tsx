@@ -1,11 +1,13 @@
 'use client'
 
-import { useConnect } from 'wagmi'
+import { useConnect, useAccount, useDisconnect } from 'wagmi'
 import Button from '@mui/material/Button'
 import { useCallback } from 'react'
 
 export default function WalletConnectEvnButton() {
   const { connect, connectors } = useConnect()
+  const { isConnected } = useAccount()
+  const { disconnect } = useDisconnect()
 
   const handleWalletConnect = useCallback(async () => {
     if (!connectors[0]) return
@@ -17,14 +19,31 @@ export default function WalletConnectEvnButton() {
     }
   }, [connect, connectors])
 
+  const handleDisconnect = useCallback(async () => {
+    await disconnect()
+  }, [disconnect])
+
   return (
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={handleWalletConnect}
-      disableElevation
-    >
-      ウォレット接続
-    </Button>
+    <>
+      {isConnected ? (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleDisconnect}
+          disableElevation
+        >
+          切断
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleWalletConnect}
+          disableElevation
+        >
+          ウォレット接続
+        </Button>
+      )}
+    </>
   )
 }

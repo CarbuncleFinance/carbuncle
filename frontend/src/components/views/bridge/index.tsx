@@ -14,12 +14,16 @@ import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepContent from '@mui/material/StepContent'
 import StepLabel from '@mui/material/StepLabel'
+import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import PageLayout from '@/components/features/layout/PageLayout'
 import WalletConnectEvnButton from '@/components/ui/buttons/WalletConnectEvnButton'
+import { useAccount } from 'wagmi'
 
 export default function BridgeView() {
   const [blockchain, setBlockchain] = useState('')
+
+  const { isConnected, address } = useAccount()
 
   const [activeStep, setActiveStep] = useState(0)
 
@@ -159,6 +163,14 @@ export default function BridgeView() {
               pt={2}
               sx={{ backgroundColor: '#fbfaf5', borderRadius: 1, p: 2 }}
             >
+              {isConnected && (
+                <Typography
+                  variant="caption"
+                  sx={{ fontSize: 14, color: '#000' }}
+                >
+                  宛先: {address}
+                </Typography>
+              )}
               <WalletConnectEvnButton />
               <Box display="flex" justifyContent="flex-end" gap={1}>
                 <Button
@@ -185,7 +197,7 @@ export default function BridgeView() {
         <Step key={3}>
           <StepLabel>
             <Typography variant="caption" sx={{ fontSize: 14, color: '#fff' }}>
-              振込先のアドレスを入力してください。
+              振込金額を入力してください。
             </Typography>
           </StepLabel>
           <StepContent>
@@ -196,27 +208,11 @@ export default function BridgeView() {
               pt={2}
               sx={{ backgroundColor: '#fbfaf5', borderRadius: 1, p: 2 }}
             >
-              <Button variant="contained" color="primary" disableElevation>
-                ウォレット接続
-              </Button>
-              <Box display="flex" justifyContent="flex-end" gap={1}>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  onClick={handleBack}
-                  disableElevation
-                >
-                  Back
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  disableElevation
-                >
-                  Next
-                </Button>
-              </Box>
+              <TextField
+                label="振込金額"
+                type="number"
+                fullWidth
+              />
             </Box>
           </StepContent>
         </Step>
