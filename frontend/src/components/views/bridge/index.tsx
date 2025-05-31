@@ -12,7 +12,20 @@ import BlockchainSelectionStep from './components/steps/BlockchainSelectionStep'
 import AddressInputStep from './components/steps/AddressInputStep'
 import AmountInputStep from './components/steps/AmountInputStep'
 
+type BridgeForm = {
+  transferMethod: string // 振込方法
+  blockchain: string // ブロックチェーン
+  address: string // アドレス
+  amount: string // 金額
+}
+
 export default function BridgeView() {
+  const [bridgeForm, setBridgeForm] = useState<BridgeForm>({
+    transferMethod: 'xrp',
+    blockchain: '',
+    address: '',
+    amount: ''
+  })
   const [blockchain, setBlockchain] = useState('')
   const [activeStep, setActiveStep] = useState(0)
 
