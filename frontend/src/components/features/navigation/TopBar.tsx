@@ -82,6 +82,10 @@ export default function TopBar() {
         <Box sx={{ flexGrow: 1, display: 'flex', gap: 1 }}>
           {[
             {
+              href: '/transfer',
+              label: 'Transfer'
+            },
+            {
               href: '/bridge',
               label: 'Bridge'
             },
