@@ -20,6 +20,13 @@
       "label": "Connect"
     }
   },
+  "Menus": {
+    "walletMenu": {
+      "accountInfo": "Account Info",
+      "menu": "Menu",
+      "logout": "Logout"
+    }
+  },
   "Dialogs": {
     "walletSelectDialog": {
       "title": "Please select a wallet.",

@@ -20,6 +20,13 @@
       "label": "ウォレット接続"
     }
   },
+  "Menus": {
+    "walletMenu": {
+      "accountInfo": "口座情報",
+      "menu": "メニュー",
+      "logout": "ログアウト"
+    }
+  },
   "Dialogs": {
     "walletSelectDialog": {
       "title": "ウォレットを選択してください",

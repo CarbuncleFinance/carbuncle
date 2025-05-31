@@ -9,8 +9,11 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { APP_NAME } from '@/constants/app'
 import LangSwitchButton from '@/components/ui/buttons/LangSwitchButton'
+import TopBarWalletMenu from '@/components/features/navigation/TopBarWalletMenu'
+import TopBarWalletMenuButton from '@/components/features/navigation/TopBarWalletMenuButton'
 import WalletConnectButton from '@/components/ui/buttons/WalletConnectButton'
 import WalletSelectDialog from '@/components/ui/dialogs/WalletSelectDialog'
+import { useWallet } from '@/hooks/useWallet'
 
 const AppBar = dynamic(
   () => import('@mui/material/AppBar').then((mod) => mod.default),
@@ -23,6 +26,19 @@ export default function TopBar() {
   /* Router */
   const handleGoTo = (path: string) => {
     router.push(path)
+  }
+
+  /* Wallet */
+  const { isConnected } = useWallet()
+
+  /* Wallet Menu */
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
   }
 
   /* Wallet Select Dialog */
@@ -79,13 +95,27 @@ export default function TopBar() {
         </Box>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <LangSwitchButton />
-          <WalletConnectButton
-            onClick={(e) => handleOpenWalletSelectDialog(e)}
-          />
-          <WalletSelectDialog
-            open={openWalletSelectDialog}
-            onClose={handleCloseWalletSelectDialog}
-          />
+          {isConnected && (
+            <>
+              <TopBarWalletMenuButton onClick={handleClick} />
+              <TopBarWalletMenu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+              />
+            </>
+          )}
+          {!isConnected && (
+            <>
+              <WalletConnectButton
+                onClick={(e) => handleOpenWalletSelectDialog(e)}
+              />
+              <WalletSelectDialog
+                open={openWalletSelectDialog}
+                onClose={handleCloseWalletSelectDialog}
+              />
+            </>
+          )}
         </Box>
       </Toolbar>
     </AppBar>

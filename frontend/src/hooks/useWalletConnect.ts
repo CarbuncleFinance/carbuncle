@@ -1,37 +1,50 @@
 import { isInstalled, getAddress } from '@gemwallet/api'
 import { AppErrorCode, XrplWalletTypes, XrplWalletType } from '@/types/enums'
 import { useErrorHandler } from '@/hooks/useErrorHandler'
+import { useWalletStore } from '@/stores/wallet'
+import type { Wallet } from '@/stores/wallet'
 
 export function useWalletConnect() {
   const { createError } = useErrorHandler()
+  const { setWallet, clearWallet } = useWalletStore()
 
   const connect = async (walletType: XrplWalletType) => {
     try {
+      const wallet: Wallet = {
+        address: ''
+      }
+
       switch (walletType) {
         case XrplWalletTypes.GEM_WALLET:
-          if (!isInstalled()) {
+          const { result: gemWalletInstallStatus } = await isInstalled()
+
+          if (!gemWalletInstallStatus.isInstalled) {
             throw createError(AppErrorCode.WALLET_NOT_INSTALLED)
           }
 
-          const { result } = await getAddress()
+          const { result: gemWalletAddress } = await getAddress()
 
-          if (!result) {
+          if (!gemWalletAddress) {
             throw createError(AppErrorCode.WALLET_CONNECTION_FAILED)
           }
 
-          const address = result.address
-          console.log(address)
+          wallet.address = gemWalletAddress.address
 
           break
         default:
           throw new Error('Invalid wallet type')
       }
+
+      setWallet(wallet)
     } catch (error) {
+      clearWallet()
       throw error
     }
   }
 
-  const disconnect = () => {}
+  const disconnect = () => {
+    clearWallet()
+  }
 
   return {
     connect,
