@@ -1,17 +1,25 @@
-import { XrplWalletTypes, XrplWalletType } from '@/types/enums'
 import { isInstalled, getAddress } from '@gemwallet/api'
+import { AppErrorCode, XrplWalletTypes, XrplWalletType } from '@/types/enums'
+import { useErrorHandler } from '@/hooks/useErrorHandler'
 
 export function useWalletConnect() {
+  const { createError } = useErrorHandler()
+
   const connect = async (walletType: XrplWalletType) => {
     try {
       switch (walletType) {
         case XrplWalletTypes.GEM_WALLET:
           if (!isInstalled()) {
-            throw new Error('GemWallet is not installed')
+            throw createError(AppErrorCode.WALLET_NOT_INSTALLED)
           }
 
-          const address = await getAddress()
+          const { result } = await getAddress()
 
+          if (!result) {
+            throw createError(AppErrorCode.WALLET_CONNECTION_FAILED)
+          }
+
+          const address = result.address
           console.log(address)
 
           break

@@ -25,5 +25,15 @@
       "title": "ウォレットを選択してください",
       "closeButton": "閉じる"
     }
+  },
+  "Errors": {
+    "walletNotInstalled": {
+      "title": "ウォレットがインストールされていません",
+      "message": "ウォレットをインストールしてください。"
+    },
+    "walletConnectionFailed": {
+      "title": "ウォレット接続に失敗しました",
+      "message": "ウォレットを接続してください。"
+    }
   }
 }

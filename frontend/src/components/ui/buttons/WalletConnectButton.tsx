@@ -3,7 +3,7 @@
 import BaseButton from '@/components/ui/buttons/BaseButton'
 
 interface WalletConnectButtonProps {
-  onClick: () => void
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export default function WalletConnectButton({

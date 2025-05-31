@@ -16,7 +16,7 @@ interface BaseButtonProps {
     | 'inherit'
   className?: string
   sx?: SxProps
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export default function BaseButton({

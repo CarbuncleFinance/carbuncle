@@ -28,7 +28,10 @@ export default function TopBar() {
   /* Wallet Select Dialog */
   const [openWalletSelectDialog, setOpenWalletSelectDialog] = useState(false)
 
-  const handleOpenWalletSelectDialog = () => {
+  const handleOpenWalletSelectDialog = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.currentTarget.blur()
     setOpenWalletSelectDialog(true)
   }
 
@@ -76,7 +79,9 @@ export default function TopBar() {
         </Box>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <LangSwitchButton />
-          <WalletConnectButton onClick={handleOpenWalletSelectDialog} />
+          <WalletConnectButton
+            onClick={(e) => handleOpenWalletSelectDialog(e)}
+          />
           <WalletSelectDialog
             open={openWalletSelectDialog}
             onClose={handleCloseWalletSelectDialog}

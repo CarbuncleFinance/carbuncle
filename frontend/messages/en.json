@@ -25,5 +25,15 @@
       "title": "Please select a wallet.",
       "closeButton": "Close"
     }
+  },
+  "Errors": {
+    "walletNotInstalled": {
+      "title": "Wallet is not installed",
+      "message": "Please install the wallet."
+    },
+    "walletConnectionFailed": {
+      "title": "Wallet connection failed",
+      "message": "Please try again."
+    }
   }
 }
