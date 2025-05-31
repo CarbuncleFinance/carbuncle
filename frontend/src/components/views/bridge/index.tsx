@@ -208,11 +208,7 @@ export default function BridgeView() {
               pt={2}
               sx={{ backgroundColor: '#fbfaf5', borderRadius: 1, p: 2 }}
             >
-              <TextField
-                label="振込金額"
-                type="number"
-                fullWidth
-              />
+              <TextField label="振込金額" type="number" fullWidth />
             </Box>
           </StepContent>
         </Step>
