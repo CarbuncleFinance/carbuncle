@@ -9,14 +9,12 @@ export class WalletFactory {
         return new XrplGemWalletAdapter()
       case WalletType.EVM_INJECTED:
         return new EvmWalletAdapter()
-      case WalletType.SUI_WALLET:
-        throw new Error('Sui wallet support is not yet implemented')
       default:
         throw new Error(`Unsupported wallet type: ${walletType}`)
     }
   }
 
   static getSupportedWallets(): WalletType[] {
-    return [WalletType.XRPL_GEM, WalletType.EVM_INJECTED, WalletType.SUI_WALLET]
+    return [WalletType.XRPL_GEM, WalletType.EVM_INJECTED]
   }
 }

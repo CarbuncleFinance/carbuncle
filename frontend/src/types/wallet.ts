@@ -7,8 +7,7 @@ export interface WalletAdapter {
 
 export enum WalletType {
   XRPL_GEM = 'xrpl-gem',
-  EVM_INJECTED = 'evm-injected',
-  SUI_WALLET = 'sui-wallet'
+  EVM_INJECTED = 'evm-injected'
 }
 
 export interface WalletConfig {
