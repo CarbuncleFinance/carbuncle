@@ -4,6 +4,8 @@ import { APP_NAME, APP_DESCRIPTION } from '@/constants/app'
 import TopBar from '@/components/features/navigation/TopBar'
 import { ThemeProvider } from '@mui/material/styles'
 import SnackbarProvider from '@/components/providers/SnackbarProvider'
+import WagmiProvider from '@/components/providers/WagmiProvider'
+import QueryClientProvider from '@/components/providers/QueryClientProvider'
 import theme from '@/utils/theme'
 // i18n
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
@@ -49,8 +51,12 @@ export default async function RootLayout({
         <NextIntlClientProvider>
           <SnackbarProvider>
             <ThemeProvider theme={theme}>
-              <TopBar />
-              {children}
+              <WagmiProvider>
+                <QueryClientProvider>
+                  <TopBar />
+                  {children}
+                </QueryClientProvider>
+              </WagmiProvider>
             </ThemeProvider>
           </SnackbarProvider>
         </NextIntlClientProvider>

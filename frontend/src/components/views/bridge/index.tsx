@@ -16,10 +16,11 @@ import StepContent from '@mui/material/StepContent'
 import StepLabel from '@mui/material/StepLabel'
 import Typography from '@mui/material/Typography'
 import PageLayout from '@/components/features/layout/PageLayout'
+import WalletConnectEvnButton from '@/components/ui/buttons/WalletConnectEvnButton'
 
 export default function BridgeView() {
   const [blockchain, setBlockchain] = useState('')
-  
+
   const [activeStep, setActiveStep] = useState(0)
 
   const handleNext = () => {
@@ -50,7 +51,10 @@ export default function BridgeView() {
               pt={2}
               sx={{ backgroundColor: '#fbfaf5', borderRadius: 1, p: 2 }}
             >
-              <Typography variant="caption" sx={{ fontSize: 14, color: '#000' }}>
+              <Typography
+                variant="caption"
+                sx={{ fontSize: 14, color: '#000' }}
+              >
                 現在は新しい振込先のみ利用可能です。
               </Typography>
               <FormControl>
@@ -101,7 +105,10 @@ export default function BridgeView() {
               pt={2}
               sx={{ backgroundColor: '#fbfaf5', borderRadius: 1, p: 2 }}
             >
-              <Typography variant="caption" sx={{ fontSize: 14, color: '#000' }}>
+              <Typography
+                variant="caption"
+                sx={{ fontSize: 14, color: '#000' }}
+              >
                 振込先のブロックチェーンを選択してください。
               </Typography>
               <FormControl fullWidth>
@@ -152,9 +159,7 @@ export default function BridgeView() {
               pt={2}
               sx={{ backgroundColor: '#fbfaf5', borderRadius: 1, p: 2 }}
             >
-              <Button variant="contained" color="primary" onClick={handleNext} disableElevation>
-                ウォレット接続
-              </Button>
+              <WalletConnectEvnButton />
               <Box display="flex" justifyContent="flex-end" gap={1}>
                 <Button
                   variant="outlined"
@@ -191,7 +196,7 @@ export default function BridgeView() {
               pt={2}
               sx={{ backgroundColor: '#fbfaf5', borderRadius: 1, p: 2 }}
             >
-              <Button variant="contained" color="primary" onClick={handleNext} disableElevation>
+              <Button variant="contained" color="primary" disableElevation>
                 ウォレット接続
               </Button>
               <Box display="flex" justifyContent="flex-end" gap={1}>
