@@ -1,30 +1,17 @@
-import { AppErrorCode, XrplWalletTypes, XrplWalletType } from '@/types/enums'
-import { WalletType } from '@/types/wallet'
+import { WalletType, WalletAdapter } from '@/types/wallet'
 import { WalletFactory } from '@/adapters/walletFactory'
+import { AppErrorCode } from '@/types/enums'
 import { useErrorHandler } from '@/hooks/useErrorHandler'
 import { useWalletStore } from '@/stores/wallet'
 import type { Wallet } from '@/stores/wallet'
 
-export function useWalletConnect() {
+export function useMultiWalletConnect() {
   const { createError } = useErrorHandler()
   const { setWallet, clearWallet } = useWalletStore()
 
-  const connect = async (walletType: XrplWalletType) => {
+  const connect = async (walletType: WalletType) => {
     try {
-      const wallet: Wallet = {
-        address: ''
-      }
-
-      let adapterWalletType: WalletType
-      switch (walletType) {
-        case XrplWalletTypes.GEM_WALLET:
-          adapterWalletType = WalletType.XRPL_GEM
-          break
-        default:
-          throw new Error('Invalid wallet type')
-      }
-
-      const adapter = WalletFactory.createAdapter(adapterWalletType)
+      const adapter = WalletFactory.createAdapter(walletType)
       
       const installed = await adapter.isInstalled()
       if (!installed) {
@@ -36,20 +23,32 @@ export function useWalletConnect() {
         throw createError(AppErrorCode.WALLET_CONNECTION_FAILED)
       }
 
-      wallet.address = address
+      const wallet: Wallet = {
+        address
+      }
+
       setWallet(wallet)
+      return { address, adapter }
     } catch (error) {
       clearWallet()
       throw error
     }
   }
 
-  const disconnect = () => {
+  const disconnect = async (adapter?: WalletAdapter) => {
+    if (adapter) {
+      await adapter.disconnect()
+    }
     clearWallet()
+  }
+
+  const getSupportedWallets = () => {
+    return WalletFactory.getSupportedWallets()
   }
 
   return {
     connect,
-    disconnect
+    disconnect,
+    getSupportedWallets
   }
 }
