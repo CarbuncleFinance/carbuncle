@@ -85,24 +85,7 @@ export default function WalletSelectDialog({
             disableElevation
             onClick={() => handleConnect(XrplWalletTypes.GEM_WALLET)}
           >
-            GemWallet (XRPL)
-          </Button>
-          <Button
-            variant="contained"
-            fullWidth
-            disableElevation
-            onClick={() => handleMultiWalletConnect(WalletType.EVM_INJECTED)}
-          >
-            MetaMask (EVM)
-          </Button>
-          <Button
-            variant="contained"
-            fullWidth
-            disableElevation
-            disabled
-            onClick={() => handleMultiWalletConnect(WalletType.SUI_WALLET)}
-          >
-            Sui Wallet (Coming Soon)
+            GemWallet
           </Button>
           <Button variant="outlined" fullWidth onClick={onClose}>
             {t('closeButton')}
