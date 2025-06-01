@@ -37,7 +37,6 @@ export const useWalletStore = create<WalletState>()(
   )
 )
 
-
 export function getWalletChain(wallet: Wallet): Chain | null {
   return wallet.chain
 }

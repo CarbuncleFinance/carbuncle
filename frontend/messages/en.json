@@ -23,6 +23,9 @@
   "Forms": {
     "selectChainTypeForm": {
       "label": "Chain type"
+    },
+    "selectProtocolForm": {
+      "label": "Protocol"
     }
   },
   "Menus": {

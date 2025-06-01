@@ -1,6 +1,6 @@
 export enum ChainProtocol {
   XRPL = 'XRPL',
-  EVM  = 'EVM',
+  EVM = 'EVM'
 }
 
 export type XRPLNetwork = 'mainnet' | 'testnet' | 'devnet'
@@ -9,7 +9,11 @@ export type PolygonNetwork = 'mainnet' | 'amoy'
 
 export type XRPLChainName = 'XRPL' | 'Xahau'
 
-export type BaseChain<P extends ChainProtocol, N extends string, C extends string> = {
+export type BaseChain<
+  P extends ChainProtocol,
+  N extends string,
+  C extends string
+> = {
   protocol: P
   name: C
   network: N
@@ -74,4 +78,35 @@ export const POLYGON_AMOY: PolygonChain = {
   network: 'amoy',
   chainId: 80002,
   address: '0x' as `0x${string}`
+}
+
+export const XRPL_MAINNET: XRPLChain = {
+  protocol: ChainProtocol.XRPL,
+  name: 'XRPL',
+  network: 'mainnet',
+  address: 'r' as `r${string}`
+}
+
+export const XRPL_TESTNET: XRPLChain = {
+  protocol: ChainProtocol.XRPL,
+  name: 'XRPL',
+  network: 'testnet',
+  address: 'r' as `r${string}`
+}
+
+export function getDefaultChainForProtocol(protocol: ChainProtocol): Chain {
+  switch (protocol) {
+    case ChainProtocol.XRPL:
+      return XRPL_MAINNET
+    case ChainProtocol.EVM:
+      return ETHEREUM_MAINNET
+    default:
+      throw new Error(`Unsupported protocol: ${protocol}`)
+  }
+}
+
+export function getSupportedWalletsForProtocol(protocol: ChainProtocol) {
+  const defaultChain = getDefaultChainForProtocol(protocol)
+  const { WalletFactory } = require('@/libs/adapters/walletFactory')
+  return WalletFactory.getSupportedWalletsForChain(defaultChain)
 }

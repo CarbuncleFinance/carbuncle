@@ -2,7 +2,15 @@
 
 import React from 'react'
 import { useTranslations } from 'next-intl'
-import { Chain, ETHEREUM_MAINNET, ETHEREUM_SEPOLIA, POLYGON_MAINNET, POLYGON_AMOY } from '@/domains/blockchain/types'
+import {
+  Chain,
+  ETHEREUM_MAINNET,
+  ETHEREUM_SEPOLIA,
+  POLYGON_MAINNET,
+  POLYGON_AMOY,
+  XRPL_MAINNET,
+  XRPL_TESTNET
+} from '@/domains/blockchain/types'
 import { SelectForm } from '@/components/ui/forms/SelectForm'
 
 type SelectFormChainProps = {
@@ -12,6 +20,16 @@ type SelectFormChainProps = {
 }
 
 const chainOptions: { value: string; label: string; chain: Chain }[] = [
+  {
+    value: 'xrpl-mainnet',
+    label: 'XRPL Mainnet',
+    chain: XRPL_MAINNET
+  },
+  {
+    value: 'xrpl-testnet',
+    label: 'XRPL Testnet',
+    chain: XRPL_TESTNET
+  },
   {
     value: 'ethereum-mainnet',
     label: 'Ethereum Mainnet',
@@ -41,14 +59,16 @@ export const SelectFormChain = ({
 }: SelectFormChainProps) => {
   const t = useTranslations('Forms.selectChainForm')
 
-  const selectedValue = chainOptions.find(option => 
-    option.chain.protocol === selectedChain.protocol &&
-    option.chain.name === selectedChain.name &&
-    option.chain.network === selectedChain.network
-  )?.value || 'ethereum-mainnet'
+  const selectedValue =
+    chainOptions.find(
+      (option) =>
+        option.chain.protocol === selectedChain.protocol &&
+        option.chain.name === selectedChain.name &&
+        option.chain.network === selectedChain.network
+    )?.value || 'xrpl-mainnet'
 
   const handleChange = (value: string) => {
-    const option = chainOptions.find(opt => opt.value === value)
+    const option = chainOptions.find((opt) => opt.value === value)
     if (option) {
       setSelectedChain(option.chain)
     }
@@ -58,7 +78,10 @@ export const SelectFormChain = ({
     <SelectForm
       label={t('label')}
       size={size}
-      options={chainOptions.map(opt => ({ value: opt.value, label: opt.label }))}
+      options={chainOptions.map((opt) => ({
+        value: opt.value,
+        label: opt.label
+      }))}
       selectedValue={selectedValue}
       setSelectedValue={handleChange}
     />
