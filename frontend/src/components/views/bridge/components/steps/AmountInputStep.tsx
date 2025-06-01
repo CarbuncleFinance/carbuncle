@@ -14,6 +14,14 @@ export default function AmountInputStep({
 }: AmountInputStepProps) {
   const t = useTranslations('Errors')
 
+  const handleNext = () => {
+    form.validateField('amount', 'change')
+    const amountField = form.getFieldMeta('amount')
+    if (!amountField?.errors?.length) {
+      onNext()
+    }
+  }
+
   return (
     <StepContainer title="">
       <form.Field
@@ -65,9 +73,9 @@ export default function AmountInputStep({
       <StepNavigation
         showBack={true}
         showNext={true}
-        nextDisabled={form.state.fieldMeta.amount?.errors.length > 0}
+        nextDisabled={false}
         onBack={onBack}
-        onNext={onNext}
+        onNext={handleNext}
       />
     </StepContainer>
   )

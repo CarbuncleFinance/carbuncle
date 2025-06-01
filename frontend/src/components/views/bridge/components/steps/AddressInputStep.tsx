@@ -24,6 +24,14 @@ export default function AddressInputStep({
     }
   }, [isConnected, address, form])
 
+  const handleNext = () => {
+    form.validateField('address', 'change')
+    const addressField = form.getFieldMeta('address')
+    if (!addressField?.errors?.length) {
+      onNext()
+    }
+  }
+
   return (
     <StepContainer title="">
       <form.Field
@@ -76,9 +84,9 @@ export default function AddressInputStep({
       <StepNavigation
         showBack={true}
         showNext={true}
-        nextDisabled={form.state.fieldMeta.address?.errors.length > 0}
+        nextDisabled={false}
         onBack={onBack}
-        onNext={onNext}
+        onNext={handleNext}
       />
     </StepContainer>
   )
