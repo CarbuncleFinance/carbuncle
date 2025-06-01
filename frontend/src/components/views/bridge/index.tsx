@@ -14,7 +14,6 @@ import AddressInputStep from './components/steps/AddressInputStep'
 import AmountInputStep from './components/steps/AmountInputStep'
 import ConfirmationStep from './components/steps/ConfirmationStep'
 import { EvmChainType, EvmChainTypes } from '@/types/enums'
-import { bridgeFormSchema } from './validation'
 
 export type BridgeForm = {
   chainType: EvmChainType
