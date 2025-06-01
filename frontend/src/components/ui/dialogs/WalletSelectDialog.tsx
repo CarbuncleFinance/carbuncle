@@ -8,11 +8,14 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
-import { SelectFormChain } from '@/components/ui/forms/SelectFormChain'
+import { SelectFormProtocol } from '@/components/ui/forms/SelectFormProtocol'
 import { WalletConnectOptionButton } from '@/components/ui/buttons/WalletConnectOptionButton'
 import { useWalletConnect } from '@/hooks/useWalletConnect'
-import { Chain, ETHEREUM_MAINNET } from '@/domains/blockchain/types'
-import { WalletFactory } from '@/libs/adapters/walletFactory'
+import {
+  ChainProtocol,
+  getDefaultChainForProtocol,
+  getSupportedWalletsForProtocol
+} from '@/domains/blockchain/types'
 import { WalletType, WalletTypeNames } from '@/types/enums'
 
 type WalletSelectDialogProps = {
@@ -30,16 +33,18 @@ export default function WalletSelectDialog({
 
   const { connectWithChain } = useWalletConnect()
 
-  /** Select Chain */
-  const [selectedChain, setSelectedChain] = useState<Chain>(ETHEREUM_MAINNET)
+  /** Select Protocol */
+  const [selectedProtocol, setSelectedProtocol] = useState<ChainProtocol>(
+    ChainProtocol.XRPL
+  )
 
-  /** Get supported wallets for selected chain */
-  const supportedWallets =
-    WalletFactory.getSupportedWalletsForChain(selectedChain)
+  /** Get supported wallets for selected protocol */
+  const supportedWallets = getSupportedWalletsForProtocol(selectedProtocol)
 
   /** Connect to Wallet */
   const handleConnect = async (walletType: WalletType) => {
     try {
+      const selectedChain = getDefaultChainForProtocol(selectedProtocol)
       await connectWithChain(selectedChain, walletType)
       enqueueSnackbar('Connected to wallet', {
         variant: 'success'
@@ -73,11 +78,11 @@ export default function WalletSelectDialog({
       </DialogTitle>
       <DialogContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 1 }}>
-          <SelectFormChain
-            selectedChain={selectedChain}
-            setSelectedChain={setSelectedChain}
+          <SelectFormProtocol
+            selectedProtocol={selectedProtocol}
+            setSelectedProtocol={setSelectedProtocol}
           />
-          {supportedWallets.map((walletType) => (
+          {supportedWallets.map((walletType: WalletType) => (
             <WalletConnectOptionButton
               key={walletType}
               walletName={WalletTypeNames[walletType]}

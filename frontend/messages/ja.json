@@ -23,6 +23,9 @@
   "Forms": {
     "selectChainTypeForm": {
       "label": "チェーンタイプ"
+    },
+    "selectProtocolForm": {
+      "label": "プロトコル"
     }
   },
   "Menus": {

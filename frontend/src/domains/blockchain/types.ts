@@ -93,3 +93,20 @@ export const XRPL_TESTNET: XRPLChain = {
   network: 'testnet',
   address: 'r' as `r${string}`
 }
+
+export function getDefaultChainForProtocol(protocol: ChainProtocol): Chain {
+  switch (protocol) {
+    case ChainProtocol.XRPL:
+      return XRPL_MAINNET
+    case ChainProtocol.EVM:
+      return ETHEREUM_MAINNET
+    default:
+      throw new Error(`Unsupported protocol: ${protocol}`)
+  }
+}
+
+export function getSupportedWalletsForProtocol(protocol: ChainProtocol) {
+  const defaultChain = getDefaultChainForProtocol(protocol)
+  const { WalletFactory } = require('@/libs/adapters/walletFactory')
+  return WalletFactory.getSupportedWalletsForChain(defaultChain)
+}
