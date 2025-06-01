@@ -39,6 +39,9 @@ export const useWalletStore = create<WalletState>()(
   )
 )
 
+
+// wallet.chainが未定義の場合（既存のウォレットデータや段階的移行中）、
+// 旧型定義から新型定義に変換して返す
 export function getWalletChain(wallet: Wallet): Chain | null {
   if (wallet.chain) {
     return wallet.chain
