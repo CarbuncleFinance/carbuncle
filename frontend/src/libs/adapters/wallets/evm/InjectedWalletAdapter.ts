@@ -1,7 +1,7 @@
 import { connect, disconnect, getAccount } from 'wagmi/actions'
 import { config } from '@/wagmi.config'
 import { AppErrorCode } from '@/types/enums'
-import { WalletAdapter } from '@/types/wallet'
+import { WalletAdapter } from '@/libs/adapters/walletFactory'
 
 declare global {
   interface Window {
@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-export class EvmWalletAdapter implements WalletAdapter {
+export class InjectedWalletAdapter implements WalletAdapter {
   async connect(): Promise<string> {
     const installed = await this.isInstalled()
     if (!installed) {

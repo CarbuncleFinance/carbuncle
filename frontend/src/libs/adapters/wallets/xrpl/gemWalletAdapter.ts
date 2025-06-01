@@ -1,8 +1,8 @@
 import { isInstalled, getAddress } from '@gemwallet/api'
 import { AppErrorCode } from '@/types/enums'
-import { WalletAdapter } from '@/types/wallet'
+import { WalletAdapter } from '@/libs/adapters/walletFactory'
 
-export class XrplGemWalletAdapter implements WalletAdapter {
+export class GemWalletAdapter implements WalletAdapter {
   async connect(): Promise<string> {
     const installed = await this.isInstalled()
     if (!installed) {

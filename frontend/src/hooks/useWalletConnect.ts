@@ -1,6 +1,6 @@
-import { AppErrorCode, XrplWalletTypes, XrplWalletType } from '@/types/enums'
-import { WalletType } from '@/types/wallet'
-import { WalletFactory } from '@/adapters/walletFactory'
+import { AppErrorCode, ChainType, WalletTypes, WalletType } from '@/types/enums'
+// import { WalletType } from '@/types/wallet'
+import { WalletFactory } from '@/libs/adapters/walletFactory'
 import { useErrorHandler } from '@/hooks/useErrorHandler'
 import { useWalletStore } from '@/stores/wallet'
 import type { Wallet } from '@/stores/wallet'
@@ -9,22 +9,13 @@ export function useWalletConnect() {
   const { createError } = useErrorHandler()
   const { setWallet, clearWallet } = useWalletStore()
 
-  const connect = async (walletType: XrplWalletType) => {
+  const connect = async (walletType: WalletType) => {
     try {
       const wallet: Wallet = {
         address: ''
       }
 
-      let adapterWalletType: WalletType
-      switch (walletType) {
-        case XrplWalletTypes.GEM_WALLET:
-          adapterWalletType = WalletType.XRPL_GEM
-          break
-        default:
-          throw new Error('Invalid wallet type')
-      }
-
-      const adapter = WalletFactory.createAdapter(adapterWalletType)
+      const adapter = WalletFactory.createAdapter(walletType)
 
       const installed = await adapter.isInstalled()
       if (!installed) {

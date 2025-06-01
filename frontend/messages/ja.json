@@ -20,6 +20,11 @@
       "label": "ウォレット接続"
     }
   },
+  "Forms": {
+    "selectChainTypeForm": {
+      "label": "チェーンタイプ"
+    }
+  },
   "Menus": {
     "walletMenu": {
       "accountInfo": "口座情報",

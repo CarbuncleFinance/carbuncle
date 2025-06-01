@@ -20,6 +20,11 @@
       "label": "Connect"
     }
   },
+  "Forms": {
+    "selectChainTypeForm": {
+      "label": "Chain type"
+    }
+  },
   "Menus": {
     "walletMenu": {
       "accountInfo": "Account Info",
