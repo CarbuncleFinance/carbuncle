@@ -1,61 +1,60 @@
 'use client'
 
-import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import TextField from '@mui/material/TextField'
 import StepContainer from '../common/StepContainer'
 import StepNavigation from '../common/StepNavigation'
-import { BridgeForm } from '../../index'
-
-type AmountInputStepProps = {
-  bridgeForm: BridgeForm
-  setBridgeForm: (form: BridgeForm) => void
-  onBack: () => void
-  onNext: () => void
-}
+import { AmountInputStepProps } from '../../types'
+import { bridgeFormSchema } from '../../validation'
 
 export default function AmountInputStep({
-  bridgeForm,
-  setBridgeForm,
+  form,
   onBack,
   onNext
 }: AmountInputStepProps) {
-  const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBridgeForm({
-      ...bridgeForm,
-      amount: event.target.value
-    })
+  const t = useTranslations('Errors')
+
+  const handleNext = () => {
+    form.validateField('amount', 'change')
+    const amountField = form.getFieldMeta('amount')
+    if (!amountField?.errors?.length) {
+      onNext()
+    }
   }
 
   return (
     <StepContainer title="">
-      <TextField
-        label="振込金額"
-        type="number"
-        fullWidth
-        value={bridgeForm.amount}
-        onChange={handleAmountChange}
-        InputProps={{
-          sx: {
-            color: '#fff',
-            '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'rgba(255, 255, 255, 0.23)'
-            },
-            '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: 'rgba(255, 255, 255, 0.5)'
+      <form.Field
+        name="amount"
+        validators={{
+          onChange: ({ value }: { value: string }) => {
+            const result = bridgeFormSchema.shape.amount.safeParse(value)
+            return result.success ? undefined : result.error.issues[0]?.message
+          }
+        }}
+      >
+        {(field: any) => (
+          <TextField
+            label="振込金額"
+            type="text"
+            fullWidth
+            value={field.state.value}
+            error={field.state.meta.errors.length > 0}
+            helperText={
+              field.state.meta.errors.length > 0
+                ? t(field.state.meta.errors[0])
+                : ''
             }
-          }
-        }}
-        InputLabelProps={{
-          sx: {
-            color: 'rgba(255, 255, 255, 0.7)'
-          }
-        }}
-      />
+            onChange={(e) => field.handleChange(e.target.value)}
+          />
+        )}
+      </form.Field>
       <StepNavigation
         showBack={true}
         showNext={true}
+        nextDisabled={false}
         onBack={onBack}
-        onNext={onNext}
+        onNext={handleNext}
       />
     </StepContainer>
   )

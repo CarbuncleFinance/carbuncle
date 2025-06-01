@@ -22,14 +22,16 @@ export interface BlockchainSelectionStepProps {
   onNext: () => void
 }
 
+import { BridgeForm } from '../index'
+
 export interface AddressInputStepProps {
+  form: any
   onBack: () => void
   onNext: () => void
 }
 
-import { BridgeForm } from '../index'
-
 export interface AmountInputStepProps {
+  form: any
   onBack: () => void
   onNext: () => void
 }
