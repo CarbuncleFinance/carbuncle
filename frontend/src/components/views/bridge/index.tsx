@@ -73,7 +73,14 @@ export default function BridgeView() {
     },
     {
       label: '送金金額の入力',
-      component: <AmountInputStep onBack={handleBack} onNext={handleNext} />
+      component: (
+        <AmountInputStep
+          bridgeForm={bridgeForm}
+          setBridgeForm={setBridgeForm}
+          onBack={handleBack}
+          onNext={handleNext}
+        />
+      )
     },
     {
       label: '送金確認',
@@ -86,6 +93,10 @@ export default function BridgeView() {
           }}
         />
       )
+    },
+    {
+      label: '送金完了',
+      component: <div>送金完了</div>
     }
   ]
 
