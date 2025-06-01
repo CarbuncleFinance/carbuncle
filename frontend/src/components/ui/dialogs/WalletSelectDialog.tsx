@@ -14,7 +14,6 @@ import { useWalletConnect } from '@/hooks/useWalletConnect'
 import { Chain, ETHEREUM_MAINNET } from '@/domains/blockchain/types'
 import { WalletFactory } from '@/libs/adapters/walletFactory'
 import {
-  WalletTypes,
   WalletType,
   WalletTypeNames
 } from '@/types/enums'
