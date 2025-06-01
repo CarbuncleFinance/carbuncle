@@ -8,12 +8,12 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
-import { SelectFormChainType } from '@/components/ui/forms/SelectFormChainType'
+import { SelectFormChain } from '@/components/ui/forms/SelectFormChain'
 import { WalletConnectOptionButton } from '@/components/ui/buttons/WalletConnectOptionButton'
 import { useWalletConnect } from '@/hooks/useWalletConnect'
+import { Chain, ETHEREUM_MAINNET } from '@/domains/blockchain/types'
+import { WalletFactory } from '@/libs/adapters/walletFactory'
 import {
-  ChainTypes,
-  ChainType,
   WalletTypes,
   WalletType,
   WalletTypeNames
@@ -24,21 +24,7 @@ type WalletSelectDialogProps = {
   onClose: () => void
 }
 
-const xrplWallets = [
-  {
-    chainType: ChainTypes.XRPL,
-    walletType: WalletTypes.GEM_WALLET,
-    name: WalletTypeNames[WalletTypes.GEM_WALLET]
-  }
-]
 
-const evmWallets = [
-  {
-    chainType: ChainTypes.EVM,
-    walletType: WalletTypes.METAMASK,
-    name: WalletTypeNames[WalletTypes.METAMASK]
-  }
-]
 
 export default function WalletSelectDialog({
   open,
@@ -48,17 +34,18 @@ export default function WalletSelectDialog({
 
   const { enqueueSnackbar } = useSnackbar()
 
-  const { connect } = useWalletConnect()
+  const { connectWithChain } = useWalletConnect()
 
-  /** Select Chain Type */
-  const [selectedChainType, setSelectedChainType] = useState<ChainType>(
-    ChainTypes.XRPL
-  )
+  /** Select Chain */
+  const [selectedChain, setSelectedChain] = useState<Chain>(ETHEREUM_MAINNET)
+
+  /** Get supported wallets for selected chain */
+  const supportedWallets = WalletFactory.getSupportedWalletsForChain(selectedChain)
 
   /** Connect to Wallet */
   const handleConnect = async (walletType: WalletType) => {
     try {
-      await connect(selectedChainType, walletType)
+      await connectWithChain(selectedChain, walletType)
       enqueueSnackbar('Connected to wallet', {
         variant: 'success'
       })
@@ -91,32 +78,17 @@ export default function WalletSelectDialog({
       </DialogTitle>
       <DialogContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 1 }}>
-          <SelectFormChainType
-            selectedChainType={selectedChainType}
-            setSelectedChainType={setSelectedChainType}
+          <SelectFormChain
+            selectedChain={selectedChain}
+            setSelectedChain={setSelectedChain}
           />
-          {selectedChainType === ChainTypes.XRPL && (
-            <>
-              {xrplWallets.map((wallet) => (
-                <WalletConnectOptionButton
-                  key={wallet.walletType}
-                  walletName={wallet.name}
-                  onClick={() => handleConnect(wallet.walletType)}
-                />
-              ))}
-            </>
-          )}
-          {selectedChainType === ChainTypes.EVM && (
-            <>
-              {evmWallets.map((wallet) => (
-                <WalletConnectOptionButton
-                  key={wallet.walletType}
-                  walletName={wallet.name}
-                  onClick={() => handleConnect(wallet.walletType)}
-                />
-              ))}
-            </>
-          )}
+          {supportedWallets.map((walletType) => (
+            <WalletConnectOptionButton
+              key={walletType}
+              walletName={WalletTypeNames[walletType]}
+              onClick={() => handleConnect(walletType)}
+            />
+          ))}
           <Button variant="outlined" fullWidth onClick={onClose}>
             {t('closeButton')}
           </Button>
