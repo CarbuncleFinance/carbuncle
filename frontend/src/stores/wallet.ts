@@ -1,12 +1,10 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { ChainType, chainTypeToChain, chainToChainType } from '@/types/enums'
 import { Chain } from '@/domains/blockchain/types'
 
 export type Wallet = {
-  chainType: ChainType | null
   address: string
-  chain?: Chain
+  chain: Chain | null
 }
 
 type WalletState = {
@@ -17,8 +15,8 @@ type WalletState = {
 }
 
 export const initialWallet: Wallet = {
-  chainType: null,
-  address: ''
+  address: '',
+  chain: null
 }
 
 export const useWalletStore = create<WalletState>()(
@@ -40,21 +38,12 @@ export const useWalletStore = create<WalletState>()(
 )
 
 
-// wallet.chainが未定義の場合（既存のウォレットデータや段階的移行中）、
-// 旧型定義から新型定義に変換して返す
 export function getWalletChain(wallet: Wallet): Chain | null {
-  if (wallet.chain) {
-    return wallet.chain
-  }
-  if (wallet.chainType && wallet.address) {
-    return chainTypeToChain(wallet.chainType, wallet.address)
-  }
-  return null
+  return wallet.chain
 }
 
 export function setWalletWithChain(chain: Chain, address: string): Wallet {
   return {
-    chainType: chainToChainType(chain),
     address,
     chain
   }
