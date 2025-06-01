@@ -129,11 +129,14 @@ export function evmChainToEvmChainType(evmChain: EVMChain): EvmChainType {
   return EvmChainTypes.XRPL_EVM
 }
 
+const ETHEREUM_CHAIN_ID = 1
+const POLYGON_CHAIN_ID = 137
+
 export function getChainById(chainId: number): EVMChain | null {
   switch (chainId) {
-    case 1:
+    case ETHEREUM_CHAIN_ID:
       return ETHEREUM_MAINNET
-    case 137:
+    case POLYGON_CHAIN_ID:
       return POLYGON_MAINNET
     default:
       return null
