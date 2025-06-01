@@ -11,6 +11,17 @@ export const ChainTypeNames: Record<ChainType, string> = {
   [ChainTypes.EVM]: 'EVM'
 }
 
+/** EVM Chain Types */
+export enum EvmChainTypes {
+  XRPL_EVM = 'xrpl-evm'
+}
+
+export type EvmChainType = (typeof EvmChainTypes)[keyof typeof EvmChainTypes]
+
+export const EvmChainTypeNames: Record<EvmChainType, string> = {
+  [EvmChainTypes.XRPL_EVM]: 'XRPL EVM'
+}
+
 /** Wallet Types */
 export enum WalletTypes {
   GEM_WALLET = 'gem-wallet',

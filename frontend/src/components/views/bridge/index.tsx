@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Typography from '@mui/material/Typography'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
@@ -8,25 +8,32 @@ import StepContent from '@mui/material/StepContent'
 import StepLabel from '@mui/material/StepLabel'
 import PageLayout from '@/components/features/layout/PageLayout'
 import TransferMethodStep from './components/steps/TransferMethodStep'
-import BlockchainSelectionStep from './components/steps/BlockchainSelectionStep'
+import ChainSelectionStep from './components/steps/ChainSelectionStep'
 import AddressInputStep from './components/steps/AddressInputStep'
 import AmountInputStep from './components/steps/AmountInputStep'
+import { EvmChainType, EvmChainTypes } from '@/types/enums'
+import { useWallet } from '@/hooks/useWallet'
 
-type BridgeForm = {
-  transferMethod: string // 振込方法
+export type BridgeForm = {
+  chainType: EvmChainType
   blockchain: string // ブロックチェーン
   address: string // アドレス
   amount: string // 金額
 }
 
 export default function BridgeView() {
+  const { chainType } = useWallet()
+
   const [bridgeForm, setBridgeForm] = useState<BridgeForm>({
-    transferMethod: 'xrp',
+    chainType: EvmChainTypes.XRPL_EVM,
     blockchain: '',
     address: '',
     amount: ''
   })
-  const [blockchain, setBlockchain] = useState('')
+
+  const [selectedChainType, setSelectedChainType] = useState(
+    EvmChainTypes.XRPL_EVM
+  )
   const [activeStep, setActiveStep] = useState(0)
 
   const handleNext = () => {
@@ -39,26 +46,36 @@ export default function BridgeView() {
 
   const steps = [
     {
-      label: '振込方法を選択してください。',
+      label: '振込方法の選択',
       component: <TransferMethodStep onNext={handleNext} />
     },
     {
-      label: '振込先を選択してください。',
+      label: '振込先ネットワークの選択',
       component: (
-        <BlockchainSelectionStep
-          blockchain={blockchain}
-          setBlockchain={setBlockchain}
+        <ChainSelectionStep
+          selectedChainType={selectedChainType}
+          setSelectedChainType={setSelectedChainType}
           onBack={handleBack}
           onNext={handleNext}
         />
       )
     },
     {
-      label: '振込先のアドレスを入力してください。',
-      component: <AddressInputStep onBack={handleBack} onNext={handleNext} />
+      label: '振込先の入力',
+      component: (
+        <AddressInputStep
+          setBridgeForm={setBridgeForm}
+          onBack={handleBack}
+          onNext={handleNext}
+        />
+      )
     },
     {
-      label: '振込金額を入力してください。',
+      label: '送金金額の入力',
+      component: <AmountInputStep onBack={handleBack} onNext={handleNext} />
+    },
+    {
+      label: '送金確認',
       component: <AmountInputStep onBack={handleBack} onNext={handleNext} />
     }
   ]

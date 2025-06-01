@@ -11,9 +11,9 @@ export default function StepContainer({ children, title }: StepContainerProps) {
       flexDirection="column"
       gap={2}
       pt={2}
-      sx={{ backgroundColor: '#fbfaf5', borderRadius: 1, p: 2 }}
+      sx={{ backgroundColor: '#1a1a1a', borderRadius: 1, p: 2, color: '#fff' }}
     >
-      <Typography variant="caption" sx={{ fontSize: 14, color: '#000' }}>
+      <Typography variant="caption" sx={{ fontSize: 14, pb: 2 }}>
         {title}
       </Typography>
       {children}

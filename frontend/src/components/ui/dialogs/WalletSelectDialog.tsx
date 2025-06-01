@@ -8,8 +8,7 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
-import { SelectChangeEvent } from '@mui/material/Select'
-import { SelectChainTypeForm } from '@/components/ui/forms/SelectChainTypeForm'
+import { SelectFormChainType } from '@/components/ui/forms/SelectFormChainType'
 import { WalletConnectOptionButton } from '@/components/ui/buttons/WalletConnectOptionButton'
 import { useWalletConnect } from '@/hooks/useWalletConnect'
 import {
@@ -56,14 +55,10 @@ export default function WalletSelectDialog({
     ChainTypes.XRPL
   )
 
-  const handleChangeChainType = (event: SelectChangeEvent<ChainType>) => {
-    setSelectedChainType(event.target.value as ChainType)
-  }
-
   /** Connect to Wallet */
   const handleConnect = async (walletType: WalletType) => {
     try {
-      await connect(walletType)
+      await connect(selectedChainType, walletType)
       enqueueSnackbar('Connected to wallet', {
         variant: 'success'
       })
@@ -96,9 +91,9 @@ export default function WalletSelectDialog({
       </DialogTitle>
       <DialogContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 1 }}>
-          <SelectChainTypeForm
+          <SelectFormChainType
             selectedChainType={selectedChainType}
-            handleChangeChainType={handleChangeChainType}
+            setSelectedChainType={setSelectedChainType}
           />
           {selectedChainType === ChainTypes.XRPL && (
             <>

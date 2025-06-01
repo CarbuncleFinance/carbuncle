@@ -1,20 +1,14 @@
-import { AppErrorCode, ChainType, WalletTypes, WalletType } from '@/types/enums'
-// import { WalletType } from '@/types/wallet'
+import { AppErrorCode, ChainType, WalletType } from '@/types/enums'
 import { WalletFactory } from '@/libs/adapters/walletFactory'
 import { useErrorHandler } from '@/hooks/useErrorHandler'
 import { useWalletStore } from '@/stores/wallet'
-import type { Wallet } from '@/stores/wallet'
 
 export function useWalletConnect() {
   const { createError } = useErrorHandler()
   const { setWallet, clearWallet } = useWalletStore()
 
-  const connect = async (walletType: WalletType) => {
+  const connect = async (chainType: ChainType, walletType: WalletType) => {
     try {
-      const wallet: Wallet = {
-        address: ''
-      }
-
       const adapter = WalletFactory.createAdapter(walletType)
 
       const installed = await adapter.isInstalled()
@@ -27,8 +21,10 @@ export function useWalletConnect() {
         throw createError(AppErrorCode.WALLET_CONNECTION_FAILED)
       }
 
-      wallet.address = address
-      setWallet(wallet)
+      setWallet({
+        chainType,
+        address
+      })
     } catch (error) {
       clearWallet()
       throw error
