@@ -1,22 +1,3 @@
-# チェーンの型定義
-
-## ドメインごとの最小コンセプト
-
-| 概念 | 例 | 説明 |
-|------|----|------|
-| **ChainProtocol** | `'XRPL' \| 'EVM'` | プロトコル種別（スタックの共通化軸） |
-| **ChainName** | `'XRPL' \| 'Xahau' \| 'Ethereum' \| 'Polygon'` | 個別チェーン識別子 |
-| **Network** | `'mainnet' \| 'testnet' \| 'devnet' …` | 同一チェーン内の環境 |
-| **ChainId** | `1`, `137`, `0x15` … | EVM系公式 ChainID、XRPL系は自前番号可 |
-
-> **ChainProtocol → ChainName → Network** の3層ツリーを意識！
-
----
-
-## ドメインモデル (Value Object)
-
-```ts
-// src/domains/blockchain/types.ts
 export enum ChainProtocol {
   XRPL = 'XRPL',
   EVM  = 'EVM',
@@ -34,16 +15,14 @@ export type BaseChain<P extends ChainProtocol, N extends string, C extends strin
   network: N
 }
 
-// --- XRPL 系 ---
 export type XRPLChain = BaseChain<
   ChainProtocol.XRPL,
   XRPLNetwork,
   XRPLChainName
 > & {
-  address: `r${string}`          // XRPL アドレス
+  address: `r${string}`
 }
 
-// --- EVM 系 ---
 export type EthereumChain = BaseChain<
   ChainProtocol.EVM,
   EthereumNetwork,
@@ -65,7 +44,6 @@ export type PolygonChain = BaseChain<
 export type EVMChain = EthereumChain | PolygonChain
 export type Chain = XRPLChain | EVMChain
 
-// --- 定義済みチェーン定数 ---
 export const ETHEREUM_MAINNET: EthereumChain = {
   protocol: ChainProtocol.EVM,
   name: 'Ethereum',
