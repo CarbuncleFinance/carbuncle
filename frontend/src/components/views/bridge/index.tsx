@@ -11,6 +11,7 @@ import TransferMethodStep from './components/steps/TransferMethodStep'
 import ChainSelectionStep from './components/steps/ChainSelectionStep'
 import AddressInputStep from './components/steps/AddressInputStep'
 import AmountInputStep from './components/steps/AmountInputStep'
+import ConfirmationStep from './components/steps/ConfirmationStep'
 import { EvmChainType, EvmChainTypes } from '@/types/enums'
 import { useWallet } from '@/hooks/useWallet'
 
@@ -76,7 +77,15 @@ export default function BridgeView() {
     },
     {
       label: '送金確認',
-      component: <AmountInputStep onBack={handleBack} onNext={handleNext} />
+      component: (
+        <ConfirmationStep
+          bridgeForm={bridgeForm}
+          onBack={handleBack}
+          onExecute={() => {
+            console.log('Transfer execution requested:', bridgeForm)
+          }}
+        />
+      )
     }
   ]
 
