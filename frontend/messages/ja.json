@@ -51,6 +51,10 @@
     "walletConnectionFailed": {
       "title": "ウォレット接続に失敗しました",
       "message": "ウォレットを接続してください。"
-    }
+    },
+    "BRIDGE_VALIDATION_ADDRESS_REQUIRED": "送金先アドレスを入力してください。",
+    "BRIDGE_VALIDATION_ADDRESS_INVALID": "0xで始まる40文字の16進数を入力してください。",
+    "BRIDGE_VALIDATION_AMOUNT_REQUIRED": "送金金額を入力してください。",
+    "BRIDGE_VALIDATION_AMOUNT_INVALID": "有効な数値を入力してください。"
   }
 }

@@ -22,7 +22,11 @@ export interface BlockchainSelectionStepProps {
   onNext: () => void
 }
 
+import { FormApi } from '@tanstack/react-form'
+import { BridgeFormData } from '../validation'
+
 export interface AddressInputStepProps {
+  form: any
   onBack: () => void
   onNext: () => void
 }
@@ -30,6 +34,7 @@ export interface AddressInputStepProps {
 import { BridgeForm } from '../index'
 
 export interface AmountInputStepProps {
+  form: any
   onBack: () => void
   onNext: () => void
 }

@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useForm } from '@tanstack/react-form'
+import { zodValidator } from '@tanstack/zod-form-adapter'
 import Typography from '@mui/material/Typography'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
@@ -13,26 +15,29 @@ import AddressInputStep from './components/steps/AddressInputStep'
 import AmountInputStep from './components/steps/AmountInputStep'
 import ConfirmationStep from './components/steps/ConfirmationStep'
 import { EvmChainType, EvmChainTypes } from '@/types/enums'
+import { bridgeFormSchema, BridgeFormData } from './validation'
 
 export type BridgeForm = {
   chainType: EvmChainType
-  blockchain: string // ブロックチェーン
-  address: string // アドレス
-  amount: string // 金額
+  blockchain: string
+  address: string
+  amount: string
 }
 
 export default function BridgeView() {
-  const [bridgeForm, setBridgeForm] = useState<BridgeForm>({
-    chainType: EvmChainTypes.XRPL_EVM,
-    blockchain: '',
-    address: '',
-    amount: ''
-  })
-
   const [selectedChainType, setSelectedChainType] = useState(
     EvmChainTypes.XRPL_EVM
   )
   const [activeStep, setActiveStep] = useState(0)
+
+  const form = useForm({
+    defaultValues: {
+      chainType: EvmChainTypes.XRPL_EVM,
+      blockchain: '',
+      address: '',
+      amount: ''
+    }
+  })
 
   const handleNext = () => {
     setActiveStep(activeStep + 1)
@@ -61,32 +66,23 @@ export default function BridgeView() {
     {
       label: '振込先の入力',
       component: (
-        <AddressInputStep
-          setBridgeForm={setBridgeForm}
-          onBack={handleBack}
-          onNext={handleNext}
-        />
+        <AddressInputStep form={form} onBack={handleBack} onNext={handleNext} />
       )
     },
     {
       label: '送金金額の入力',
       component: (
-        <AmountInputStep
-          bridgeForm={bridgeForm}
-          setBridgeForm={setBridgeForm}
-          onBack={handleBack}
-          onNext={handleNext}
-        />
+        <AmountInputStep form={form} onBack={handleBack} onNext={handleNext} />
       )
     },
     {
       label: '送金確認',
       component: (
         <ConfirmationStep
-          bridgeForm={bridgeForm}
+          bridgeForm={form.state.values as BridgeForm}
           onBack={handleBack}
           onExecute={() => {
-            console.log('Transfer execution requested:', bridgeForm)
+            console.log('Transfer execution requested:', form.state.values)
           }}
         />
       )
