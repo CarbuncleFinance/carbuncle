@@ -1,0 +1,23 @@
+name: Delete Merged Branch
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  delete-merged-branch:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Delete branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
+        run: |
+          if [[ "$BRANCH_NAME" != "main" && "$BRANCH_NAME" != "develop" ]]; then
+            gh api \
+              -X DELETE \
+              "repos/${{ github.repository }}/git/refs/heads/$BRANCH_NAME"
+          else
+            echo "Protected branch ($BRANCH_NAME) will not be deleted."
+          fi
