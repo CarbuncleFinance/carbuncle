@@ -13,7 +13,6 @@ import AddressInputStep from './components/steps/AddressInputStep'
 import AmountInputStep from './components/steps/AmountInputStep'
 import ConfirmationStep from './components/steps/ConfirmationStep'
 import { EvmChainType, EvmChainTypes } from '@/types/enums'
-import { useWallet } from '@/hooks/useWallet'
 
 export type BridgeForm = {
   chainType: EvmChainType
@@ -23,8 +22,6 @@ export type BridgeForm = {
 }
 
 export default function BridgeView() {
-  const { chainType } = useWallet()
-
   const [bridgeForm, setBridgeForm] = useState<BridgeForm>({
     chainType: EvmChainTypes.XRPL_EVM,
     blockchain: '',
