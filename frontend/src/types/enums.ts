@@ -74,6 +74,7 @@ export enum AppErrorCode {
 }
 
 import { Chain, XRPLChain, EVMChain, ChainProtocol, ETHEREUM_MAINNET, POLYGON_MAINNET } from '@/domains/blockchain/types'
+import { ETHEREUM_CHAIN_ID, POLYGON_CHAIN_ID } from '@/constants/blockchain'
 
 export function isXRPLChain(chain: Chain): chain is XRPLChain {
   return chain.protocol === ChainProtocol.XRPL
@@ -128,9 +129,6 @@ export function evmChainTypeToEVMChain(evmChainType: EvmChainType, address: stri
 export function evmChainToEvmChainType(evmChain: EVMChain): EvmChainType {
   return EvmChainTypes.XRPL_EVM
 }
-
-const ETHEREUM_CHAIN_ID = 1
-const POLYGON_CHAIN_ID = 137
 
 export function getChainById(chainId: number): EVMChain | null {
   switch (chainId) {
