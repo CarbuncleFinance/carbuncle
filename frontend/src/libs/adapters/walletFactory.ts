@@ -31,7 +31,6 @@ export class WalletFactory {
     if (isEVMChain(chain)) {
       return new InjectedWalletAdapter()
     }
-    const _exhaustiveCheck: never = chain
     throw new Error(`Unsupported chain protocol`)
   }
 
