@@ -1,10 +1,12 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { ChainType } from '@/types/enums'
+import { ChainType, chainTypeToChain, chainToChainType } from '@/types/enums'
+import { Chain } from '@/domains/blockchain/types'
 
 export type Wallet = {
   chainType: ChainType | null
   address: string
+  chain?: Chain
 }
 
 type WalletState = {
@@ -36,3 +38,21 @@ export const useWalletStore = create<WalletState>()(
     }
   )
 )
+
+export function getWalletChain(wallet: Wallet): Chain | null {
+  if (wallet.chain) {
+    return wallet.chain
+  }
+  if (wallet.chainType && wallet.address) {
+    return chainTypeToChain(wallet.chainType, wallet.address)
+  }
+  return null
+}
+
+export function setWalletWithChain(chain: Chain, address: string): Wallet {
+  return {
+    chainType: chainToChainType(chain),
+    address,
+    chain
+  }
+}

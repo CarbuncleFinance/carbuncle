@@ -72,3 +72,70 @@ export enum AppErrorCode {
   // Unknown Error
   UNKNOWN_ERROR = 'unknownError'
 }
+
+import { Chain, XRPLChain, EVMChain, ChainProtocol, ETHEREUM_MAINNET, POLYGON_MAINNET } from '@/domains/blockchain/types'
+
+export function isXRPLChain(chain: Chain): chain is XRPLChain {
+  return chain.protocol === ChainProtocol.XRPL
+}
+
+export function isEVMChain(chain: Chain): chain is EVMChain {
+  return chain.protocol === ChainProtocol.EVM
+}
+
+export function chainTypeToChain(chainType: ChainType, address: string = '0x'): Chain {
+  switch (chainType) {
+    case ChainTypes.XRPL:
+      return {
+        protocol: ChainProtocol.XRPL,
+        name: 'XRPL',
+        network: 'mainnet',
+        address: address.startsWith('r') ? address as `r${string}` : 'rXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' as `r${string}`
+      }
+    case ChainTypes.EVM:
+      return {
+        ...ETHEREUM_MAINNET,
+        address: address.startsWith('0x') ? address as `0x${string}` : '0x' as `0x${string}`
+      }
+    default:
+      throw new Error(`Unsupported chain type: ${chainType}`)
+  }
+}
+
+export function chainToChainType(chain: Chain): ChainType {
+  if (chain.protocol === ChainProtocol.XRPL) {
+    return ChainTypes.XRPL
+  }
+  if (chain.protocol === ChainProtocol.EVM) {
+    return ChainTypes.EVM
+  }
+  const _exhaustiveCheck: never = chain
+  throw new Error(`Unsupported chain protocol`)
+}
+
+export function evmChainTypeToEVMChain(evmChainType: EvmChainType, address: string = '0x'): EVMChain {
+  switch (evmChainType) {
+    case EvmChainTypes.XRPL_EVM:
+      return {
+        ...POLYGON_MAINNET,
+        address: address.startsWith('0x') ? address as `0x${string}` : '0x' as `0x${string}`
+      }
+    default:
+      throw new Error(`Unsupported EVM chain type: ${evmChainType}`)
+  }
+}
+
+export function evmChainToEvmChainType(evmChain: EVMChain): EvmChainType {
+  return EvmChainTypes.XRPL_EVM
+}
+
+export function getChainById(chainId: number): EVMChain | null {
+  switch (chainId) {
+    case 1:
+      return ETHEREUM_MAINNET
+    case 137:
+      return POLYGON_MAINNET
+    default:
+      return null
+  }
+}
