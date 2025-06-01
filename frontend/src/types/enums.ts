@@ -1,3 +1,16 @@
+/** Chain Protocol Types */
+export enum ChainProtocolTypes {
+  XRPL = 'xrpl',
+  EVM = 'evm'
+}
+
+export type ChainProtocolType = (typeof ChainProtocolTypes)[keyof typeof ChainProtocolTypes]
+
+export const ChainProtocolTypeNames: Record<ChainProtocolType, string> = {
+  [ChainProtocolTypes.XRPL]: 'XRPL',
+  [ChainProtocolTypes.EVM]: 'EVM'
+}
+
 /** Chain Types */
 export enum ChainTypes {
   XRPL = 'xrpl',

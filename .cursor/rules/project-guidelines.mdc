@@ -3,12 +3,34 @@ description:
 globs: 
 alwaysApply: true
 ---
-# This file is for summarizing project-wide development guidelines and policies.
-# Example related documents:
-# - docs/component_design.md (Component Design)
-# - docs/architecture.md (System Architecture Design)
-# - docs/development_flow.md (Development Flow & Rules)
-# More documents may be added in the future.
+# Project Guidelines
 
-[component_design.md](mdc:docs/component_design.md)
-The component design policy is described in docs/component_design.md.
+## Documentation Structure
+
+### Technical Documentation
+- [Blockchain Types](mdc:blockchain_types.md) - Blockchain protocol and chain type definitions
+- [Component Design](mdc:component_design.md) - Component architecture and design patterns
+
+### Language-specific Guidelines
+- [Japanese Guidelines](mdc:ja) - Japanese language specific guidelines and documentation
+
+## Documentation Standards
+
+### File Naming Convention
+- Use kebab-case for file names
+- Use `.md` extension for Markdown files
+- Use `.mdc` extension for documentation index files
+
+### Content Structure
+- Start with a clear title (H1)
+- Use appropriate heading levels (H1 -> H2 -> H3)
+- Include a brief description at the beginning
+- Use tables for structured data
+- Include code examples where relevant
+
+### Code Examples
+- Use TypeScript for code examples
+- Include comments for complex logic
+- Follow project's coding standards
+
+
