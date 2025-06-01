@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Delete branch
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
         run: |
           if [[ "$BRANCH_NAME" != "main" && "$BRANCH_NAME" != "develop" ]]; then
