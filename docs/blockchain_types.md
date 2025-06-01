@@ -29,7 +29,6 @@ export type BaseChain<P extends ChainProtocol, N extends string> = {
   protocol: P
   name: string
   network: N
-  chainId: number
 }
 
 // --- XRPL 系 ---
@@ -46,6 +45,7 @@ export type EVMChain = BaseChain<
   EVMNetwork
 > & {
   address: `0x${string}`         // 0x アドレス
+  chainId: number                // EVM ChainID
 }
 
 export type Chain = XRPLChain | EVMChain   // Discriminated Union

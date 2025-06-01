@@ -10,7 +10,6 @@ export type BaseChain<P extends ChainProtocol, N extends string> = {
   protocol: P
   name: string
   network: N
-  chainId: number
 }
 
 export type XRPLChain = BaseChain<
@@ -25,6 +24,7 @@ export type EVMChain = BaseChain<
   EVMNetwork
 > & {
   address: `0x${string}`
+  chainId: number
 }
 
 export type Chain = XRPLChain | EVMChain
