@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useForm } from '@tanstack/react-form'
-import { zodValidator } from '@tanstack/zod-form-adapter'
 import Typography from '@mui/material/Typography'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
@@ -15,7 +14,7 @@ import AddressInputStep from './components/steps/AddressInputStep'
 import AmountInputStep from './components/steps/AmountInputStep'
 import ConfirmationStep from './components/steps/ConfirmationStep'
 import { EvmChainType, EvmChainTypes } from '@/types/enums'
-import { bridgeFormSchema, BridgeFormData } from './validation'
+import { bridgeFormSchema } from './validation'
 
 export type BridgeForm = {
   chainType: EvmChainType

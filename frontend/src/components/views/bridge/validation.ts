@@ -12,5 +12,3 @@ export const bridgeFormSchema = z.object({
     .min(1, 'BRIDGE_VALIDATION_AMOUNT_REQUIRED')
     .regex(/^\d+(\.\d+)?$/, 'BRIDGE_VALIDATION_AMOUNT_INVALID')
 })
-
-export type BridgeFormData = z.infer<typeof bridgeFormSchema>
