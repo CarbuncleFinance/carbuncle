@@ -2,10 +2,10 @@
 
 import Typography from '@mui/material/Typography'
 import { useWallet } from '@/hooks/useWallet'
-import { ChainTypes } from '@/types/enums'
+import { ChainProtocol } from '@/domains/blockchain/types'
 
 export default function TopBarChainModeText() {
-  const { chainType } = useWallet()
+  const { chain } = useWallet()
 
   return (
     <Typography
@@ -18,7 +18,7 @@ export default function TopBarChainModeText() {
         mr: 1
       }}
     >
-      {chainType === ChainTypes.EVM ? 'EVM Mode' : 'XRPL Mode'}
+      {chain?.protocol === ChainProtocol.EVM ? 'EVM Mode' : 'XRPL Mode'}
     </Typography>
   )
 }
