@@ -27,7 +27,15 @@ export interface AddressInputStepProps {
   onNext: () => void
 }
 
+import { BridgeForm } from '../index'
+
 export interface AmountInputStepProps {
   onBack: () => void
   onNext: () => void
+}
+
+export interface ConfirmationStepProps {
+  bridgeForm: BridgeForm
+  onBack: () => void
+  onExecute: () => void
 }
