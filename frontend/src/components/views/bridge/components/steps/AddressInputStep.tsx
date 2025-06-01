@@ -56,27 +56,6 @@ export default function AddressInputStep({
                 : ''
             }
             onChange={(e) => field.handleChange(e.target.value)}
-            InputProps={{
-              sx: {
-                color: '#fff',
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: 'rgba(255, 255, 255, 0.23)'
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: 'rgba(255, 255, 255, 0.5)'
-                }
-              }
-            }}
-            InputLabelProps={{
-              sx: {
-                color: 'rgba(255, 255, 255, 0.7)'
-              }
-            }}
-            FormHelperTextProps={{
-              sx: {
-                color: '#f44336'
-              }
-            }}
           />
         )}
       </form.Field>
