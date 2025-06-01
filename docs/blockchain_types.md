@@ -23,7 +23,7 @@ export enum ChainProtocol {
 }
 
 export type XRPLNetwork = 'mainnet' | 'testnet' | 'devnet'
-export type EVMNetwork  = 'mainnet' | 'sepolia' | 'mumbai'
+export type EVMNetwork  = 'mainnet' | 'testnet' | 'devnet'
 
 export type BaseChain<P extends ChainProtocol, N extends string> = {
   protocol: P
