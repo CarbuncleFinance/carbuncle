@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography'
 import StepContainer from '../common/StepContainer'
 import StepNavigation from '../common/StepNavigation'
 import { ConfirmationStepProps } from '../../types'
-import { EvmChainTypeNames } from '@/types/enums'
 
 export default function ConfirmationStep({
   bridgeForm,
@@ -20,7 +19,7 @@ export default function ConfirmationStep({
             送金先ネットワーク
           </Typography>
           <Typography variant="body1" sx={{ color: '#fff' }}>
-            {EvmChainTypeNames[bridgeForm.chainType]}
+            {bridgeForm.chain.name} ({bridgeForm.chain.network})
           </Typography>
         </Box>
 
