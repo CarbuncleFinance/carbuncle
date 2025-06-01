@@ -1,4 +1,5 @@
-import { WalletType, WalletTypes } from '@/types/enums'
+import { WalletType, WalletTypes, isXRPLChain, isEVMChain } from '@/types/enums'
+import { Chain } from '@/domains/blockchain/types'
 import { GemWalletAdapter } from '@/libs/adapters/wallets/xrpl/gemWalletAdapter'
 import { InjectedWalletAdapter } from '@/libs/adapters/wallets/evm/InjectedWalletAdapter'
 
@@ -22,8 +23,29 @@ export class WalletFactory {
     }
   }
 
+  // Create a wallet adapter instance based on the given chain
+  static createAdapterForChain(chain: Chain): WalletAdapter {
+    if (isXRPLChain(chain)) {
+      return new GemWalletAdapter()
+    }
+    if (isEVMChain(chain)) {
+      return new InjectedWalletAdapter()
+    }
+    throw new Error(`Unsupported chain protocol`)
+  }
+
   // Get the supported wallet types
   static getSupportedWallets(): WalletType[] {
     return [WalletTypes.GEM_WALLET, WalletTypes.METAMASK]
+  }
+
+  static getSupportedWalletsForChain(chain: Chain): WalletType[] {
+    if (isXRPLChain(chain)) {
+      return [WalletTypes.GEM_WALLET]
+    }
+    if (isEVMChain(chain)) {
+      return [WalletTypes.METAMASK]
+    }
+    return []
   }
 }
