@@ -3,7 +3,10 @@ export enum ChainProtocol {
   EVM = 'EVM'
 }
 
+// XRPL Network
 export type XRPLNetwork = 'mainnet' | 'testnet' | 'devnet'
+// EVM Network
+export type XRPLEVMNetwork = 'mainnet' | 'testnet' | 'devnet'
 export type EthereumNetwork = 'mainnet' | 'sepolia'
 export type PolygonNetwork = 'mainnet' | 'amoy'
 
@@ -27,6 +30,15 @@ export type XRPLChain = BaseChain<
   address: `r${string}`
 }
 
+export type XRPLEVMChain = BaseChain<
+  ChainProtocol.EVM,
+  XRPLEVMNetwork,
+  'XRPL EVM'
+> & {
+  address: `0x${string}`
+  chainId: number
+}
+
 export type EthereumChain = BaseChain<
   ChainProtocol.EVM,
   EthereumNetwork,
@@ -45,8 +57,32 @@ export type PolygonChain = BaseChain<
   chainId: number
 }
 
-export type EVMChain = EthereumChain | PolygonChain
+export type EVMChain = XRPLEVMChain | EthereumChain | PolygonChain
 export type Chain = XRPLChain | EVMChain
+
+export const XRPLEVM_MAINNET: XRPLEVMChain = {
+  protocol: ChainProtocol.EVM,
+  name: 'XRPL EVM',
+  network: 'mainnet',
+  chainId: 9999999999999,
+  address: '0x' as `0x${string}`
+}
+
+export const XRPLEVM_TESTNET: XRPLEVMChain = {
+  protocol: ChainProtocol.EVM,
+  name: 'XRPL EVM',
+  network: 'testnet',
+  chainId: 1449000,
+  address: '0x' as `0x${string}`
+}
+
+export const XRPLEVM_DEVNET: XRPLEVMChain = {
+  protocol: ChainProtocol.EVM,
+  name: 'XRPL EVM',
+  network: 'devnet',
+  chainId: 1440002,
+  address: '0x' as `0x${string}`
+}
 
 export const ETHEREUM_MAINNET: EthereumChain = {
   protocol: ChainProtocol.EVM,

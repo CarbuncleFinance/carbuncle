@@ -13,7 +13,7 @@ import ChainSelectionStep from './components/steps/ChainSelectionStep'
 import AddressInputStep from './components/steps/AddressInputStep'
 import AmountInputStep from './components/steps/AmountInputStep'
 import ConfirmationStep from './components/steps/ConfirmationStep'
-import { Chain, ETHEREUM_MAINNET } from '@/domains/blockchain/types'
+import { Chain, XRPLEVM_TESTNET } from '@/domains/blockchain/types'
 
 export type BridgeForm = {
   chain: Chain
@@ -23,12 +23,12 @@ export type BridgeForm = {
 }
 
 export default function BridgeView() {
-  const [selectedChain, setSelectedChain] = useState<Chain>(ETHEREUM_MAINNET)
+  const [selectedChain, setSelectedChain] = useState<Chain>(XRPLEVM_TESTNET)
   const [activeStep, setActiveStep] = useState(0)
 
   const form = useForm({
     defaultValues: {
-      chain: ETHEREUM_MAINNET,
+      chain: XRPLEVM_TESTNET,
       blockchain: '',
       address: '',
       amount: ''

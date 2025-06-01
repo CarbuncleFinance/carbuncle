@@ -2,15 +2,7 @@
 
 import React from 'react'
 import { useTranslations } from 'next-intl'
-import {
-  Chain,
-  ETHEREUM_MAINNET,
-  ETHEREUM_SEPOLIA,
-  POLYGON_MAINNET,
-  POLYGON_AMOY,
-  XRPL_MAINNET,
-  XRPL_TESTNET
-} from '@/domains/blockchain/types'
+import { Chain, XRPLEVM_TESTNET } from '@/domains/blockchain/types'
 import { SelectForm } from '@/components/ui/forms/SelectForm'
 
 type SelectFormChainProps = {
@@ -21,34 +13,9 @@ type SelectFormChainProps = {
 
 const chainOptions: { value: string; label: string; chain: Chain }[] = [
   {
-    value: 'xrpl-mainnet',
-    label: 'XRPL Mainnet',
-    chain: XRPL_MAINNET
-  },
-  {
-    value: 'xrpl-testnet',
-    label: 'XRPL Testnet',
-    chain: XRPL_TESTNET
-  },
-  {
-    value: 'ethereum-mainnet',
-    label: 'Ethereum Mainnet',
-    chain: ETHEREUM_MAINNET
-  },
-  {
-    value: 'ethereum-sepolia',
-    label: 'Ethereum Sepolia',
-    chain: ETHEREUM_SEPOLIA
-  },
-  {
-    value: 'polygon-mainnet',
-    label: 'Polygon Mainnet',
-    chain: POLYGON_MAINNET
-  },
-  {
-    value: 'polygon-amoy',
-    label: 'Polygon Amoy',
-    chain: POLYGON_AMOY
+    value: 'xrpl-evm',
+    label: 'XRPL EVM',
+    chain: XRPLEVM_TESTNET
   }
 ]
 
