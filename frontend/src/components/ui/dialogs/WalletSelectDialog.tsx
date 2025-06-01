@@ -13,17 +13,12 @@ import { WalletConnectOptionButton } from '@/components/ui/buttons/WalletConnect
 import { useWalletConnect } from '@/hooks/useWalletConnect'
 import { Chain, ETHEREUM_MAINNET } from '@/domains/blockchain/types'
 import { WalletFactory } from '@/libs/adapters/walletFactory'
-import {
-  WalletType,
-  WalletTypeNames
-} from '@/types/enums'
+import { WalletType, WalletTypeNames } from '@/types/enums'
 
 type WalletSelectDialogProps = {
   open: boolean
   onClose: () => void
 }
-
-
 
 export default function WalletSelectDialog({
   open,
@@ -39,7 +34,8 @@ export default function WalletSelectDialog({
   const [selectedChain, setSelectedChain] = useState<Chain>(ETHEREUM_MAINNET)
 
   /** Get supported wallets for selected chain */
-  const supportedWallets = WalletFactory.getSupportedWalletsForChain(selectedChain)
+  const supportedWallets =
+    WalletFactory.getSupportedWalletsForChain(selectedChain)
 
   /** Connect to Wallet */
   const handleConnect = async (walletType: WalletType) => {
