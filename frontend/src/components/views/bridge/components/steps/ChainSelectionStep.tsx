@@ -2,35 +2,28 @@
 
 import StepContainer from '../common/StepContainer'
 import StepNavigation from '../common/StepNavigation'
-import { SelectForm } from '@/components/ui/forms/SelectForm'
-import { EvmChainType, EvmChainTypes, EvmChainTypeNames } from '@/types/enums'
-
-const options = Object.values(EvmChainTypes).map((evmChainType) => ({
-  value: evmChainType,
-  label: EvmChainTypeNames[evmChainType]
-}))
+import { SelectFormChain } from '@/components/ui/forms/SelectFormChain'
+import { Chain } from '@/domains/blockchain/types'
 
 type ChainSelectionStepProps = {
-  selectedChainType: EvmChainType
-  setSelectedChainType: (chainType: EvmChainType) => void
+  selectedChain: Chain
+  setSelectedChain: (chain: Chain) => void
   onBack: () => void
   onNext: () => void
 }
 
 export default function ChainSelectionStep({
-  selectedChainType,
-  setSelectedChainType,
+  selectedChain,
+  setSelectedChain,
   onBack,
   onNext
 }: ChainSelectionStepProps) {
   return (
     <StepContainer title="ネットワークを選択してください。">
-      <SelectForm
-        label="ネットワーク"
+      <SelectFormChain
+        selectedChain={selectedChain}
+        setSelectedChain={setSelectedChain}
         size="medium"
-        options={options}
-        selectedValue={selectedChainType}
-        setSelectedValue={setSelectedChainType}
       />
       <StepNavigation
         showBack={true}

@@ -13,24 +13,22 @@ import ChainSelectionStep from './components/steps/ChainSelectionStep'
 import AddressInputStep from './components/steps/AddressInputStep'
 import AmountInputStep from './components/steps/AmountInputStep'
 import ConfirmationStep from './components/steps/ConfirmationStep'
-import { EvmChainType, EvmChainTypes } from '@/types/enums'
+import { Chain, ETHEREUM_MAINNET } from '@/domains/blockchain/types'
 
 export type BridgeForm = {
-  chainType: EvmChainType
+  chain: Chain
   blockchain: string
   address: string
   amount: string
 }
 
 export default function BridgeView() {
-  const [selectedChainType, setSelectedChainType] = useState(
-    EvmChainTypes.XRPL_EVM
-  )
+  const [selectedChain, setSelectedChain] = useState<Chain>(ETHEREUM_MAINNET)
   const [activeStep, setActiveStep] = useState(0)
 
   const form = useForm({
     defaultValues: {
-      chainType: EvmChainTypes.XRPL_EVM,
+      chain: ETHEREUM_MAINNET,
       blockchain: '',
       address: '',
       amount: ''
@@ -54,8 +52,8 @@ export default function BridgeView() {
       label: '振込先ネットワークの選択',
       component: (
         <ChainSelectionStep
-          selectedChainType={selectedChainType}
-          setSelectedChainType={setSelectedChainType}
+          selectedChain={selectedChain}
+          setSelectedChain={setSelectedChain}
           onBack={handleBack}
           onNext={handleNext}
         />
