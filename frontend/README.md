@@ -43,12 +43,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
   - `ui/`：汎用UI（ボタン、ダイアログ等）
   - `features/`：機能単位のコンポーネント
   - `views/`：ページ単位のViewコンポーネント
+- `src/domains/`：ドメイン固有の型定義・ロジック
+  - `blockchain/`：ブロックチェーン関連の型定義（Chain型システム）
 - `src/hooks/`：カスタムフック
 - `src/stores/`：Zustand等の状態管理
 - `src/utils/`：ユーティリティ関数
-- `src/constants/`：定数
-- `src/types/`：型定義
+- `src/constants/`：定数（ブロックチェーンID等）
+- `src/types/`：汎用型定義（Wallet、Language等）
 - `src/styles/`：Vanilla ExtractによるCSS-in-JS設計
+- `src/libs/`：外部ライブラリのアダプター・ラッパー
 - `public/`：静的ファイル
 
 ### 技術スタック
@@ -61,6 +64,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - Biome（Lint/Format）
 - Bun（推奨ランタイム）
 
+### Web3/ブロックチェーン対応
+- **型安全なChain型システム**: discriminated unionによる厳密な型チェック
+- **対応プロトコル**: XRPL、EVM（Ethereum、Polygon）
+- **ウォレット統合**: GemWallet（XRPL）、MetaMask（EVM）
+- **ネットワーク対応**: Mainnet、Testnet、開発環境
+- **Bridge機能**: クロスチェーン資産転送
+
 ### コーディングスタイル
 - TypeScript：strictモード、型安全重視
 - Biome：シングルクォート、セミコロン省略、2スペースインデント
@@ -68,6 +78,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - Vanilla Extract：グローバル・ユーティリティスタイル
 - i18n：`useTranslations`でラベル管理、`[locale]`動的ルーティング
 - パスエイリアス：`@/`で`src/`直下参照
+
+### ブロックチェーン型定義パターン
+- **Chain型**: `src/domains/blockchain/types.ts`で定義されたdiscriminated union
+- **プロトコル判定**: `isXRPLChain(chain)`, `isEVMChain(chain)`関数を使用
+- **ネットワーク定数**: `src/constants/blockchain.ts`でチェーンID管理
+- **ウォレット統合**: `WalletFactory`パターンでプロトコル別アダプター
 
 ### ページ・コンポーネント設計方針
 - ページは`src/app/[locale]/[page]/page.tsx`で管理
@@ -84,9 +100,22 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 - ファイル粒度は「1機能1ファイル」推奨
 - i18nキーは`ComponentName.label`形式
 
+### ブロックチェーン関連の設計指針
+- **型定義**: `Chain`型を基本とし、プロトコル固有の拡張は継承で実現
+- **ネットワーク管理**: 定数は`ETHEREUM_MAINNET`等の具体的な名前で定義
+- **ウォレット状態**: `wallet.chain`フィールドで現在接続中のチェーン情報を管理
+- **コンポーネント設計**: `chain.protocol`による条件分岐でプロトコル固有UI制御
+
 ### その他Devin向けTips
 - Bun推奨（`bun dev`等）
 - MUIの`Button`等はラップして`BaseButton`等で拡張
 - グローバルな状態やテーマはProviderでラップ
 - 追加実装時は`views/`や`features/`配下を優先
 - Storybookやテストは未導入（必要に応じて追加可）
+
+### ブロックチェーン開発時の注意点
+- **型安全性**: 必ず`Chain`型を使用し、文字列での直接比較は避ける
+- **プロトコル判定**: `chain.protocol === ChainProtocol.EVM`等で厳密に判定
+- **ウォレット接続**: `connectWithChain(chain, walletType)`で型安全な接続
+- **新チェーン追加**: `src/domains/blockchain/types.ts`と`src/constants/blockchain.ts`を更新
+- **バリデーション**: Zodスキーマで`Chain`オブジェクトの包括的検証を実装
