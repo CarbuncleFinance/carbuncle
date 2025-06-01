@@ -1,0 +1,56 @@
+{
+  "HomePage": {
+    "title1": "전설의 카벙클이 이끄는",
+    "title2": "새로운 자산의 세계",
+    "card1": {
+      "title": "Web3 실제 세계의 다리",
+      "description": "Web2 시대의 송금 및 잔액 관리 경험을 Web3에서 재현하여 누구나 사용할 수 있는 금융 서비스로."
+    },
+    "card2": {
+      "title": "익숙한 업무 플로우",
+      "description": "기존 금융 거래 플로우를 Web3에서 재현. 직관적인 조작성으로 누구나 안심하고 이용할 수 있습니다."
+    },
+    "card3": {
+      "title": "유연한 자산 관리",
+      "description": "스마트 컨트랙트에 의한 자동화된 자산 관리와 원활한 자산 이동을 실현합니다."
+    }
+  },
+  "Buttons": {
+    "walletConnectButton": {
+      "label": "지갑 연결"
+    }
+  },
+  "Forms": {
+    "selectChainTypeForm": {
+      "label": "체인 타입"
+    }
+  },
+  "Menus": {
+    "walletMenu": {
+      "accountInfo": "계정 정보",
+      "menu": "메뉴",
+      "logout": "로그아웃"
+    },
+    "languageMenu": {
+      "english": "English",
+      "japanese": "日本語",
+      "korean": "한국어"
+    }
+  },
+  "Dialogs": {
+    "walletSelectDialog": {
+      "title": "지갑을 선택해주세요",
+      "closeButton": "닫기"
+    }
+  },
+  "Errors": {
+    "walletNotInstalled": {
+      "title": "지갑이 설치되지 않았습니다",
+      "message": "지갑을 설치해주세요."
+    },
+    "walletConnectionFailed": {
+      "title": "지갑 연결에 실패했습니다",
+      "message": "지갑을 연결해주세요."
+    }
+  }
+}

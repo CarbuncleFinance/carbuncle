@@ -35,6 +35,21 @@ export const WalletTypeNames: Record<WalletType, string> = {
   [WalletTypes.METAMASK]: 'MetaMask'
 }
 
+/** Languages */
+export enum Languages {
+  EN = 'en',
+  JA = 'ja',
+  KO = 'ko'
+}
+
+export type Language = (typeof Languages)[keyof typeof Languages]
+
+export const LanguageNames: Record<Language, string> = {
+  [Languages.EN]: 'English',
+  [Languages.JA]: '日本語',
+  [Languages.KO]: '한국어'
+}
+
 /** App Error Codes */
 export enum AppErrorCode {
   // Wallet Errors

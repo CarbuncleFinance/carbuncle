@@ -30,6 +30,11 @@
       "accountInfo": "口座情報",
       "menu": "メニュー",
       "logout": "ログアウト"
+    },
+    "languageMenu": {
+      "english": "English",
+      "japanese": "日本語",
+      "korean": "한국어"
     }
   },
   "Dialogs": {
