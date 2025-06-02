@@ -1,24 +1,24 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import StepContainer from '../common/StepContainer'
-import StepNavigation from '../common/StepNavigation'
 import { SelectFormChain } from '@/components/ui/forms/SelectFormChain'
+import StepContainer from '@/components/ui/steppers/StepContainer'
+import StepNavigation from '@/components/ui/steppers/StepNavigation'
 import { Chain } from '@/domains/blockchain/types'
 
-type ChainSelectionStepProps = {
+type StepContainerChainInputProps = {
   selectedChain: Chain
   setSelectedChain: (chain: Chain) => void
   onBack: () => void
   onNext: () => void
 }
 
-export default function ChainSelectionStep({
+export default function StepContainerChainInput({
   selectedChain,
   setSelectedChain,
   onBack,
   onNext
-}: ChainSelectionStepProps) {
+}: StepContainerChainInputProps) {
   const t = useTranslations('BridgeContent')
 
   return (
@@ -29,7 +29,7 @@ export default function ChainSelectionStep({
         size="medium"
       />
       <StepNavigation
-        showBack={true}
+        showBack={false}
         showNext={true}
         onBack={onBack}
         onNext={onNext}

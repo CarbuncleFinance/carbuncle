@@ -5,8 +5,8 @@ import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
-import StepContainer from '../common/StepContainer'
-import StepNavigation from '../common/StepNavigation'
+import StepContainer from '../../../../ui/steppers/StepContainer'
+import StepNavigation from '../../../../ui/steppers/StepNavigation'
 import { TransferMethodStepProps } from '../../types'
 
 export default function TransferMethodStep({

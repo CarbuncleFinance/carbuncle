@@ -57,8 +57,7 @@
   },
   "BridgeSteps": {
     "transferMethodSelection": "Transfer Method Selection",
-    "networkSelection": "Destination Network Selection",
-    "addressInput": "Address Input",
+    "destinationInput": "Destination Input",
     "amountInput": "Amount Input",
     "confirmation": "Confirmation",
     "completion": "Completion"
@@ -70,7 +69,8 @@
     "selectNetwork": "Please select a network.",
     "destinationNetwork": "Destination Network",
     "destinationAddress": "Destination Address",
-    "amount": "Amount"
+    "amount": "Amount",
+    "amountInput": "Amount Input"
   },
   "Errors": {
     "walletNotInstalled": {

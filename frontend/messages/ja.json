@@ -57,8 +57,8 @@
   },
   "BridgeSteps": {
     "transferMethodSelection": "振込方法の選択",
-    "networkSelection": "振込先ネットワークの選択",
-    "addressInput": "振込先の入力",
+    "chainInput": "チェーンの選択",
+    "destinationInput": "振込先の入力",
     "amountInput": "送金金額の入力",
     "confirmation": "送金確認",
     "completion": "送金完了"
@@ -68,9 +68,11 @@
     "newDestination": "新しい振込先",
     "existingDestination": "既存の振込先",
     "selectNetwork": "ネットワークを選択してください。",
+    "selectDestination": "振込先を選択してください。",
     "destinationNetwork": "送金先ネットワーク",
     "destinationAddress": "送金先アドレス",
-    "amount": "送金金額"
+    "amount": "送金金額",
+    "amountInput": "送金金額の入力"
   },
   "Errors": {
     "walletNotInstalled": {

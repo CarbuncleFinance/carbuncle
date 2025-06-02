@@ -2,7 +2,7 @@
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import { StepNavigationProps } from '../../types'
+import { StepNavigationProps } from '../../views/bridge/types'
 
 export default function StepNavigation({
   showBack,

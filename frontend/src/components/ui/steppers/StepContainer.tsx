@@ -2,7 +2,7 @@
 
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { StepContainerProps } from '../../types'
+import { StepContainerProps } from '../../views/bridge/types'
 
 export default function StepContainer({ children, title }: StepContainerProps) {
   return (

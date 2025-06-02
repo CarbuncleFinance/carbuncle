@@ -17,7 +17,9 @@ export function useWalletBalance({ address }: WalletBalanceRequest) {
         throw new Error('No chain protocol available')
       }
       const adapter = WalletFactory.createAdapter(WalletTypes.GEM_WALLET)
-      return await adapter.getNativeBalance(address)
+      const balance = await adapter.getNativeBalance(address)
+
+      return balance
     },
     enabled: !!address && !!wallet.chainProtocol,
     staleTime: 30000,

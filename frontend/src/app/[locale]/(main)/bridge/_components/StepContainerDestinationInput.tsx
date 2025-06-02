@@ -1,22 +1,42 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useAccount } from 'wagmi'
 import { useTranslations } from 'next-intl'
+import { useAccount } from 'wagmi'
+import StepContainer from '@/components/ui/steppers/StepContainer'
+import StepNavigation from '@/components/ui/steppers/StepNavigation'
 import WalletConnectEvnButton from '@/components/ui/buttons/WalletConnectEvnButton'
-import StepContainer from '../common/StepContainer'
-import StepNavigation from '../common/StepNavigation'
-import { AddressInputStepProps } from '../../types'
-import { bridgeFormSchema } from '../../validation'
+import { bridgeFormSchema } from '@/app/[locale]/(main)/bridge/_forms/bridgeFormSchema'
 import TextField from '@mui/material/TextField'
+import type { ReactFormExtendedApi } from '@tanstack/react-form'
+import type { BridgeFormValues } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
 
-export default function AddressInputStep({
+type StepContainerDestinationInputProps = {
+  form: ReactFormExtendedApi<
+    BridgeFormValues,
+    any,
+    any,
+    any,
+    any,
+    any,
+    any,
+    any,
+    any,
+    any
+  >
+  onBack: () => void
+  onNext: () => void
+}
+
+export default function StepContainerDestinationInput({
   form,
   onBack,
   onNext
-}: AddressInputStepProps) {
+}: StepContainerDestinationInputProps) {
   const { isConnected, address } = useAccount()
-  const t = useTranslations('Errors')
+
+  const tBridgeContent = useTranslations('BridgeContent')
+  const tErrors = useTranslations('Errors')
 
   useEffect(() => {
     if (isConnected && address) {
@@ -33,7 +53,7 @@ export default function AddressInputStep({
   }
 
   return (
-    <StepContainer title="">
+    <StepContainer title={tBridgeContent('selectDestination')}>
       <form.Field
         name="address"
         validators={{
@@ -52,7 +72,7 @@ export default function AddressInputStep({
             error={field.state.meta.errors.length > 0}
             helperText={
               field.state.meta.errors.length > 0
-                ? t(field.state.meta.errors[0])
+                ? tErrors(field.state.meta.errors[0])
                 : ''
             }
             onChange={(e) => field.handleChange(e.target.value)}
@@ -63,7 +83,6 @@ export default function AddressInputStep({
       <StepNavigation
         showBack={true}
         showNext={true}
-        nextDisabled={false}
         onBack={onBack}
         onNext={handleNext}
       />

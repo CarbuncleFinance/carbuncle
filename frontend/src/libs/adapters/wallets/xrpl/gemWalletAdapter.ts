@@ -39,7 +39,9 @@ export class GemWalletAdapter implements WalletAdapter {
   }
 
   async getNativeBalance(address: string): Promise<number> {
-    return await this.xrplClient.getNativeBalance(address)
+    const nativeBalance = await this.xrplClient.getNativeBalance(address)
+    console.log('nativeBalance', nativeBalance)
+    return nativeBalance
   }
 
   async getTokenBalance(): Promise<number> {

@@ -57,8 +57,7 @@
   },
   "BridgeSteps": {
     "transferMethodSelection": "송금 방법 선택",
-    "networkSelection": "목적지 네트워크 선택",
-    "addressInput": "주소 입력",
+    "destinationInput": "목적지 입력",
     "amountInput": "금액 입력",
     "confirmation": "송금 확인",
     "completion": "송금 완료"
@@ -70,7 +69,8 @@
     "selectNetwork": "네트워크를 선택해주세요.",
     "destinationNetwork": "목적지 네트워크",
     "destinationAddress": "목적지 주소",
-    "amount": "금액"
+    "amount": "금액",
+    "amountInput": "금액 입력"
   },
   "Errors": {
     "walletNotInstalled": {

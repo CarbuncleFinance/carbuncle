@@ -1,14 +1,6 @@
 import { z } from 'zod'
-import { ChainProtocol } from '@/domains/blockchain/types'
 
 export const bridgeFormSchema = z.object({
-  chain: z.object({
-    protocol: z.nativeEnum(ChainProtocol),
-    name: z.string(),
-    network: z.string(),
-    chainId: z.number()
-  }),
-  blockchain: z.string(),
   address: z
     .string()
     .min(1, 'BRIDGE_VALIDATION_ADDRESS_REQUIRED')

@@ -24,7 +24,7 @@ export const SelectFormChain = ({
   selectedChain,
   setSelectedChain
 }: SelectFormChainProps) => {
-  const t = useTranslations('Forms.selectChainForm')
+  const t = useTranslations('Forms.selectChainTypeForm')
 
   const selectedValue =
     chainOptions.find(

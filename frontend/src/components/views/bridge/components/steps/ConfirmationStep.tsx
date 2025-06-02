@@ -3,8 +3,8 @@
 import { useTranslations } from 'next-intl'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import StepContainer from '../common/StepContainer'
-import StepNavigation from '../common/StepNavigation'
+import StepContainer from '../../../../ui/steppers/StepContainer'
+import StepNavigation from '../../../../ui/steppers/StepNavigation'
 import { ConfirmationStepProps } from '../../types'
 
 export default function ConfirmationStep({
