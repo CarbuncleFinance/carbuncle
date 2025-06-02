@@ -8,6 +8,7 @@ export interface WalletAdapter {
   disconnect(): Promise<void>
   isInstalled(): Promise<boolean>
   getAddress(): Promise<string | null>
+  getNativeBalance(address: string): Promise<number>
 }
 
 export class WalletFactory {

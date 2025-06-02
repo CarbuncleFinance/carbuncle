@@ -38,4 +38,8 @@ export class InjectedWalletAdapter implements WalletAdapter {
     const account = getAccount(config)
     return account.address || null
   }
+
+  async getNativeBalance(address: string): Promise<number> {
+    throw new Error('Native balance not supported for EVM wallets')
+  }
 }
