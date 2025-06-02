@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Radio from '@mui/material/Radio'
@@ -11,8 +12,10 @@ import { TransferMethodStepProps } from '../../types'
 export default function TransferMethodStep({
   onNext
 }: TransferMethodStepProps) {
+  const t = useTranslations('BridgeContent')
+
   return (
-    <StepContainer title="現在は新しい振込先のみ利用可能です。">
+    <StepContainer title={t('newDestinationOnly')}>
       <FormControl>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
@@ -22,13 +25,13 @@ export default function TransferMethodStep({
           <FormControlLabel
             value="new"
             control={<Radio />}
-            label="新しい振込先"
+            label={t('newDestination')}
             checked
           />
           <FormControlLabel
             value="existing"
             control={<Radio />}
-            label="既存の振込先"
+            label={t('existingDestination')}
             disabled
           />
         </RadioGroup>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useForm } from '@tanstack/react-form'
+import { useTranslations } from 'next-intl'
 import Typography from '@mui/material/Typography'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
@@ -25,6 +26,8 @@ export type BridgeForm = {
 export default function BridgeView() {
   const [selectedChain, setSelectedChain] = useState<Chain>(XRPLEVM_TESTNET)
   const [activeStep, setActiveStep] = useState(0)
+  const tSteps = useTranslations('BridgeSteps')
+  const tPages = useTranslations('Pages')
 
   const form = useForm({
     defaultValues: {
@@ -45,11 +48,11 @@ export default function BridgeView() {
 
   const steps = [
     {
-      label: '振込方法の選択',
+      label: tSteps('transferMethodSelection'),
       component: <TransferMethodStep onNext={handleNext} />
     },
     {
-      label: '振込先ネットワークの選択',
+      label: tSteps('networkSelection'),
       component: (
         <ChainSelectionStep
           selectedChain={selectedChain}
@@ -60,19 +63,19 @@ export default function BridgeView() {
       )
     },
     {
-      label: '振込先の入力',
+      label: tSteps('addressInput'),
       component: (
         <AddressInputStep form={form} onBack={handleBack} onNext={handleNext} />
       )
     },
     {
-      label: '送金金額の入力',
+      label: tSteps('amountInput'),
       component: (
         <AmountInputStep form={form} onBack={handleBack} onNext={handleNext} />
       )
     },
     {
-      label: '送金確認',
+      label: tSteps('confirmation'),
       component: (
         <ConfirmationStep
           bridgeForm={form.state.values as BridgeForm}
@@ -84,15 +87,15 @@ export default function BridgeView() {
       )
     },
     {
-      label: '送金完了',
-      component: <div>送金完了</div>
+      label: tSteps('completion'),
+      component: <div>{tSteps('completion')}</div>
     }
   ]
 
   return (
     <PageLayout maxWidth="sm">
       <Typography variant="h5" mb={2} sx={{ color: '#fff' }}>
-        Bridge
+        {tPages('bridge')}
       </Typography>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (

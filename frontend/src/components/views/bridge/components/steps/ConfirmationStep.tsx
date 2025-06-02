@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import StepContainer from '../common/StepContainer'
@@ -11,12 +12,14 @@ export default function ConfirmationStep({
   onBack,
   onExecute
 }: ConfirmationStepProps) {
+  const t = useTranslations('BridgeContent')
+
   return (
     <StepContainer title="送金内容をご確認ください。">
       <Box display="flex" flexDirection="column" gap={2}>
         <Box>
           <Typography variant="caption" sx={{ color: '#aaa', fontSize: 12 }}>
-            送金先ネットワーク
+            {t('destinationNetwork')}
           </Typography>
           <Typography variant="body1" sx={{ color: '#fff' }}>
             {bridgeForm.chain.name} ({bridgeForm.chain.network})
@@ -25,7 +28,7 @@ export default function ConfirmationStep({
 
         <Box>
           <Typography variant="caption" sx={{ color: '#aaa', fontSize: 12 }}>
-            送金先アドレス
+            {t('destinationAddress')}
           </Typography>
           <Typography
             variant="body1"
@@ -37,7 +40,7 @@ export default function ConfirmationStep({
 
         <Box>
           <Typography variant="caption" sx={{ color: '#aaa', fontSize: 12 }}>
-            送金金額
+            {t('amount')}
           </Typography>
           <Typography variant="body1" sx={{ color: '#fff' }}>
             {bridgeForm.amount}
