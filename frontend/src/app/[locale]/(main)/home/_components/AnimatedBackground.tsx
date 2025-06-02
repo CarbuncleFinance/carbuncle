@@ -5,7 +5,7 @@ import {
   backgroundContainer,
   circle,
   circleContainer
-} from '@/components/ui/AnimatedBackground.css'
+} from '@/app/[locale]/(main)/home/_components/AnimatedBackground.css'
 
 const PARTICLE_NUM = 200
 
