@@ -5,7 +5,7 @@ import { useWallet } from '@/hooks/useWallet'
 import { ChainProtocol } from '@/domains/blockchain/types'
 
 export default function TopBarChainModeText() {
-  const { chain } = useWallet()
+  const { chainProtocol } = useWallet()
 
   return (
     <Typography
@@ -18,7 +18,7 @@ export default function TopBarChainModeText() {
         mr: 1
       }}
     >
-      {chain?.protocol === ChainProtocol.EVM ? 'EVM Mode' : 'XRPL Mode'}
+      {chainProtocol === ChainProtocol.EVM ? 'EVM Mode' : 'XRPL Mode'}
     </Typography>
   )
 }
