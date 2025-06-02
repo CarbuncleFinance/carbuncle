@@ -1,9 +1,15 @@
 import { isInstalled, getAddress } from '@gemwallet/api'
 import { AppErrorCode } from '@/types/enums'
 import { WalletAdapter } from '@/libs/adapters/walletFactory'
-import { getXrplClient } from '@/libs/xrplClient'
+import { XrplClient } from '@/libs/xrplClient'
 
 export class GemWalletAdapter implements WalletAdapter {
+  private xrplClient: XrplClient
+
+  constructor() {
+    this.xrplClient = new XrplClient()
+  }
+
   async connect(): Promise<string> {
     const installed = await this.isInstalled()
     if (!installed) {
@@ -33,7 +39,10 @@ export class GemWalletAdapter implements WalletAdapter {
   }
 
   async getNativeBalance(address: string): Promise<number> {
-    const xrplClient = getXrplClient()
-    return await xrplClient.getNativeBalance(address)
+    return await this.xrplClient.getNativeBalance(address)
+  }
+
+  async getTokenBalance(): Promise<number> {
+    return 0
   }
 }

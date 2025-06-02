@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { Chain } from '@/domains/blockchain/types'
+import { Chain, ChainProtocol } from '@/domains/blockchain/types'
 
 export type Wallet = {
   address: string
-  chain: Chain | null
+  chainProtocol: ChainProtocol | null
 }
 
 type WalletState = {
@@ -16,7 +16,7 @@ type WalletState = {
 
 export const initialWallet: Wallet = {
   address: '',
-  chain: null
+  chainProtocol: null
 }
 
 export const useWalletStore = create<WalletState>()(
@@ -37,13 +37,13 @@ export const useWalletStore = create<WalletState>()(
   )
 )
 
-export function getWalletChain(wallet: Wallet): Chain | null {
-  return wallet.chain
+export function getWalletChainProtocol(wallet: Wallet): ChainProtocol | null {
+  return wallet.chainProtocol
 }
 
-export function setWalletWithChain(chain: Chain, address: string): Wallet {
+export function setWalletWithChainProtocol(chainProtocol: ChainProtocol, address: string): Wallet {
   return {
     address,
-    chain
+    chainProtocol
   }
 }

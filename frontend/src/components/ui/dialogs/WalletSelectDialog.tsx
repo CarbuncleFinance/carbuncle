@@ -31,7 +31,7 @@ export default function WalletSelectDialog({
 
   const { enqueueSnackbar } = useSnackbar()
 
-  const { connectWithChain } = useWalletConnect()
+  const { connectWithChainProtocol } = useWalletConnect()
 
   /** Select Protocol */
   const [selectedProtocol, setSelectedProtocol] = useState<ChainProtocol>(
@@ -44,8 +44,7 @@ export default function WalletSelectDialog({
   /** Connect to Wallet */
   const handleConnect = async (walletType: WalletType) => {
     try {
-      const selectedChain = getDefaultChainForProtocol(selectedProtocol)
-      await connectWithChain(selectedChain, walletType)
+      await connectWithChainProtocol(selectedProtocol, walletType)
       enqueueSnackbar('Connected to wallet', {
         variant: 'success'
       })

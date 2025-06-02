@@ -1,25 +1,26 @@
 import { useQuery } from '@tanstack/react-query'
 import { WalletFactory } from '@/libs/adapters/walletFactory'
-import { useWallet } from '@/hooks/useWallet'
+import { useWalletStore } from '@/stores/wallet'
+import { WalletTypes } from '@/types/enums'
 
 type WalletBalanceRequest = {
   address: string
 }
 
 export function useWalletBalance({ address }: WalletBalanceRequest) {
-  const { chain } = useWallet()
-
+  const { wallet } = useWalletStore()
+  
   return useQuery({
-    queryKey: ['walletBalance', address, chain?.name],
+    queryKey: ['walletBalance', address, wallet.chainProtocol],
     queryFn: async () => {
-      if (!chain) {
-        throw new Error('No chain available')
+      if (!wallet.chainProtocol) {
+        throw new Error('No chain protocol available')
       }
-      const adapter = WalletFactory.createAdapterForChain(chain)
+      const adapter = WalletFactory.createAdapter(WalletTypes.GEM_WALLET)
       return await adapter.getNativeBalance(address)
     },
-    enabled: !!address && !!chain,
+    enabled: !!address && !!wallet.chainProtocol,
     staleTime: 30000,
-    refetchInterval: 60000
+    refetchInterval: 60000,
   })
 }
