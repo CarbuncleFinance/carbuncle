@@ -46,6 +46,32 @@
       "closeButton": "閉じる"
     }
   },
+  "Navigation": {
+    "transfer": "振り込み",
+    "bridge": "ブリッジ",
+    "dev": "開発"
+  },
+  "Pages": {
+    "transfer": "振り込み",
+    "bridge": "ブリッジ"
+  },
+  "BridgeSteps": {
+    "transferMethodSelection": "振込方法の選択",
+    "networkSelection": "振込先ネットワークの選択",
+    "addressInput": "振込先の入力",
+    "amountInput": "送金金額の入力",
+    "confirmation": "送金確認",
+    "completion": "送金完了"
+  },
+  "BridgeContent": {
+    "newDestinationOnly": "現在は新しい振込先のみ利用可能です。",
+    "newDestination": "新しい振込先",
+    "existingDestination": "既存の振込先",
+    "selectNetwork": "ネットワークを選択してください。",
+    "destinationNetwork": "送金先ネットワーク",
+    "destinationAddress": "送金先アドレス",
+    "amount": "送金金額"
+  },
   "Errors": {
     "walletNotInstalled": {
       "title": "ウォレットがインストールされていません",

@@ -46,6 +46,32 @@
       "closeButton": "Close"
     }
   },
+  "Navigation": {
+    "transfer": "Transfer",
+    "bridge": "Bridge",
+    "dev": "Dev"
+  },
+  "Pages": {
+    "transfer": "Transfer",
+    "bridge": "Bridge"
+  },
+  "BridgeSteps": {
+    "transferMethodSelection": "Transfer Method Selection",
+    "networkSelection": "Destination Network Selection",
+    "addressInput": "Address Input",
+    "amountInput": "Amount Input",
+    "confirmation": "Confirmation",
+    "completion": "Completion"
+  },
+  "BridgeContent": {
+    "newDestinationOnly": "Currently only new destinations are available.",
+    "newDestination": "New Destination",
+    "existingDestination": "Existing Destination",
+    "selectNetwork": "Please select a network.",
+    "destinationNetwork": "Destination Network",
+    "destinationAddress": "Destination Address",
+    "amount": "Amount"
+  },
   "Errors": {
     "walletNotInstalled": {
       "title": "Wallet is not installed",

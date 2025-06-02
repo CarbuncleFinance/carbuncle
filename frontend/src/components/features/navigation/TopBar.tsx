@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
@@ -23,6 +24,7 @@ const AppBar = dynamic(
 
 export default function TopBar() {
   const router = useRouter()
+  const t = useTranslations('Navigation')
 
   /* Router */
   const handleGoTo = (path: string) => {
@@ -84,15 +86,15 @@ export default function TopBar() {
           {[
             {
               href: '/transfer',
-              label: 'Transfer'
+              label: t('transfer')
             },
             {
               href: '/bridge',
-              label: 'Bridge'
+              label: t('bridge')
             },
             {
               href: '/dev',
-              label: 'Dev'
+              label: t('dev')
             }
           ].map(({ href, label }) => (
             <LinkButton key={href} href={href} label={label} />

@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import StepContainer from '../common/StepContainer'
 import StepNavigation from '../common/StepNavigation'
 import { SelectFormChain } from '@/components/ui/forms/SelectFormChain'
@@ -18,8 +19,10 @@ export default function ChainSelectionStep({
   onBack,
   onNext
 }: ChainSelectionStepProps) {
+  const t = useTranslations('BridgeContent')
+
   return (
-    <StepContainer title="ネットワークを選択してください。">
+    <StepContainer title={t('selectNetwork')}>
       <SelectFormChain
         selectedChain={selectedChain}
         setSelectedChain={setSelectedChain}
