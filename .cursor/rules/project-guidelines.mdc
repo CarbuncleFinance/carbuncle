@@ -14,6 +14,11 @@ alwaysApply: true
 ### Language-specific Guidelines
 - [Japanese Guidelines](mdc:ja) - Japanese language specific guidelines and documentation
 
+## Documentation Guidelines for xrpl.js (Japanese)
+
+- [01_introduction.md](mdc:docs/xrpljs/01_introduction.md) - Overview, features, quickstart, and key links for xrpl.js (in Japanese)
+- [02_client.md](mdc:docs/xrpljs/02_client.md) - Japanese API reference for the Client class: methods, properties, usage notes
+
 ## Documentation Standards
 
 ### File Naming Convention

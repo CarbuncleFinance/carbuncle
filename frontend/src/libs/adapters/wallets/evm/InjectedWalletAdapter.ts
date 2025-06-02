@@ -38,4 +38,13 @@ export class InjectedWalletAdapter implements WalletAdapter {
     const account = getAccount(config)
     return account.address || null
   }
+
+  async getNativeBalance(address: string): Promise<number> {
+    console.log('address: ', address)
+    return 0
+  }
+
+  async getTokenBalance(): Promise<number> {
+    return 0
+  }
 }

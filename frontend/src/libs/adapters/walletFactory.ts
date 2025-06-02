@@ -8,6 +8,8 @@ export interface WalletAdapter {
   disconnect(): Promise<void>
   isInstalled(): Promise<boolean>
   getAddress(): Promise<string | null>
+  getNativeBalance(address: string): Promise<number>
+  getTokenBalance(): Promise<number>
 }
 
 export class WalletFactory {
@@ -24,14 +26,14 @@ export class WalletFactory {
   }
 
   // Create a wallet adapter instance based on the given chain
-  static createAdapterForChain(chain: Chain): WalletAdapter {
-    if (isXRPLChain(chain)) {
+  static createAdapterForWalletType(walletType: WalletType): WalletAdapter {
+    if (walletType === WalletTypes.GEM_WALLET) {
       return new GemWalletAdapter()
     }
-    if (isEVMChain(chain)) {
+    if (walletType === WalletTypes.METAMASK) {
       return new InjectedWalletAdapter()
     }
-    throw new Error(`Unsupported chain protocol`)
+    throw new Error(`Unsupported wallet type: ${walletType}`)
   }
 
   // Get the supported wallet types
