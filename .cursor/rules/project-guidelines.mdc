@@ -7,17 +7,22 @@ alwaysApply: true
 
 ## Documentation Structure
 
-### Technical Documentation
-- [Blockchain Types](mdc:blockchain_types.md) - Blockchain protocol and chain type definitions
-- [Component Design](mdc:component_design.md) - Component architecture and design patterns
+### Business Documentation
+- [Business Requirements](mdc:docs/business/requirements) - Project overview and requirements
+- [Business Concepts](mdc:docs/business/concepts) - Core concepts and architecture overview
 
-### Language-specific Guidelines
-- [Japanese Guidelines](mdc:ja) - Japanese language specific guidelines and documentation
+### Technical Documentation
+- [Blockchain Types](mdc:docs/technical/architecture/blockchain_types.md) - Blockchain protocol and chain type definitions
+- [Wallet Connect Design](mdc:docs/technical/architecture/wallet_connect_design.md) - Wallet connection architecture
+- [Component Design](mdc:docs/development/guidelines/component_design.md) - Component architecture and design patterns
+
+### API Documentation
+- [XRPL.js API](mdc:docs/technical/api/xrpljs) - XRPL.js library documentation in Japanese
 
 ## Documentation Guidelines for xrpl.js (Japanese)
 
-- [01_introduction.md](mdc:docs/xrpljs/01_introduction.md) - Overview, features, quickstart, and key links for xrpl.js (in Japanese)
-- [02_client.md](mdc:docs/xrpljs/02_client.md) - Japanese API reference for the Client class: methods, properties, usage notes
+- [01_introduction.md](mdc:docs/technical/api/xrpljs/01_introduction.md) - Overview, features, quickstart, and key links for xrpl.js (in Japanese)
+- [02_client.md](mdc:docs/technical/api/xrpljs/02_client.md) - Japanese API reference for the Client class: methods, properties, usage notes
 
 ## Documentation Standards
 
