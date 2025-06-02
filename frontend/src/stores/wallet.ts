@@ -41,7 +41,10 @@ export function getWalletChainProtocol(wallet: Wallet): ChainProtocol | null {
   return wallet.chainProtocol
 }
 
-export function setWalletWithChainProtocol(chainProtocol: ChainProtocol, address: string): Wallet {
+export function setWalletWithChainProtocol(
+  chainProtocol: ChainProtocol,
+  address: string
+): Wallet {
   return {
     address,
     chainProtocol

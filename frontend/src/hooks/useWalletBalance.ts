@@ -9,7 +9,7 @@ type WalletBalanceRequest = {
 
 export function useWalletBalance({ address }: WalletBalanceRequest) {
   const { wallet } = useWalletStore()
-  
+
   return useQuery({
     queryKey: ['walletBalance', address, wallet.chainProtocol],
     queryFn: async () => {
@@ -21,6 +21,6 @@ export function useWalletBalance({ address }: WalletBalanceRequest) {
     },
     enabled: !!address && !!wallet.chainProtocol,
     staleTime: 30000,
-    refetchInterval: 60000,
+    refetchInterval: 60000
   })
 }

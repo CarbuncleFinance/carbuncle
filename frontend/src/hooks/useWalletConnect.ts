@@ -8,7 +8,10 @@ export function useWalletConnect() {
   const { createError } = useErrorHandler()
   const { setWallet, clearWallet } = useWalletStore()
 
-  const connectWithChainProtocol = async (chainProtocol: ChainProtocol, walletType: WalletType) => {
+  const connectWithChainProtocol = async (
+    chainProtocol: ChainProtocol,
+    walletType: WalletType
+  ) => {
     try {
       const adapter = WalletFactory.createAdapterForWalletType(walletType)
 
