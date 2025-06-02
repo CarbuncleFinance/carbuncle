@@ -17,4 +17,8 @@ export const bridgeFormSchema = z.object({
     .string()
     .min(1, 'BRIDGE_VALIDATION_AMOUNT_REQUIRED')
     .regex(/^\d+(\.\d+)?$/, 'BRIDGE_VALIDATION_AMOUNT_INVALID')
+    .refine(
+      (val) => parseFloat(val) > 0,
+      'BRIDGE_VALIDATION_AMOUNT_MUST_BE_POSITIVE'
+    )
 })
