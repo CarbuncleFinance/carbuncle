@@ -13,10 +13,10 @@ interface TopBarWalletMenuButtonProps {
 export default function TopBarWalletMenuButton({
   onClick
 }: TopBarWalletMenuButtonProps) {
-  const { shortAddress, chain } = useWallet()
+  const { shortAddress, chainProtocol } = useWallet()
 
   const walletIcon = useMemo(() => {
-    switch (chain?.protocol) {
+    switch (chainProtocol) {
       case ChainProtocol.XRPL:
         return '/images/xrpl-logo.png'
       case ChainProtocol.EVM:
@@ -24,7 +24,7 @@ export default function TopBarWalletMenuButton({
       default:
         return '/images/xrpl-logo.png'
     }
-  }, [chain?.protocol])
+  }, [chainProtocol])
 
   return (
     <Button
