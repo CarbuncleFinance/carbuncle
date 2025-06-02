@@ -1,6 +1,7 @@
 export interface StepContainerProps {
   children: React.ReactNode
-  title: string
+  title?: string
+  titleKey?: string
 }
 
 export interface StepNavigationProps {
