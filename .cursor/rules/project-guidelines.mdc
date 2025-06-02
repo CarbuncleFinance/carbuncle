@@ -24,6 +24,9 @@ alwaysApply: true
 - [01_introduction.md](mdc:docs/technical/api/xrpljs/01_introduction.md) - Overview, features, quickstart, and key links for xrpl.js (in Japanese)
 - [02_client.md](mdc:docs/technical/api/xrpljs/02_client.md) - Japanese API reference for the Client class: methods, properties, usage notes
 
+## i18n
+- [i18n-guidelines](/Users/user/Projects/Carbuncle/carbuncle/docs/i18n-guidelines.md)
+
 ## Documentation Standards
 
 ### File Naming Convention
