@@ -5,9 +5,13 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { StepContainerProps } from '../../types'
 
-export default function StepContainer({ children, title, titleKey }: StepContainerProps) {
+export default function StepContainer({
+  children,
+  title,
+  titleKey
+}: StepContainerProps) {
   const t = useTranslations()
-  
+
   const displayTitle = titleKey ? t(titleKey) : title
 
   return (
