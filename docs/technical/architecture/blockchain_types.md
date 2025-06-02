@@ -97,3 +97,4 @@ export const POLYGON_AMOY: PolygonChain = {
   chainId: 80002,
   address: '0x' as `0x${string}`
 }
+```
