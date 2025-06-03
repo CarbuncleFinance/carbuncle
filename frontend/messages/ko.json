@@ -33,6 +33,10 @@
       "chain": {
         "description": "송금 목적지 체인을 선택해주세요.",
         "label": "송금 목적지 체인"
+      },
+      "recipient": {
+        "description": "송금 목적지 주소를 입력해주세요.",
+        "label": "송금 목적지 주소"
       }
     }
   },

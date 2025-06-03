@@ -49,8 +49,14 @@
   "bridge": {
     "steps": {
       "chain": {
+        "title": "チェーンの選択",
         "description": "送金先のチェーンを選択してください。",
         "label": "送金先のチェーン"
+      },
+      "recipient": {
+        "title": "送金先の入力",
+        "description": "送金先のアドレスを入力してください。",
+        "label": "送金先のアドレス"
       }
     }
   },

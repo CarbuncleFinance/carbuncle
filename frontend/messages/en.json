@@ -33,6 +33,10 @@
       "chain": {
         "description": "Please select the destination chain.",
         "label": "Destination Chain"
+      },
+      "recipient": {
+        "description": "Please enter the destination address.",
+        "label": "Destination Address"
       }
     }
   },

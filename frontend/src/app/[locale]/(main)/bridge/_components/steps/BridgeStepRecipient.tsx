@@ -3,15 +3,17 @@
 import { useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { useAccount } from 'wagmi'
-import StepContainer from '@/components/ui/steppers/StepContainer'
-import StepNavigation from '@/components/ui/steppers/StepNavigation'
+import TextField from '@mui/material/TextField'
+import BridgeStepContainer from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepContainer'
+import BridgeStepDescription from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepDescription'
+import BridgeStepNavigation from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepNavigation'
 import WalletConnectEvnButton from '@/components/ui/buttons/WalletConnectEvnButton'
 import { bridgeFormSchema } from '@/app/[locale]/(main)/bridge/_forms/bridgeFormSchema'
-import TextField from '@mui/material/TextField'
+
 import type { ReactFormExtendedApi } from '@tanstack/react-form'
 import type { BridgeFormValues } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
 
-type StepContainerDestinationInputProps = {
+type BridgeStepRecipientProps = {
   form: ReactFormExtendedApi<
     BridgeFormValues,
     any,
@@ -28,14 +30,15 @@ type StepContainerDestinationInputProps = {
   onNext: () => void
 }
 
-export default function StepContainerDestinationInput({
+export default function BridgeStepRecipient({
   form,
   onBack,
   onNext
-}: StepContainerDestinationInputProps) {
+}: BridgeStepRecipientProps) {
+  const t = useTranslations('bridge.steps.recipient')
+
   const { isConnected, address } = useAccount()
 
-  const tBridgeContent = useTranslations('BridgeContent')
   const tErrors = useTranslations('Errors')
 
   useEffect(() => {
@@ -53,7 +56,11 @@ export default function StepContainerDestinationInput({
   }
 
   return (
-    <StepContainer description={tBridgeContent('selectDestination')}>
+    <BridgeStepContainer>
+      <BridgeStepDescription
+        namespace="bridge.steps.recipient"
+        translationKey="description"
+      />
       <form.Field
         name="address"
         validators={{
@@ -65,7 +72,7 @@ export default function StepContainerDestinationInput({
       >
         {(field: any) => (
           <TextField
-            label="宛先"
+            label={t('label')}
             size="medium"
             value={field.state.value}
             disabled={isConnected}
@@ -80,12 +87,12 @@ export default function StepContainerDestinationInput({
         )}
       </form.Field>
       <WalletConnectEvnButton />
-      <StepNavigation
+      <BridgeStepNavigation
         showBack={true}
         showNext={true}
         onBack={onBack}
         onNext={handleNext}
       />
-    </StepContainer>
+    </BridgeStepContainer>
   )
 }

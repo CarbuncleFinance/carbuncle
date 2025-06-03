@@ -8,13 +8,14 @@ import Step from '@mui/material/Step'
 import StepContent from '@mui/material/StepContent'
 import StepLabel from '@mui/material/StepLabel'
 import BridgeStepChain from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepChain'
+import BridgeStepRecipient from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepRecipient'
 import StepContainerAmountInput from '@/app/[locale]/(main)/bridge/_components/StepContainerAmountInput'
 import StepContainerConfirmation from '@/app/[locale]/(main)/bridge/_components/StepContainerConfirmation'
 import StepContainerDestinationInput from '@/app/[locale]/(main)/bridge/_components/StepContainerDestinationInput'
 import { useBridgeForm } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
 
 export default function BridgeStepper() {
-  const tSteps = useTranslations('BridgeSteps')
+  const tSteps = useTranslations('bridge.steps')
 
   /** Form */
   const { form: bridgeForm } = useBridgeForm()
@@ -33,7 +34,7 @@ export default function BridgeStepper() {
   /** Stepper contents */
   const stepContents: { label: string; component: React.ReactNode }[] = [
     {
-      label: tSteps('chainInput'),
+      label: tSteps('chain.title'),
       component: (
         <BridgeStepChain
           form={bridgeForm}
@@ -43,15 +44,16 @@ export default function BridgeStepper() {
       )
     },
     {
-      label: tSteps('destinationInput'),
+      label: tSteps('recipient.title'),
       component: (
-        <StepContainerDestinationInput
+        <BridgeStepRecipient
           form={bridgeForm}
           onBack={handleBack}
           onNext={handleNext}
         />
       )
     },
+    /*
     {
       label: tSteps('amountInput'),
       component: (
@@ -72,6 +74,7 @@ export default function BridgeStepper() {
         />
       )
     }
+      */
   ]
 
   return (
