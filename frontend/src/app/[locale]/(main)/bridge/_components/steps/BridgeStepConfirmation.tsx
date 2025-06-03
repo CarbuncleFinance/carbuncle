@@ -3,12 +3,14 @@
 import { useTranslations } from 'next-intl'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import StepContainer from '@/components/ui/steppers/StepContainer'
-import StepNavigation from '@/components/ui/steppers/StepNavigation'
-import type { ReactFormExtendedApi } from '@tanstack/react-form'
-import type { BridgeFormValues } from '../_forms/useBridgeForm'
+import BridgeStepContainer from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepContainer'
+import BridgeStepDescription from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepDescription'
+import BridgeStepNavigation from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepNavigation'
 
-type StepContainerConfirmationProps = {
+import type { ReactFormExtendedApi } from '@tanstack/react-form'
+import type { BridgeFormValues } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
+
+type BridgeStepConfirmationProps = {
   form: ReactFormExtendedApi<
     BridgeFormValues,
     any,
@@ -25,15 +27,19 @@ type StepContainerConfirmationProps = {
   onNext: () => void
 }
 
-export default function StepContainerConfirmation({
+export default function BridgeStepConfirmation({
   form,
   onBack,
   onNext
-}: StepContainerConfirmationProps) {
-  const t = useTranslations('BridgeContent')
+}: BridgeStepConfirmationProps) {
+  const t = useTranslations('bridge.steps.confirmation')
 
   return (
-    <StepContainer description="送金内容をご確認ください。">
+    <BridgeStepContainer>
+      <BridgeStepDescription
+        namespace="bridge.steps.confirmation"
+        translationKey="description"
+      />
       <Box display="flex" flexDirection="column" gap={2}>
         <Box>
           <Typography variant="caption" sx={{ color: '#aaa', fontSize: 12 }}>
@@ -65,13 +71,13 @@ export default function StepContainerConfirmation({
           </Typography>
         </Box>
       </Box>
-      <StepNavigation
-        showBack={false}
+      <BridgeStepNavigation
+        showBack={true}
         showNext={false}
         showExecute={true}
         onBack={onBack}
         onNext={onNext}
       />
-    </StepContainer>
+    </BridgeStepContainer>
   )
 }
