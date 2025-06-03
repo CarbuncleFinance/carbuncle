@@ -34,6 +34,7 @@ export default function BridgeFormAmountInput({
   schema,
   symbol = 'XRP'
 }: BridgeFormAmountInputProps) {
+  const t = useTranslations('bridge.steps.amount')
   const tErrors = useTranslations('Errors')
 
   return (
@@ -51,9 +52,9 @@ export default function BridgeFormAmountInput({
           error={field.state.meta.errors.length > 0}
           variant="outlined"
         >
-          <InputLabel htmlFor="bridge-amount-input">振込金額</InputLabel>
+          <InputLabel htmlFor="bridge-amount-input">{t('label')}</InputLabel>
           <OutlinedInput
-            label="振込金額"
+            label={t('label')}
             id="bridge-amount-input"
             type="text"
             autoFocus={false}

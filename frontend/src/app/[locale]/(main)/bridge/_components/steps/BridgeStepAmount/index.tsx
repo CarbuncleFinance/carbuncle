@@ -2,9 +2,11 @@
 
 import { useTranslations } from 'next-intl'
 import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import BridgeStepContainer from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepContainer'
 import BridgeStepDescription from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepDescription'
 import BridgeStepNavigation from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepNavigation'
+import { BRDGE_GAS_FEE_AMOUT_XRP } from '@/constants/app'
 import { useWallet } from '@/hooks/useWallet'
 import { useWalletBalance } from '@/hooks/useWalletBalance'
 import { bridgeFormSchema } from '@/app/[locale]/(main)/bridge/_forms/bridgeFormSchema'
@@ -87,6 +89,12 @@ export default function BridgeStepAmount({
           ))}
         </Box>
         <BridgeFormAmountInput form={form} schema={bridgeFormSchema} />
+        <Typography variant="body2" color="text.secondary">
+          送金額: {form.state.values.amount} XRP
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          手数料: {BRDGE_GAS_FEE_AMOUT_XRP} XRP
+        </Typography>
       </Box>
       <BridgeStepNavigation
         showBack={true}
