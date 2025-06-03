@@ -32,6 +32,7 @@ export enum AppErrorCode {
   WALLET_NOT_INSTALLED = 'walletNotInstalled',
   WALLET_CONNECTION_FAILED = 'walletConnectionFailed',
   WALLET_BALANCE_FETCH_FAILED = 'walletBalanceFetchFailed',
+  WALLET_TRANSACTION_FAILED = 'walletTransactionFailed',
 
   // Unknown Error
   UNKNOWN_ERROR = 'unknownError'

@@ -1,3 +1,4 @@
+import type { Memo } from 'xrpl'
 import { addressTo32, padAddressTo32Bytes, stringToHex } from '@/utils/string'
 import { keccak256, toUtf8Bytes } from 'ethers'
 import dayjs from 'dayjs'
@@ -10,13 +11,6 @@ export enum BridgeTypes {
 }
 
 export type BridgeType = (typeof BridgeTypes)[keyof typeof BridgeTypes]
-
-type BridgeMemo = {
-  Memo: {
-    MemoType: string
-    MemoData: string
-  }
-}
 
 type CreateBridgeMemoParams = {
   bridgeType: BridgeType
@@ -68,29 +62,29 @@ export const createBridgeMemo = ({
   destinationChain,
   gasFeeAmount,
   toAddress
-}: CreateBridgeMemoParams): { Memos: BridgeMemo[] } => {
-  const bridgeTypeMemo: BridgeMemo = {
+}: CreateBridgeMemoParams): Memo[] => {
+  const bridgeTypeMemo: Memo = {
     Memo: {
       MemoType: stringToHex('type'),
       MemoData: stringToHex(bridgeType)
     }
   }
 
-  const destinationAddressMemo: BridgeMemo = {
+  const destinationAddressMemo: Memo = {
     Memo: {
       MemoType: stringToHex('destination_address'),
       MemoData: addressTo32(destinationAddress)
     }
   }
 
-  const destinationChainMemo: BridgeMemo = {
+  const destinationChainMemo: Memo = {
     Memo: {
       MemoType: stringToHex('destination_chain'),
       MemoData: stringToHex(destinationChain)
     }
   }
 
-  const gasFeeAmountMemo: BridgeMemo = {
+  const gasFeeAmountMemo: Memo = {
     Memo: {
       MemoType: stringToHex('gas_fee_amount'),
       MemoData: stringToHex(gasFeeAmount)
@@ -110,7 +104,7 @@ export const createBridgeMemo = ({
     toAddress
   })
 
-  const payloadMemo: BridgeMemo = {
+  const payloadMemo: Memo = {
     Memo: {
       MemoType: stringToHex('payload'),
       MemoData: [
@@ -120,13 +114,11 @@ export const createBridgeMemo = ({
     }
   }
 
-  return {
-    Memos: [
-      bridgeTypeMemo,
-      destinationAddressMemo,
-      destinationChainMemo,
-      gasFeeAmountMemo,
-      payloadMemo
-    ]
-  }
+  return [
+    bridgeTypeMemo,
+    destinationAddressMemo,
+    destinationChainMemo,
+    gasFeeAmountMemo,
+    payloadMemo
+  ]
 }

@@ -1,4 +1,5 @@
 import { isInstalled, getAddress } from '@gemwallet/api'
+import { Payment, TxResponse } from 'xrpl'
 import { AppErrorCode } from '@/types/enums'
 import { WalletAdapter } from '@/libs/adapters/walletFactory'
 import { XrplClient } from '@/libs/xrplClient'
@@ -40,7 +41,6 @@ export class GemWalletAdapter implements WalletAdapter {
 
   async getNativeBalance(address: string): Promise<number> {
     const nativeBalance = await this.xrplClient.getNativeBalance(address)
-    console.log('nativeBalance', nativeBalance)
     return nativeBalance
   }
 
@@ -48,7 +48,8 @@ export class GemWalletAdapter implements WalletAdapter {
     return 0
   }
 
-  async sendBridgeTransaction(transaction: any): Promise<void> {
-    console.log('sendBridgeTransaction', transaction)
+  async sendBridgeTransaction(transaction: Payment): Promise<TxResponse<Payment>> {
+    const result = await this.xrplClient.sendPaymentTransaction(transaction)
+    return result
   }
 }
