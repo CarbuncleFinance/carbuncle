@@ -9,11 +9,11 @@ import Step from '@mui/material/Step'
 import StepContent from '@mui/material/StepContent'
 import StepLabel from '@mui/material/StepLabel'
 import PageLayout from '@/components/features/layout/PageLayout'
-import TransferMethodStep from './components/steps/TransferMethodStep'
+// import TransferMethodStep from './components/steps/TransferMethodStep'
 // import ChainSelectionStep from '@/app/[locale]/(main)/bridge/_components/ChainSelectionStepContainer'
 // import AddressInputStep from './components/steps/AddressInputStep'
 // import AmountInputStep from './components/steps/AmountInputStep'
-import ConfirmationStep from './components/steps/ConfirmationStep'
+// import ConfirmationStep from './components/steps/ConfirmationStep'
 import { Chain, XRPLEVM_TESTNET } from '@/domains/blockchain/types'
 
 export type BridgeForm = {
@@ -49,23 +49,7 @@ export default function BridgeView() {
   const steps = [
     {
       label: tSteps('transferMethodSelection'),
-      component: <TransferMethodStep onNext={handleNext} />
-    },
-    {
-      label: tSteps('confirmation'),
-      component: (
-        <ConfirmationStep
-          bridgeForm={form.state.values as BridgeForm}
-          onBack={handleBack}
-          onExecute={() => {
-            console.log('Transfer execution requested:', form.state.values)
-          }}
-        />
-      )
-    },
-    {
-      label: tSteps('completion'),
-      component: <div>{tSteps('completion')}</div>
+      component: <></>
     }
   ]
 

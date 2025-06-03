@@ -10,6 +10,7 @@ export interface WalletAdapter {
   getAddress(): Promise<string | null>
   getNativeBalance(address: string): Promise<number>
   getTokenBalance(): Promise<number>
+  sendBridgeTransaction(transaction: any): Promise<void>
 }
 
 export class WalletFactory {

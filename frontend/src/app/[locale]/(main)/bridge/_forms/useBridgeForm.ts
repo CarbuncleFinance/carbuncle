@@ -1,4 +1,5 @@
 import { useForm } from '@tanstack/react-form'
+import { useSendTransaction } from '@/hooks/useSendTransaction'
 
 export type BridgeFormValues = {
   chain: string
@@ -13,10 +14,13 @@ const defaultValues: BridgeFormValues = {
 }
 
 export function useBridgeForm() {
+  const { sendTransaction } = useSendTransaction()
+
   const form = useForm({
     defaultValues,
-    onSubmit: ({ value }) => {
+    onSubmit: async ({ value }) => {
       try {
+        await sendTransaction(value)
         console.log('onSubmit', value)
       } catch (error) {
         console.error(error)

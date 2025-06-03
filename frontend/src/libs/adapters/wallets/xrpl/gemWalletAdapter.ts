@@ -47,4 +47,8 @@ export class GemWalletAdapter implements WalletAdapter {
   async getTokenBalance(): Promise<number> {
     return 0
   }
+
+  async sendBridgeTransaction(transaction: any): Promise<void> {
+    console.log('sendBridgeTransaction', transaction)
+  }
 }
