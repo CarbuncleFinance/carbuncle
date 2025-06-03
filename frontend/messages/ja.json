@@ -61,7 +61,8 @@
       "amount": {
         "title": "送金金額の入力",
         "description": "送金金額を入力してください。",
-        "label": "送金金額"
+        "label": "送金金額",
+        "feeNotice": "この取引には手数料（{fee} XRP）がかかります。"
       },
       "confirmation": {
         "title": "送金確認",

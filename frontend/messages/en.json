@@ -37,6 +37,11 @@
       "recipient": {
         "description": "Please enter the destination address.",
         "label": "Destination Address"
+      },
+      "amount": {
+        "description": "Please enter the amount.",
+        "label": "Amount",
+        "feeNotice": "A fee of {fee} XRP will be charged for this transaction."
       }
     }
   },
@@ -81,7 +86,9 @@
     "selectNetwork": "Please select a network.",
     "destinationNetwork": "Destination Network",
     "destinationAddress": "Destination Address",
-    "amount": "Amount",
+    "amount": {
+      "feeNotice": "A fee of {fee} XRP will be charged for this transaction."
+    },
     "amountInput": "Amount Input"
   },
   "Errors": {

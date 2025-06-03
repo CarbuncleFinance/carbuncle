@@ -40,6 +40,7 @@ export default function BridgeStepAmount({
   onNext
 }: BridgeStepAmountProps) {
   const { address, isConnected } = useWallet()
+  const t = useTranslations('bridge.steps.amount')
 
   const {
     data: balance,
@@ -90,10 +91,7 @@ export default function BridgeStepAmount({
         </Box>
         <BridgeFormAmountInput form={form} schema={bridgeFormSchema} />
         <Typography variant="body2" color="text.secondary">
-          送金額: {form.state.values.amount} XRP
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          手数料: {BRDGE_GAS_FEE_AMOUT_XRP} XRP
+          {t('feeNotice', { fee: BRDGE_GAS_FEE_AMOUT_XRP })}
         </Typography>
       </Box>
       <BridgeStepNavigation

@@ -37,6 +37,11 @@
       "recipient": {
         "description": "송금 목적지 주소를 입력해주세요.",
         "label": "송금 목적지 주소"
+      },
+      "amount": {
+        "description": "송금 금액을 입력해주세요.",
+        "label": "송금 금액",
+        "feeNotice": "이 거래에는 수수료({fee} XRP)가 부과됩니다."
       }
     }
   },
