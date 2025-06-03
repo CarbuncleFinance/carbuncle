@@ -12,7 +12,7 @@ import PageLayout from '@/components/features/layout/PageLayout'
 import TransferMethodStep from './components/steps/TransferMethodStep'
 // import ChainSelectionStep from '@/app/[locale]/(main)/bridge/_components/ChainSelectionStepContainer'
 // import AddressInputStep from './components/steps/AddressInputStep'
-import AmountInputStep from './components/steps/AmountInputStep'
+// import AmountInputStep from './components/steps/AmountInputStep'
 import ConfirmationStep from './components/steps/ConfirmationStep'
 import { Chain, XRPLEVM_TESTNET } from '@/domains/blockchain/types'
 
@@ -50,12 +50,6 @@ export default function BridgeView() {
     {
       label: tSteps('transferMethodSelection'),
       component: <TransferMethodStep onNext={handleNext} />
-    },
-    {
-      label: tSteps('amountInput'),
-      component: (
-        <AmountInputStep form={form} onBack={handleBack} onNext={handleNext} />
-      )
     },
     {
       label: tSteps('confirmation'),

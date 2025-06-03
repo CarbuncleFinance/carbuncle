@@ -6,8 +6,10 @@ export interface StepContainerProps {
 export interface StepNavigationProps {
   showBack: boolean
   showNext: boolean
+  showExecute?: boolean
   onBack?: () => void
   onNext?: () => void
+  onExecute?: () => void
   nextDisabled?: boolean
 }
 

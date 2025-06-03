@@ -1,20 +1,28 @@
 import { useForm } from '@tanstack/react-form'
 
 export type BridgeFormValues = {
-  blockchain: string
+  chain: string
   address: string
   amount: string
 }
 
 const defaultValues: BridgeFormValues = {
-  blockchain: '',
+  chain: 'xrpl-evm',
   address: '',
   amount: ''
 }
 
 export function useBridgeForm() {
   const form = useForm({
-    defaultValues
+    defaultValues,
+    onSubmit: ({ value }) => {
+      try {
+        console.log('onSubmit', value)
+      } catch (error) {
+        console.error(error)
+        throw error
+      }
+    }
   })
 
   return { form }
