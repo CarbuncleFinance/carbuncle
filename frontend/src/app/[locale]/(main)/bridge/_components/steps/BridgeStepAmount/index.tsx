@@ -8,9 +8,9 @@ import BridgeStepNavigation from '@/app/[locale]/(main)/bridge/_components/share
 import { useWallet } from '@/hooks/useWallet'
 import { useWalletBalance } from '@/hooks/useWalletBalance'
 import { bridgeFormSchema } from '@/app/[locale]/(main)/bridge/_forms/bridgeFormSchema'
-import BridgeFormAmountHeader from '@/app/[locale]/(main)/bridge/_components/BridgeFormAmountHeader'
-import BridgeFormAmountInput from '@/app/[locale]/(main)/bridge/_components/BridgeFormAmountInput'
-import BridgeFormAmountPercentageButton from '@/app/[locale]/(main)/bridge/_components/BridgeFormAmountPercentageButton'
+import BridgeFormAmountHeader from './BridgeFormAmountHeader'
+import BridgeFormAmountInput from './BridgeFormAmountInput'
+import BridgeFormAmountPercentageButton from './BridgeFormAmountPercentageButton'
 
 import type { ReactFormExtendedApi } from '@tanstack/react-form'
 import type { BridgeFormValues } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'

@@ -9,11 +9,6 @@ import Step from '@mui/material/Step'
 import StepContent from '@mui/material/StepContent'
 import StepLabel from '@mui/material/StepLabel'
 import PageLayout from '@/components/features/layout/PageLayout'
-// import TransferMethodStep from './components/steps/TransferMethodStep'
-// import ChainSelectionStep from '@/app/[locale]/(main)/bridge/_components/ChainSelectionStepContainer'
-// import AddressInputStep from './components/steps/AddressInputStep'
-// import AmountInputStep from './components/steps/AmountInputStep'
-// import ConfirmationStep from './components/steps/ConfirmationStep'
 import { Chain, XRPLEVM_TESTNET } from '@/domains/blockchain/types'
 
 export type BridgeForm = {
