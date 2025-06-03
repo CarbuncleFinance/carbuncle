@@ -28,6 +28,14 @@
       "label": "Protocol"
     }
   },
+  "bridge": {
+    "steps": {
+      "chain": {
+        "description": "Please select the destination chain.",
+        "label": "Destination Chain"
+      }
+    }
+  },
   "Menus": {
     "walletMenu": {
       "accountInfo": "Account Info",

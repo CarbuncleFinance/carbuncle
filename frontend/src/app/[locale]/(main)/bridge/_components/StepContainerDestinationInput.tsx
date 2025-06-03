@@ -53,7 +53,7 @@ export default function StepContainerDestinationInput({
   }
 
   return (
-    <StepContainer title={tBridgeContent('selectDestination')}>
+    <StepContainer description={tBridgeContent('selectDestination')}>
       <form.Field
         name="address"
         validators={{

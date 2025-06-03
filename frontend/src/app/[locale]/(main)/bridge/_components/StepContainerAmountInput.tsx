@@ -2,10 +2,6 @@
 
 import { useTranslations } from 'next-intl'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import CircularProgress from '@mui/material/CircularProgress'
-import IconButton from '@mui/material/IconButton'
-import RefreshIcon from '@mui/icons-material/Refresh'
 import StepContainer from '@/components/ui/steppers/StepContainer'
 import StepNavigation from '@/components/ui/steppers/StepNavigation'
 import { useWallet } from '@/hooks/useWallet'
@@ -67,7 +63,7 @@ export default function StepContainerAmountInput({
   const percentageButtons = [25, 50, 75, 100]
 
   return (
-    <StepContainer title={tBridgeContent('amountInput')}>
+    <StepContainer description={tBridgeContent('amountInput')}>
       <Box display="flex" flexDirection="column" gap={1}>
         <BridgeFormAmountHeader
           balance={balance || 0}

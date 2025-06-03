@@ -33,7 +33,7 @@ export default function StepContainerConfirmation({
   const t = useTranslations('BridgeContent')
 
   return (
-    <StepContainer title="送金内容をご確認ください。">
+    <StepContainer description="送金内容をご確認ください。">
       <Box display="flex" flexDirection="column" gap={2}>
         <Box>
           <Typography variant="caption" sx={{ color: '#aaa', fontSize: 12 }}>

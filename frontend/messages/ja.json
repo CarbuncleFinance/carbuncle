@@ -15,6 +15,24 @@
       "description": "スマートコントラクトによる自動化された資産管理とシームレスな資産移動を実現します。"
     }
   },
+  "BridgePage": {
+    "stepContainer": {
+      "step1": {
+        "title": "チェーンの選択",
+        "description": "送金先のチェーンを選択してください。",
+        "label": "送金先のチェーン"
+      },
+      "step2": {
+        "title": "送金先の入力"
+      },
+      "step3": {
+        "title": "金額の入力"
+      },
+      "step4": {
+        "title": "送金の実行"
+      }
+    }
+  },
   "Buttons": {
     "walletConnectButton": {
       "label": "ウォレット接続"
@@ -26,6 +44,14 @@
     },
     "selectProtocolForm": {
       "label": "プロトコル"
+    }
+  },
+  "bridge": {
+    "steps": {
+      "chain": {
+        "description": "送金先のチェーンを選択してください。",
+        "label": "送金先のチェーン"
+      }
     }
   },
   "Menus": {

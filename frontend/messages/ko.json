@@ -28,6 +28,14 @@
       "label": "프로토콜"
     }
   },
+  "bridge": {
+    "steps": {
+      "chain": {
+        "description": "송금 목적지 체인을 선택해주세요.",
+        "label": "송금 목적지 체인"
+      }
+    }
+  },
   "Menus": {
     "walletMenu": {
       "accountInfo": "계정 정보",

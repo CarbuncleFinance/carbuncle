@@ -7,14 +7,14 @@ import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepContent from '@mui/material/StepContent'
 import StepLabel from '@mui/material/StepLabel'
+import BridgeStepChain from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepChain'
 import StepContainerAmountInput from '@/app/[locale]/(main)/bridge/_components/StepContainerAmountInput'
-import StepContainerChainInput from '@/app/[locale]/(main)/bridge/_components/StepContainerChainInput'
 import StepContainerConfirmation from '@/app/[locale]/(main)/bridge/_components/StepContainerConfirmation'
 import StepContainerDestinationInput from '@/app/[locale]/(main)/bridge/_components/StepContainerDestinationInput'
 import { useBridgeForm } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
 import { Chain, XRPLEVM_TESTNET } from '@/domains/blockchain/types'
 
-export default function BridgeFormStepper() {
+export default function BridgeStepper() {
   const tSteps = useTranslations('BridgeSteps')
 
   const [selectedChain, setSelectedChain] = useState<Chain>(XRPLEVM_TESTNET)
@@ -38,7 +38,8 @@ export default function BridgeFormStepper() {
     {
       label: tSteps('chainInput'),
       component: (
-        <StepContainerChainInput
+        <BridgeStepChain
+          form={bridgeForm}
           selectedChain={selectedChain}
           setSelectedChain={setSelectedChain}
           onBack={handleBack}

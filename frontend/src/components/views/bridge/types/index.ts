@@ -1,8 +1,3 @@
-export interface StepContainerProps {
-  children: React.ReactNode
-  title: string
-}
-
 export interface StepNavigationProps {
   showBack: boolean
   showNext: boolean

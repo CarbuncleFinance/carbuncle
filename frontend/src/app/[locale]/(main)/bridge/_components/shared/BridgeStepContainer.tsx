@@ -1,17 +1,14 @@
 'use client'
 
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 
-type StepContainerProps = {
+type BridgeStepContainerProps = {
   children: React.ReactNode
-  description: string
 }
 
-export default function StepContainer({
-  children,
-  description
-}: StepContainerProps) {
+export default function BridgeStepContainer({
+  children
+}: BridgeStepContainerProps) {
   return (
     <Box
       display="flex"
@@ -20,9 +17,6 @@ export default function StepContainer({
       pt={2}
       sx={{ backgroundColor: '#1a1a1a', borderRadius: 1, p: 2, color: '#fff' }}
     >
-      <Typography variant="caption" sx={{ fontSize: 14, pb: 2 }}>
-        {description}
-      </Typography>
       {children}
     </Box>
   )
