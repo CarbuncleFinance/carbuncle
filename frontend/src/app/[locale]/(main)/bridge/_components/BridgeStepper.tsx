@@ -12,12 +12,9 @@ import StepContainerAmountInput from '@/app/[locale]/(main)/bridge/_components/S
 import StepContainerConfirmation from '@/app/[locale]/(main)/bridge/_components/StepContainerConfirmation'
 import StepContainerDestinationInput from '@/app/[locale]/(main)/bridge/_components/StepContainerDestinationInput'
 import { useBridgeForm } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
-import { Chain, XRPLEVM_TESTNET } from '@/domains/blockchain/types'
 
 export default function BridgeStepper() {
   const tSteps = useTranslations('BridgeSteps')
-
-  const [selectedChain, setSelectedChain] = useState<Chain>(XRPLEVM_TESTNET)
 
   /** Form */
   const { form: bridgeForm } = useBridgeForm()
@@ -40,8 +37,6 @@ export default function BridgeStepper() {
       component: (
         <BridgeStepChain
           form={bridgeForm}
-          selectedChain={selectedChain}
-          setSelectedChain={setSelectedChain}
           onBack={handleBack}
           onNext={handleNext}
         />
