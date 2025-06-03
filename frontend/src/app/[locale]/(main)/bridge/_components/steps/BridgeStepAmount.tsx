@@ -2,18 +2,20 @@
 
 import { useTranslations } from 'next-intl'
 import Box from '@mui/material/Box'
-import StepContainer from '@/components/ui/steppers/StepContainer'
-import StepNavigation from '@/components/ui/steppers/StepNavigation'
+import BridgeStepContainer from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepContainer'
+import BridgeStepDescription from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepDescription'
+import BridgeStepNavigation from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepNavigation'
 import { useWallet } from '@/hooks/useWallet'
 import { useWalletBalance } from '@/hooks/useWalletBalance'
 import { bridgeFormSchema } from '@/app/[locale]/(main)/bridge/_forms/bridgeFormSchema'
 import BridgeFormAmountHeader from '@/app/[locale]/(main)/bridge/_components/BridgeFormAmountHeader'
 import BridgeFormAmountInput from '@/app/[locale]/(main)/bridge/_components/BridgeFormAmountInput'
 import BridgeFormAmountPercentageButton from '@/app/[locale]/(main)/bridge/_components/BridgeFormAmountPercentageButton'
+
 import type { ReactFormExtendedApi } from '@tanstack/react-form'
 import type { BridgeFormValues } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
 
-type StepContainerAmountInputProps = {
+type BridgeStepAmountProps = {
   form: ReactFormExtendedApi<
     BridgeFormValues,
     any,
@@ -30,14 +32,12 @@ type StepContainerAmountInputProps = {
   onNext: () => void
 }
 
-export default function StepContainerAmountInput({
+export default function BridgeStepAmount({
   form,
   onBack,
   onNext
-}: StepContainerAmountInputProps) {
+}: BridgeStepAmountProps) {
   const { address, isConnected } = useWallet()
-
-  const tBridgeContent = useTranslations('BridgeContent')
 
   const {
     data: balance,
@@ -63,7 +63,11 @@ export default function StepContainerAmountInput({
   const percentageButtons = [25, 50, 75, 100]
 
   return (
-    <StepContainer description={tBridgeContent('amountInput')}>
+    <BridgeStepContainer>
+      <BridgeStepDescription
+        namespace="bridge.steps.amount"
+        translationKey="description"
+      />
       <Box display="flex" flexDirection="column" gap={1}>
         <BridgeFormAmountHeader
           balance={balance || 0}
@@ -84,13 +88,12 @@ export default function StepContainerAmountInput({
         </Box>
         <BridgeFormAmountInput form={form} schema={bridgeFormSchema} />
       </Box>
-
-      <StepNavigation
+      <BridgeStepNavigation
         showBack={true}
         showNext={true}
         onBack={onBack}
         onNext={handleNext}
       />
-    </StepContainer>
+    </BridgeStepContainer>
   )
 }

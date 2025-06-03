@@ -9,9 +9,8 @@ import StepContent from '@mui/material/StepContent'
 import StepLabel from '@mui/material/StepLabel'
 import BridgeStepChain from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepChain'
 import BridgeStepRecipient from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepRecipient'
-import StepContainerAmountInput from '@/app/[locale]/(main)/bridge/_components/StepContainerAmountInput'
-import StepContainerConfirmation from '@/app/[locale]/(main)/bridge/_components/StepContainerConfirmation'
-import StepContainerDestinationInput from '@/app/[locale]/(main)/bridge/_components/StepContainerDestinationInput'
+import BridgeStepAmount from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepAmount'
+import BridgeStepConfirmation from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepConfirmation'
 import { useBridgeForm } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
 
 export default function BridgeStepper() {
@@ -53,11 +52,10 @@ export default function BridgeStepper() {
         />
       )
     },
-    /*
     {
-      label: tSteps('amountInput'),
+      label: tSteps('amount.title'),
       component: (
-        <StepContainerAmountInput
+        <BridgeStepAmount
           form={bridgeForm}
           onBack={handleBack}
           onNext={handleNext}
@@ -65,16 +63,15 @@ export default function BridgeStepper() {
       )
     },
     {
-      label: tSteps('confirmation'),
+      label: tSteps('confirmation.title'),
       component: (
-        <StepContainerConfirmation
+        <BridgeStepConfirmation
           form={bridgeForm}
           onBack={handleBack}
           onNext={handleNext}
         />
       )
     }
-      */
   ]
 
   return (
