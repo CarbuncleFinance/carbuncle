@@ -13,7 +13,7 @@ export default function SnackbarProvider({
   return (
     <NotistackSnackbarProvider
       maxSnack={3}
-      autoHideDuration={3000}
+      autoHideDuration={5000}
       action={(key) => (
         <IconButton onClick={() => closeSnackbar(key)}>
           <CloseIcon sx={{ color: 'white' }} />

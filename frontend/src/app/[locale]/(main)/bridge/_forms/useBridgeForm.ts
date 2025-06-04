@@ -56,7 +56,7 @@ export function useBridgeForm() {
         const adapter = WalletFactory.createAdapter(WalletTypes.GEM_WALLET)
         const result = await adapter.sendBridgeTransaction(transaction)
 
-        if (result === undefined) {
+        if (result.type === 'reject') {
           const error = createError(AppErrorCode.BRIDGE_TRANSACTION_FAILED)
           handleError(error)
           throw error
