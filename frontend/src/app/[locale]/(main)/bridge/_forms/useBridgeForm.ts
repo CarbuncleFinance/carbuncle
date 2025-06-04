@@ -27,7 +27,7 @@ const defaultValues: BridgeFormValues = {
 
 export function useBridgeForm() {
   const db = useDatabase()
-  const { createError } = useErrorHandler()
+  const { createError, handleError } = useErrorHandler()
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -57,7 +57,9 @@ export function useBridgeForm() {
         const result = await adapter.sendBridgeTransaction(transaction)
 
         if (result === undefined) {
-          throw createError(AppErrorCode.BRIDGE_TRANSACTION_FAILED)
+          const error = createError(AppErrorCode.BRIDGE_TRANSACTION_FAILED)
+          handleError(error)
+          throw error
         }
 
         const wallet = await db.wallet.getOrCreate({ address: value.address })
@@ -65,7 +67,10 @@ export function useBridgeForm() {
           throw createError(AppErrorCode.DATABASE_ERROR)
         }
 
-        const tx = await db.transactions.create({ walletId: wallet.id, hash: result.result.hash })
+        const tx = await db.transactions.create({
+          walletId: wallet.id,
+          hash: result.result.hash
+        })
         if (!tx) {
           throw createError(AppErrorCode.DATABASE_ERROR)
         }

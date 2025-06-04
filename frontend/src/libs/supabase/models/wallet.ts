@@ -11,8 +11,13 @@ export class WalletModel extends BaseModel {
     this.wallets = this.client.from(this.tableName)
   }
 
-  async getByAddress(address: string): Promise<Database['public']['Tables']['wallets']['Row'] | null> {
-    const { data, error } = await this.wallets.select('*').eq('address', address).single()
+  async getByAddress(
+    address: string
+  ): Promise<Database['public']['Tables']['wallets']['Row'] | null> {
+    const { data, error } = await this.wallets
+      .select('*')
+      .eq('address', address)
+      .single()
     if (error) {
       throw error
     }
@@ -21,7 +26,10 @@ export class WalletModel extends BaseModel {
 
   async isExistByAddress(address: string): Promise<boolean> {
     try {
-      const { data, error } = await this.wallets.select('*').eq('address', address).maybeSingle()
+      const { data, error } = await this.wallets
+        .select('*')
+        .eq('address', address)
+        .maybeSingle()
       if (error) {
         throw error
       }
@@ -31,7 +39,11 @@ export class WalletModel extends BaseModel {
     }
   }
 
-  async getOrCreate({ address }: { address: string }): Promise<Database['public']['Tables']['wallets']['Row'] | null> {
+  async getOrCreate({
+    address
+  }: { address: string }): Promise<
+    Database['public']['Tables']['wallets']['Row'] | null
+  > {
     try {
       const isExist = await this.isExistByAddress(address)
 
@@ -39,7 +51,10 @@ export class WalletModel extends BaseModel {
         return await this.getByAddress(address)
       }
 
-      const { data, error } = await this.wallets.insert({ address }).select().maybeSingle()
+      const { data, error } = await this.wallets
+        .insert({ address })
+        .select()
+        .maybeSingle()
       if (error) {
         throw error
       }

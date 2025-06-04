@@ -1,6 +1,9 @@
 import { WalletModel } from '@/libs/supabase/models/wallet'
 import { TransactionModel } from '@/libs/supabase/models/transaction'
-import { createClient, type SupabaseClient as SupabaseClientType } from '@supabase/supabase-js'
+import {
+  createClient,
+  type SupabaseClient as SupabaseClientType
+} from '@supabase/supabase-js'
 import type { Database } from '@/types/database'
 
 /**

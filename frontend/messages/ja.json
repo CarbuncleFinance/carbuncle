@@ -128,6 +128,10 @@
       "title": "ウォレット接続に失敗しました",
       "message": "ウォレットを接続してください。"
     },
+    "bridgeTransactionFailed": {
+      "title": "ブリッジ取引に失敗しました",
+      "message": "ブリッジ取引を完了できませんでした。もう一度お試しください。"
+    },
     "BRIDGE_VALIDATION_ADDRESS_REQUIRED": "送金先アドレスを入力してください。",
     "BRIDGE_VALIDATION_ADDRESS_INVALID": "0xで始まる40文字の16進数を入力してください。",
     "BRIDGE_VALIDATION_AMOUNT_REQUIRED": "送金金額を入力してください。",

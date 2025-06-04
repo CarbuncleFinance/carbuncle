@@ -107,6 +107,10 @@
       "title": "Wallet connection failed",
       "message": "Please try again."
     },
+    "bridgeTransactionFailed": {
+      "title": "Bridge transaction failed",
+      "message": "The bridge transaction could not be completed. Please try again."
+    },
     "BRIDGE_VALIDATION_ADDRESS_REQUIRED": "Please enter a destination address.",
     "BRIDGE_VALIDATION_ADDRESS_INVALID": "Please enter a valid address starting with 0x followed by 40 hexadecimal characters.",
     "BRIDGE_VALIDATION_AMOUNT_REQUIRED": "Please enter an amount.",
