@@ -15,6 +15,29 @@
       "description": "Realize automatic asset management and seamless asset movement through smart contracts."
     }
   },
+  "Navigation": {
+    "bridge": "Bridge",
+    "history": "History",
+    "dev": "Dev"
+  },
+  "Menus": {
+    "walletMenu": {
+      "accountInfo": "Account Info",
+      "menu": "Menu",
+      "logout": "Logout"
+    },
+    "languageMenu": {
+      "english": "English",
+      "japanese": "日本語",
+      "korean": "한국어"
+    }
+  },
+  "Dialogs": {
+    "walletSelectDialog": {
+      "title": "Please select a wallet.",
+      "closeButton": "Close"
+    }
+  },
   "Buttons": {
     "walletConnectButton": {
       "label": "Connect"
@@ -48,55 +71,13 @@
       },
       "confirmation": {
         "title": "Confirmation",
-        "description": "Please confirm the transaction details."
-      }
+        "description": "Please confirm the transaction details.",
+        "destinationNetwork": "Destination Network",
+        "destinationAddress": "Destination Address",
+        "amount": "Amount"
+      },
+      "completion": "Completion"
     }
-  },
-  "Menus": {
-    "walletMenu": {
-      "accountInfo": "Account Info",
-      "menu": "Menu",
-      "logout": "Logout"
-    },
-    "languageMenu": {
-      "english": "English",
-      "japanese": "日本語",
-      "korean": "한국어"
-    }
-  },
-  "Dialogs": {
-    "walletSelectDialog": {
-      "title": "Please select a wallet.",
-      "closeButton": "Close"
-    }
-  },
-  "Navigation": {
-    "bridge": "Bridge",
-    "history": "History",
-    "dev": "Dev"
-  },
-  "Pages": {
-    "bridge": "Bridge",
-    "history": "History"
-  },
-  "BridgeSteps": {
-    "transferMethodSelection": "Transfer Method Selection",
-    "destinationInput": "Destination Input",
-    "amountInput": "Amount Input",
-    "confirmation": "Confirmation",
-    "completion": "Completion"
-  },
-  "BridgeContent": {
-    "newDestinationOnly": "Currently only new destinations are available.",
-    "newDestination": "New Destination",
-    "existingDestination": "Existing Destination",
-    "selectNetwork": "Please select a network.",
-    "destinationNetwork": "Destination Network",
-    "destinationAddress": "Destination Address",
-    "amount": {
-      "feeNotice": "A fee of {fee} XRP will be charged for this transaction."
-    },
-    "amountInput": "Amount Input"
   },
   "Errors": {
     "walletNotInstalled": {

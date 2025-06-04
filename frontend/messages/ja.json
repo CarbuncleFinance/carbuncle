@@ -15,22 +15,27 @@
       "description": "スマートコントラクトによる自動化された資産管理とシームレスな資産移動を実現します。"
     }
   },
-  "BridgePage": {
-    "stepContainer": {
-      "step1": {
-        "title": "チェーンの選択",
-        "description": "送金先のチェーンを選択してください。",
-        "label": "送金先のチェーン"
-      },
-      "step2": {
-        "title": "送金先の入力"
-      },
-      "step3": {
-        "title": "金額の入力"
-      },
-      "step4": {
-        "title": "送金の実行"
-      }
+  "Navigation": {
+    "bridge": "ブリッジ",
+    "history": "履歴",
+    "dev": "開発"
+  },
+  "Menus": {
+    "walletMenu": {
+      "accountInfo": "口座情報",
+      "menu": "メニュー",
+      "logout": "ログアウト"
+    },
+    "languageMenu": {
+      "english": "English",
+      "japanese": "日本語",
+      "korean": "한국어"
+    }
+  },
+  "Dialogs": {
+    "walletSelectDialog": {
+      "title": "ウォレットを選択してください",
+      "closeButton": "閉じる"
     }
   },
   "Buttons": {
@@ -70,55 +75,9 @@
         "destinationNetwork": "送金先ネットワーク",
         "destinationAddress": "送金先アドレス",
         "amount": "送金金額"
-      }
+      },
+      "completion": "送金完了"
     }
-  },
-  "Menus": {
-    "walletMenu": {
-      "accountInfo": "口座情報",
-      "menu": "メニュー",
-      "logout": "ログアウト"
-    },
-    "languageMenu": {
-      "english": "English",
-      "japanese": "日本語",
-      "korean": "한국어"
-    }
-  },
-  "Dialogs": {
-    "walletSelectDialog": {
-      "title": "ウォレットを選択してください",
-      "closeButton": "閉じる"
-    }
-  },
-  "Navigation": {
-    "bridge": "ブリッジ",
-    "history": "履歴",
-    "dev": "開発"
-  },
-  "Pages": {
-    "transfer": "振り込み",
-    "bridge": "ブリッジ",
-    "history": "履歴"
-  },
-  "BridgeSteps": {
-    "transferMethodSelection": "振込方法の選択",
-    "chainInput": "チェーンの選択",
-    "destinationInput": "振込先の入力",
-    "amountInput": "送金金額の入力",
-    "confirmation": "送金確認",
-    "completion": "送金完了"
-  },
-  "BridgeContent": {
-    "newDestinationOnly": "現在は新しい振込先のみ利用可能です。",
-    "newDestination": "新しい振込先",
-    "existingDestination": "既存の振込先",
-    "selectNetwork": "ネットワークを選択してください。",
-    "selectDestination": "振込先を選択してください。",
-    "destinationNetwork": "送金先ネットワーク",
-    "destinationAddress": "送金先アドレス",
-    "amount": "送金金額",
-    "amountInput": "送金金額の入力"
   },
   "Errors": {
     "walletNotInstalled": {
