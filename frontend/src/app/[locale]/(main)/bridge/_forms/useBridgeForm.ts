@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { xrpToDrops } from 'xrpl'
 import type { SendPaymentRequest } from '@gemwallet/api'
 import { useForm } from '@tanstack/react-form'
@@ -25,10 +26,12 @@ const defaultValues: BridgeFormValues = {
 
 export function useBridgeForm() {
   // const { sendTransaction } = useSendTransaction()
+  const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm({
     defaultValues,
     onSubmit: async ({ value }) => {
+      setIsLoading(true)
       try {
         const memos = createBridgeMemo({
           bridgeType: BridgeTypes.INTERCHAIN_TRANSFER,
@@ -56,9 +59,11 @@ export function useBridgeForm() {
       } catch (error) {
         console.error(error)
         throw error
+      } finally {
+        setIsLoading(false)
       }
     }
   })
 
-  return { form }
+  return { form, isLoading }
 }
