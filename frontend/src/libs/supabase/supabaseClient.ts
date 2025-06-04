@@ -1,4 +1,7 @@
-import { createClient, SupabaseClient as SupabaseClientType } from '@supabase/supabase-js'
+import {
+  createClient,
+  SupabaseClient as SupabaseClientType
+} from '@supabase/supabase-js'
 import { Database } from '@/types/database'
 
 /**
@@ -18,6 +21,9 @@ export class SupabaseClient {
   }
 
   async find() {
-    return await this.client.from('wallets').select().overrideTypes<Array<{ id: string }>>()
+    return await this.client
+      .from('wallets')
+      .select()
+      .overrideTypes<Array<{ id: string }>>()
   }
 }

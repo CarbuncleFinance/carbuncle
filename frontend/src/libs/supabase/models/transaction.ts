@@ -11,10 +11,18 @@ export class TransactionModel extends BaseModel {
     this.transactions = this.client.from(this.tableName)
   }
 
-  async create({ walletId, hash }: { walletId: string, hash: string }): Promise<Database['public']['Tables']['transactions']['Row'] | null> {
+  async create({
+    walletId,
+    hash
+  }: { walletId: string; hash: string }): Promise<
+    Database['public']['Tables']['transactions']['Row'] | null
+  > {
     try {
       console.log('create', walletId, hash)
-      const { data, error } = await this.transactions.insert({ wallet_id: walletId, tx_hash: hash }).select().maybeSingle()
+      const { data, error } = await this.transactions
+        .insert({ wallet_id: walletId, tx_hash: hash })
+        .select()
+        .maybeSingle()
       if (error) {
         throw error
       }
