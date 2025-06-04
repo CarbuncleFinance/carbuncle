@@ -14,7 +14,7 @@ type BridgeStepCompletionProps = {
 export default function BridgeStepCompletion({
   onNewTransaction
 }: BridgeStepCompletionProps) {
-  const t = useTranslations('BridgeSteps')
+  const t = useTranslations('bridge.steps')
 
   return (
     <BridgeStepContainer>

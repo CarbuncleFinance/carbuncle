@@ -15,6 +15,29 @@
       "description": "스마트 컨트랙트에 의한 자동화된 자산 관리와 원활한 자산 이동을 실현합니다."
     }
   },
+  "Navigation": {
+    "bridge": "브리지",
+    "history": "기록",
+    "dev": "개발"
+  },
+  "Menus": {
+    "walletMenu": {
+      "accountInfo": "계정 정보",
+      "menu": "메뉴",
+      "logout": "로그아웃"
+    },
+    "languageMenu": {
+      "english": "English",
+      "japanese": "日本語",
+      "korean": "한국어"
+    }
+  },
+  "Dialogs": {
+    "walletSelectDialog": {
+      "title": "지갑을 선택해주세요",
+      "closeButton": "닫기"
+    }
+  },
   "Buttons": {
     "walletConnectButton": {
       "label": "지갑 연결"
@@ -48,54 +71,13 @@
       },
       "confirmation": {
         "title": "확인",
-        "description": "거래 내용을 확인해주세요."
-      }
+        "description": "거래 내용을 확인해주세요.",
+        "destinationNetwork": "목적지 네트워크",
+        "destinationAddress": "목적지 주소",
+        "amount": "금액"
+      },
+      "completion": "송금 완료"
     }
-  },
-  "Menus": {
-    "walletMenu": {
-      "accountInfo": "계정 정보",
-      "menu": "메뉴",
-      "logout": "로그아웃"
-    },
-    "languageMenu": {
-      "english": "English",
-      "japanese": "日本語",
-      "korean": "한국어"
-    }
-  },
-  "Dialogs": {
-    "walletSelectDialog": {
-      "title": "지갑을 선택해주세요",
-      "closeButton": "닫기"
-    }
-  },
-  "Navigation": {
-    "bridge": "브리지",
-    "history": "기록",
-    "dev": "개발"
-  },
-  "Pages": {
-    "transfer": "송금",
-    "bridge": "브리지",
-    "history": "기록"
-  },
-  "BridgeSteps": {
-    "transferMethodSelection": "송금 방법 선택",
-    "destinationInput": "목적지 입력",
-    "amountInput": "금액 입력",
-    "confirmation": "송금 확인",
-    "completion": "송금 완료"
-  },
-  "BridgeContent": {
-    "newDestinationOnly": "현재는 새로운 목적지만 이용 가능합니다.",
-    "newDestination": "새로운 목적지",
-    "existingDestination": "기존 목적지",
-    "selectNetwork": "네트워크를 선택해주세요.",
-    "destinationNetwork": "목적지 네트워크",
-    "destinationAddress": "목적지 주소",
-    "amount": "금액",
-    "amountInput": "금액 입력"
   },
   "Errors": {
     "walletNotInstalled": {

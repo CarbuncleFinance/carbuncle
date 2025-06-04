@@ -17,7 +17,6 @@ import { useWallet } from '@/hooks/useWallet'
 
 export default function BridgeStepper() {
   const tSteps = useTranslations('bridge.steps')
-  const tBridgeSteps = useTranslations('BridgeSteps')
 
   const { address } = useWallet()
 
@@ -97,7 +96,7 @@ export default function BridgeStepper() {
       )
     },
     {
-      label: tBridgeSteps('completion'),
+      label: tSteps('completion'),
       component: (
         <BridgeStepCompletion onNewTransaction={handleNewTransaction} />
       )
