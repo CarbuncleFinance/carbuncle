@@ -71,13 +71,13 @@
     }
   },
   "Navigation": {
-    "transfer": "Transfer",
     "bridge": "Bridge",
+    "history": "History",
     "dev": "Dev"
   },
   "Pages": {
-    "transfer": "Transfer",
-    "bridge": "Bridge"
+    "bridge": "Bridge",
+    "history": "History"
   },
   "BridgeSteps": {
     "transferMethodSelection": "Transfer Method Selection",

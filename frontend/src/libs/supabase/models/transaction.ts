@@ -11,6 +11,23 @@ export class TransactionModel extends BaseModel {
     this.transactions = this.client.from(this.tableName)
   }
 
+  async getByWalletId(
+    walletId: string
+  ): Promise<Database['public']['Tables']['transactions']['Row'][]> {
+    try {
+      const { data, error } = await this.transactions
+        .select('*')
+        .eq('wallet_id', walletId)
+      if (error) {
+        throw error
+      }
+
+      return data
+    } catch (error) {
+      throw error
+    }
+  }
+
   async create({
     walletId,
     hash

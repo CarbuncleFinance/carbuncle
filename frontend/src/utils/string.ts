@@ -1,6 +1,16 @@
 import { stringToHex as stringToHexOnXrpl } from '@xrplf/isomorphic/utils'
 
 /**
+ * Shorten a string by replacing the middle characters with "..."
+ * @param s - The string to shorten
+ * @param length - The length of the string to keep at the start and end
+ * @returns The shortened string
+ */
+export const shortenString = (s: string, length: number): string => {
+  return s.slice(0, length) + '...' + s.slice(-length)
+}
+
+/**
  * Convert a string to a hex string
  * @param s - The string to convert
  * @returns The hex string

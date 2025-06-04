@@ -92,13 +92,14 @@
     }
   },
   "Navigation": {
-    "transfer": "振り込み",
     "bridge": "ブリッジ",
+    "history": "履歴",
     "dev": "開発"
   },
   "Pages": {
     "transfer": "振り込み",
-    "bridge": "ブリッジ"
+    "bridge": "ブリッジ",
+    "history": "履歴"
   },
   "BridgeSteps": {
     "transferMethodSelection": "振込方法の選択",

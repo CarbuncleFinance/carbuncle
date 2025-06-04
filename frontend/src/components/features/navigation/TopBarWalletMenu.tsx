@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 // import Divider from '@mui/material/Divider'
 import Menu from '@mui/material/Menu'
@@ -19,6 +20,9 @@ export default function TopBarWalletMenu({
   onClose
 }: TopBarWalletMenuProps) {
   const t = useTranslations('Menus.walletMenu')
+  const tNavigation = useTranslations('Navigation')
+
+  const router = useRouter()
 
   const { disconnect } = useWalletConnect()
 
@@ -47,6 +51,15 @@ export default function TopBarWalletMenu({
         }
       }}
     >
+      <MenuItem dense>
+        <Typography
+          variant="inherit"
+          sx={{ color: '#fff', cursor: 'pointer' }}
+          onClick={() => router.push('/history')}
+        >
+          {tNavigation('history')}
+        </Typography>
+      </MenuItem>
       <MenuItem dense>
         <Typography
           variant="inherit"

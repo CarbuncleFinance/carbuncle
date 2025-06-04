@@ -71,13 +71,14 @@
     }
   },
   "Navigation": {
-    "transfer": "송금",
     "bridge": "브리지",
+    "history": "기록",
     "dev": "개발"
   },
   "Pages": {
     "transfer": "송금",
-    "bridge": "브리지"
+    "bridge": "브리지",
+    "history": "기록"
   },
   "BridgeSteps": {
     "transferMethodSelection": "송금 방법 선택",

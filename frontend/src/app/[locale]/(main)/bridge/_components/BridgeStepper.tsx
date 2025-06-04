@@ -13,10 +13,13 @@ import BridgeStepAmount from '@/app/[locale]/(main)/bridge/_components/steps/Bri
 import BridgeStepConfirmation from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepConfirmation'
 import BridgeStepCompletion from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepCompletion'
 import { useBridgeForm } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
+import { useWallet } from '@/hooks/useWallet'
 
 export default function BridgeStepper() {
   const tSteps = useTranslations('bridge.steps')
   const tBridgeSteps = useTranslations('BridgeSteps')
+
+  const { address } = useWallet()
 
   /** Form */
   const {
@@ -24,7 +27,7 @@ export default function BridgeStepper() {
     isLoading,
     isSuccess,
     resetSuccess
-  } = useBridgeForm()
+  } = useBridgeForm(address)
 
   /** Stepper */
   const [activeStep, setActiveStep] = useState<number>(0)
