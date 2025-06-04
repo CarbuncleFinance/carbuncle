@@ -34,6 +34,12 @@ export enum AppErrorCode {
   WALLET_BALANCE_FETCH_FAILED = 'walletBalanceFetchFailed',
   WALLET_TRANSACTION_FAILED = 'walletTransactionFailed',
 
+  // Bridge Errors
+  BRIDGE_TRANSACTION_FAILED = 'bridgeTransactionFailed',
+
+  // Database Errors
+  DATABASE_ERROR = 'databaseError',
+
   // Unknown Error
   UNKNOWN_ERROR = 'unknownError'
 }

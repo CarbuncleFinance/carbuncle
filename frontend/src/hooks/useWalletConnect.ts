@@ -3,8 +3,10 @@ import { ChainProtocol } from '@/domains/blockchain/types'
 import { WalletFactory } from '@/libs/adapters/walletFactory'
 import { useErrorHandler } from '@/hooks/useErrorHandler'
 import { useWalletStore, setWalletWithChainProtocol } from '@/stores/wallet'
+import { useDatabase } from '@/hooks/useDatabase'
 
 export function useWalletConnect() {
+  const db = useDatabase()
   const { createError } = useErrorHandler()
   const { setWallet, clearWallet } = useWalletStore()
 
@@ -27,6 +29,13 @@ export function useWalletConnect() {
 
       const walletWithChain = setWalletWithChainProtocol(chainProtocol, address)
       setWallet(walletWithChain)
+
+      const wallet = await db.wallet.getOrCreate({ address })
+      if (!wallet) {
+        throw createError(AppErrorCode.DATABASE_ERROR)
+      }
+
+      console.log(wallet)
     } catch (error) {
       clearWallet()
       throw error

@@ -2,15 +2,16 @@ import { useState } from 'react'
 import { xrpToDrops } from 'xrpl'
 import type { SendPaymentRequest } from '@gemwallet/api'
 import { useForm } from '@tanstack/react-form'
-// import { useSendTransaction } from '@/hooks/useSendTransaction'
+import { useDatabase } from '@/hooks/useDatabase'
 import { createBridgeMemo, BridgeTypes } from '@/utils/bridge'
 import {
   SQUID_ROUTER_CONTRACT,
   BRDGE_GAS_FEE_AMOUT_XRP,
   AXELAR_GATEWAY_WALLET
 } from '@/constants/app'
-import { WalletTypes } from '@/types/enums'
+import { AppErrorCode, WalletTypes } from '@/types/enums'
 import { WalletFactory } from '@/libs/adapters/walletFactory'
+import { useErrorHandler } from '@/hooks/useErrorHandler'
 
 export type BridgeFormValues = {
   chain: string
@@ -25,7 +26,8 @@ const defaultValues: BridgeFormValues = {
 }
 
 export function useBridgeForm() {
-  // const { sendTransaction } = useSendTransaction()
+  const db = useDatabase()
+  const { createError } = useErrorHandler()
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -51,16 +53,24 @@ export function useBridgeForm() {
           memos: memos
         }
 
-        console.log('transaction', transaction)
-
         const adapter = WalletFactory.createAdapter(WalletTypes.GEM_WALLET)
         const result = await adapter.sendBridgeTransaction(transaction)
 
-        console.log('result', result)
-        setIsSuccess(true)
+        if (result === undefined) {
+          throw createError(AppErrorCode.BRIDGE_TRANSACTION_FAILED)
+        }
 
-        // await sendTransaction(memo)
-        console.log('onSubmit', value)
+        const wallet = await db.wallet.getOrCreate({ address: value.address })
+        if (!wallet) {
+          throw createError(AppErrorCode.DATABASE_ERROR)
+        }
+
+        const tx = await db.transactions.create({ walletId: wallet.id, hash: result.result.hash })
+        if (!tx) {
+          throw createError(AppErrorCode.DATABASE_ERROR)
+        }
+
+        setIsSuccess(true)
       } catch (error) {
         console.error(error)
         setIsSuccess(false)

@@ -84,3 +84,10 @@ Carbuncle Financeは、現実世界の「銀行口座」と「財布」の役割
 ## 今後の展望
 
 Carbuncle Financeは、取引の特性に応じた最適な処理を実現し、より広範なDeFiエコシステムの中核を担うことを目指します。従来金融とWeb3金融の架け橋となり、ユーザーが求める要件を満たす新しい金融サービスを提供します。
+
+## Migration
+
+
+```bash
+bun supabase migration new new_table_name
+```
