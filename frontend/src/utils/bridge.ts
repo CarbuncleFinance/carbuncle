@@ -1,4 +1,4 @@
-import type { Memo } from 'xrpl'
+import type { Memo as GemWalletMemo } from '@gemwallet/api'
 import { addressTo32, padAddressTo32Bytes, stringToHex } from '@/utils/string'
 import { keccak256, toUtf8Bytes } from 'ethers'
 import dayjs from 'dayjs'
@@ -55,6 +55,7 @@ export const generatePayloadHash = (params: CreateBridgeMemoParams): string => {
  * Create a bridge memo
  * @param params - The parameters for the bridge memo
  * @returns The bridge memo
+ * @note This function is used to create a bridge memo for the GemWallet.
  */
 export const createBridgeMemo = ({
   bridgeType,
@@ -62,32 +63,32 @@ export const createBridgeMemo = ({
   destinationChain,
   gasFeeAmount,
   toAddress
-}: CreateBridgeMemoParams): Memo[] => {
-  const bridgeTypeMemo: Memo = {
-    Memo: {
-      MemoType: stringToHex('type'),
-      MemoData: stringToHex(bridgeType)
+}: CreateBridgeMemoParams): GemWalletMemo[] => {
+  const bridgeTypeMemo: GemWalletMemo = {
+    memo: {
+      memoType: stringToHex('type'),
+      memoData: stringToHex(bridgeType)
     }
   }
 
-  const destinationAddressMemo: Memo = {
-    Memo: {
-      MemoType: stringToHex('destination_address'),
-      MemoData: addressTo32(destinationAddress)
+  const destinationAddressMemo: GemWalletMemo = {
+    memo: {
+      memoType: stringToHex('destination_address'),
+      memoData: stringToHex(addressTo32(destinationAddress))
     }
   }
 
-  const destinationChainMemo: Memo = {
-    Memo: {
-      MemoType: stringToHex('destination_chain'),
-      MemoData: stringToHex(destinationChain)
+  const destinationChainMemo: GemWalletMemo = {
+    memo: {
+      memoType: stringToHex('destination_chain'),
+      memoData: stringToHex(destinationChain)
     }
   }
 
-  const gasFeeAmountMemo: Memo = {
-    Memo: {
-      MemoType: stringToHex('gas_fee_amount'),
-      MemoData: stringToHex(gasFeeAmount)
+  const gasFeeAmountMemo: GemWalletMemo = {
+    memo: {
+      memoType: stringToHex('gas_fee_amount'),
+      memoData: stringToHex(gasFeeAmount)
     }
   }
 
@@ -104,10 +105,10 @@ export const createBridgeMemo = ({
     toAddress
   })
 
-  const payloadMemo: Memo = {
-    Memo: {
-      MemoType: stringToHex('payload'),
-      MemoData: [
+  const payloadMemo: GemWalletMemo = {
+    memo: {
+      memoType: stringToHex('payload'),
+      memoData: [
         paddedAddress.padStart(64, '0').toUpperCase(),
         hash.slice(2).padStart(64, '0').toUpperCase()
       ].join('')

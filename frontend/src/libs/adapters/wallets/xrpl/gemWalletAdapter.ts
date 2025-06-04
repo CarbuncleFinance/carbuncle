@@ -48,6 +48,11 @@ export class GemWalletAdapter implements WalletAdapter {
   }
 
   async sendBridgeTransaction(transaction: SendPaymentRequest): Promise<any> {
+    const installed = await this.isInstalled()
+    if (!installed) {
+      throw new Error(AppErrorCode.WALLET_NOT_INSTALLED)
+    }
+
     const result = await sendPayment(transaction)
     return result
   }

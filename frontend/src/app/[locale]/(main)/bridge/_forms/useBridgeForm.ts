@@ -43,8 +43,10 @@ export function useBridgeForm() {
             Number(value.amount) + Number(BRDGE_GAS_FEE_AMOUT_XRP)
           ).toString(),
           destination: AXELAR_GATEWAY_WALLET.address,
-          memos: memos as any
+          memos: memos
         }
+
+        console.log('transaction', transaction)
 
         const adapter = WalletFactory.createAdapter(WalletTypes.GEM_WALLET)
         const result = await adapter.sendBridgeTransaction(transaction)
