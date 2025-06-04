@@ -17,7 +17,7 @@ export default function BridgeStepper() {
   const tSteps = useTranslations('bridge.steps')
 
   /** Form */
-  const { form: bridgeForm } = useBridgeForm()
+  const { form: bridgeForm, isLoading } = useBridgeForm()
 
   /** Stepper */
   const [activeStep, setActiveStep] = useState<number>(0)
@@ -69,6 +69,7 @@ export default function BridgeStepper() {
           form={bridgeForm}
           onBack={handleBack}
           onNext={handleNext}
+          isLoading={isLoading}
         />
       )
     }
