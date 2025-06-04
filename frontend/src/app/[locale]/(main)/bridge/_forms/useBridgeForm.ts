@@ -67,7 +67,10 @@ export function useBridgeForm() {
           throw createError(AppErrorCode.DATABASE_ERROR)
         }
 
-        const tx = await db.transactions.create({ walletId: wallet.id, hash: result.result.hash })
+        const tx = await db.transactions.create({
+          walletId: wallet.id,
+          hash: result.result.hash
+        })
         if (!tx) {
           throw createError(AppErrorCode.DATABASE_ERROR)
         }
