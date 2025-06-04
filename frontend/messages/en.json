@@ -31,17 +31,24 @@
   "bridge": {
     "steps": {
       "chain": {
+        "title": "Chain Selection",
         "description": "Please select the destination chain.",
         "label": "Destination Chain"
       },
       "recipient": {
+        "title": "Recipient",
         "description": "Please enter the destination address.",
         "label": "Destination Address"
       },
       "amount": {
+        "title": "Amount",
         "description": "Please enter the amount.",
         "label": "Amount",
         "feeNotice": "A fee of {fee} XRP will be charged for this transaction."
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "description": "Please confirm the transaction details."
       }
     }
   },

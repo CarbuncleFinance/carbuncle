@@ -27,11 +27,13 @@ const defaultValues: BridgeFormValues = {
 export function useBridgeForm() {
   // const { sendTransaction } = useSendTransaction()
   const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const form = useForm({
     defaultValues,
     onSubmit: async ({ value }) => {
       setIsLoading(true)
+      setIsSuccess(false)
       try {
         const memos = createBridgeMemo({
           bridgeType: BridgeTypes.INTERCHAIN_TRANSFER,
@@ -55,11 +57,13 @@ export function useBridgeForm() {
         const result = await adapter.sendBridgeTransaction(transaction)
 
         console.log('result', result)
+        setIsSuccess(true)
 
         // await sendTransaction(memo)
         console.log('onSubmit', value)
       } catch (error) {
         console.error(error)
+        setIsSuccess(false)
         throw error
       } finally {
         setIsLoading(false)
@@ -67,5 +71,5 @@ export function useBridgeForm() {
     }
   })
 
-  return { form, isLoading }
+  return { form, isLoading, isSuccess, resetSuccess: () => setIsSuccess(false) }
 }
