@@ -10,6 +10,7 @@ type BridgeStepNavigationProps = {
   nextDisabled?: boolean
   onBack?: () => void
   onNext?: () => void
+  onExecute?: () => void
 }
 
 export default function BridgeStepNavigation({
@@ -18,7 +19,8 @@ export default function BridgeStepNavigation({
   showExecute = false,
   nextDisabled = false,
   onBack,
-  onNext
+  onNext,
+  onExecute
 }: BridgeStepNavigationProps) {
   return (
     <Box display="flex" justifyContent="flex-end" gap={1}>
@@ -48,6 +50,7 @@ export default function BridgeStepNavigation({
           variant="contained"
           color="primary"
           type="submit"
+          onClick={onExecute}
           disableElevation
         >
           Execute

@@ -69,6 +69,7 @@ export default function BridgeStepper() {
           form={bridgeForm}
           onBack={handleBack}
           onNext={handleNext}
+          onExecute={() => bridgeForm.handleSubmit()}
         />
       )
     }
