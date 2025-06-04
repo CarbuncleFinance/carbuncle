@@ -26,13 +26,15 @@ type BridgeStepConfirmationProps = {
   onBack: () => void
   onNext: () => void
   onExecute: () => void
+  isLoading?: boolean
 }
 
 export default function BridgeStepConfirmation({
   form,
   onBack,
   onNext,
-  onExecute
+  onExecute,
+  isLoading = false
 }: BridgeStepConfirmationProps) {
   const t = useTranslations('bridge.steps.confirmation')
 
@@ -80,6 +82,7 @@ export default function BridgeStepConfirmation({
         onBack={onBack}
         onNext={onNext}
         onExecute={onExecute}
+        isLoading={isLoading}
       />
     </BridgeStepContainer>
   )

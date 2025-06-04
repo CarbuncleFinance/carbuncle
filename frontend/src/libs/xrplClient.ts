@@ -20,7 +20,9 @@ export class XrplClient {
     }
   }
 
-  async sendPaymentTransaction(transaction: Payment): Promise<TxResponse<Payment>> {
+  async sendPaymentTransaction(
+    transaction: Payment
+  ): Promise<TxResponse<Payment>> {
     try {
       await this.client.connect()
       const result = await this.client.submitAndWait(transaction)

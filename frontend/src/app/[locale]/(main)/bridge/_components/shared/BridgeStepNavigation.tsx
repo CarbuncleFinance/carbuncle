@@ -2,12 +2,14 @@
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
 
 type BridgeStepNavigationProps = {
   showBack?: boolean
   showNext?: boolean
   showExecute?: boolean
   nextDisabled?: boolean
+  isLoading?: boolean
   onBack?: () => void
   onNext?: () => void
   onExecute?: () => void
@@ -18,6 +20,7 @@ export default function BridgeStepNavigation({
   showNext = false,
   showExecute = false,
   nextDisabled = false,
+  isLoading = false,
   onBack,
   onNext,
   onExecute
@@ -30,6 +33,7 @@ export default function BridgeStepNavigation({
           color="primary"
           onClick={onBack}
           disableElevation
+          disabled={isLoading}
         >
           Back
         </Button>
@@ -52,8 +56,14 @@ export default function BridgeStepNavigation({
           type="submit"
           onClick={onExecute}
           disableElevation
+          disabled={isLoading}
+          startIcon={
+            isLoading ? (
+              <CircularProgress size={16} color="inherit" />
+            ) : undefined
+          }
         >
-          Execute
+          {isLoading ? 'Loading...' : 'Execute'}
         </Button>
       )}
     </Box>

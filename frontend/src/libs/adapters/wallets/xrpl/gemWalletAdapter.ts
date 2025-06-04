@@ -1,4 +1,9 @@
-import { isInstalled, getAddress, sendPayment, type SendPaymentRequest } from '@gemwallet/api'
+import {
+  isInstalled,
+  getAddress,
+  sendPayment,
+  type SendPaymentRequest
+} from '@gemwallet/api'
 import { AppErrorCode } from '@/types/enums'
 import { WalletAdapter } from '@/libs/adapters/walletFactory'
 import { XrplClient } from '@/libs/xrplClient'

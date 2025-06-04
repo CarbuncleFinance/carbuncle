@@ -2,7 +2,11 @@
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import { isInstalled, type SendPaymentRequest, sendPayment } from '@gemwallet/api'
+import {
+  isInstalled,
+  type SendPaymentRequest,
+  sendPayment
+} from '@gemwallet/api'
 
 export default function DevContent() {
   const handleClick = async () => {
@@ -15,7 +19,7 @@ export default function DevContent() {
 
       const transaction: SendPaymentRequest = {
         amount: '1000000',
-        destination: 'rLWQskMM8EoPxaLsmuQxE5rYeP4uX7dhym',
+        destination: 'rLWQskMM8EoPxaLsmuQxE5rYeP4uX7dhym'
       }
 
       const result = await sendPayment(transaction)
