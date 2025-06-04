@@ -105,6 +105,10 @@
       "title": "지갑 연결에 실패했습니다",
       "message": "지갑을 연결해주세요."
     },
+    "bridgeTransactionFailed": {
+      "title": "브리지 거래에 실패했습니다",
+      "message": "브리지 거래를 완료할 수 없습니다. 다시 시도해주세요."
+    },
     "BRIDGE_VALIDATION_ADDRESS_REQUIRED": "목적지 주소를 입력해주세요.",
     "BRIDGE_VALIDATION_ADDRESS_INVALID": "0x로 시작하는 40자리 16진수를 입력해주세요.",
     "BRIDGE_VALIDATION_AMOUNT_REQUIRED": "송금 금액을 입력해주세요.",
