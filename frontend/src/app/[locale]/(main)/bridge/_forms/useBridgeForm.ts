@@ -1,4 +1,5 @@
-import { xrpToDrops, type Payment } from 'xrpl'
+import { xrpToDrops } from 'xrpl'
+import type { SendPaymentRequest } from '@gemwallet/api'
 import { useForm } from '@tanstack/react-form'
 // import { useSendTransaction } from '@/hooks/useSendTransaction'
 import { createBridgeMemo, BridgeTypes } from '@/utils/bridge'
@@ -37,14 +38,12 @@ export function useBridgeForm() {
           toAddress: value.address
         })
 
-        const transaction: Payment = {
-          TransactionType: 'Payment',
-          Amount: xrpToDrops(
+        const transaction: SendPaymentRequest = {
+          amount: xrpToDrops(
             Number(value.amount) + Number(BRDGE_GAS_FEE_AMOUT_XRP)
           ).toString(),
-          Destination: AXELAR_GATEWAY_WALLET.address,
-          Account: value.address,
-          Memos: memos
+          destination: AXELAR_GATEWAY_WALLET.address,
+          memos: memos as any
         }
 
         const adapter = WalletFactory.createAdapter(WalletTypes.GEM_WALLET)

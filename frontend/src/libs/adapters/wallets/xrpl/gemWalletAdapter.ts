@@ -1,5 +1,4 @@
-import { isInstalled, getAddress } from '@gemwallet/api'
-import { Payment, TxResponse } from 'xrpl'
+import { isInstalled, getAddress, sendPayment, type SendPaymentRequest } from '@gemwallet/api'
 import { AppErrorCode } from '@/types/enums'
 import { WalletAdapter } from '@/libs/adapters/walletFactory'
 import { XrplClient } from '@/libs/xrplClient'
@@ -48,8 +47,8 @@ export class GemWalletAdapter implements WalletAdapter {
     return 0
   }
 
-  async sendBridgeTransaction(transaction: Payment): Promise<TxResponse<Payment>> {
-    const result = await this.xrplClient.sendPaymentTransaction(transaction)
+  async sendBridgeTransaction(transaction: SendPaymentRequest): Promise<any> {
+    const result = await sendPayment(transaction)
     return result
   }
 }
