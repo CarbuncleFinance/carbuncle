@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import Box from '@mui/material/Box'
 import Stepper from '@mui/material/Stepper'
@@ -11,16 +11,29 @@ import BridgeStepChain from '@/app/[locale]/(main)/bridge/_components/steps/Brid
 import BridgeStepRecipient from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepRecipient'
 import BridgeStepAmount from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepAmount'
 import BridgeStepConfirmation from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepConfirmation'
+import BridgeStepCompletion from '@/app/[locale]/(main)/bridge/_components/steps/BridgeStepCompletion'
 import { useBridgeForm } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
 
 export default function BridgeStepper() {
   const tSteps = useTranslations('bridge.steps')
+  const tBridgeSteps = useTranslations('BridgeSteps')
 
   /** Form */
-  const { form: bridgeForm, isLoading } = useBridgeForm()
+  const {
+    form: bridgeForm,
+    isLoading,
+    isSuccess,
+    resetSuccess
+  } = useBridgeForm()
 
   /** Stepper */
   const [activeStep, setActiveStep] = useState<number>(0)
+
+  useEffect(() => {
+    if (isSuccess && activeStep === 3) {
+      setActiveStep(4)
+    }
+  }, [isSuccess, activeStep])
 
   const handleNext = () => {
     setActiveStep(activeStep + 1)
@@ -28,6 +41,12 @@ export default function BridgeStepper() {
 
   const handleBack = () => {
     setActiveStep(activeStep - 1)
+  }
+
+  const handleNewTransaction = () => {
+    setActiveStep(0)
+    resetSuccess()
+    bridgeForm.reset()
   }
 
   /** Stepper contents */
@@ -72,6 +91,12 @@ export default function BridgeStepper() {
           onExecute={() => bridgeForm.handleSubmit()}
           isLoading={isLoading}
         />
+      )
+    },
+    {
+      label: tBridgeSteps('completion'),
+      component: (
+        <BridgeStepCompletion onNewTransaction={handleNewTransaction} />
       )
     }
   ]

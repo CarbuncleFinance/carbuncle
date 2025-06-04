@@ -31,17 +31,24 @@
   "bridge": {
     "steps": {
       "chain": {
+        "title": "체인 선택",
         "description": "송금 목적지 체인을 선택해주세요.",
         "label": "송금 목적지 체인"
       },
       "recipient": {
+        "title": "수신자",
         "description": "송금 목적지 주소를 입력해주세요.",
         "label": "송금 목적지 주소"
       },
       "amount": {
+        "title": "금액",
         "description": "송금 금액을 입력해주세요.",
         "label": "송금 금액",
         "feeNotice": "이 거래에는 수수료({fee} XRP)가 부과됩니다."
+      },
+      "confirmation": {
+        "title": "확인",
+        "description": "거래 내용을 확인해주세요."
       }
     }
   },
