@@ -175,12 +175,28 @@ contract rCBX is ERC20, Ownable, IrCBX {
         address from,
         address to,
         uint256 amount
-    )
-        internal
-        override(ERC20)
-    {
-        require(from != address(0), "ERC20: transfer from the zero address");
-        require(to != address(0), "ERC20: transfer to the zero address");
+    ) internal override(ERC20) {
+        if (from == address(0)) {
+        // ── mint 専用処理 ───────────────────
+        _totalSupply += amount;
+        uint256 rAmount = amount * _getRate();   // 現在の反射レート
+        _reflectedBalances[to] += rAmount;
+        if (_isExcludedFromReward[to]) {
+            _actualBalances[to] += amount;
+        }
+        emit Transfer(address(0), to, amount);
+        return;
+       }
+
+        // ゼロアドレスチェック
+        if (from == address(0)) {
+            // ミント時は特別な処理
+            require(to != address(0), "ERC20: mint to the zero address");
+        } else {
+            // 通常の転送時
+            require(to != address(0), "ERC20: transfer to the zero address");
+        }
+        
         require(amount > 0, "Transfer amount must be greater than zero");
 
         if (from != owner() && to != owner()) {

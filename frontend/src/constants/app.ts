@@ -12,3 +12,7 @@ export const AXELAR_GATEWAY_WALLET = {
 export const BRDGE_GAS_FEE_AMOUT_XRP = '3'
 
 export const AXELAR_SCAN_URL = 'https://testnet.axelarscan.io'
+
+export const CBX_CONTRACT = {
+  address: '0x3d5f6b69bB3F8D6d44Eb4d3F3B6102C312Acc640'
+}
