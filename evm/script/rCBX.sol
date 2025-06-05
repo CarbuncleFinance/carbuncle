@@ -2,17 +2,17 @@
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import {rXRP} from "../src/rXRP.sol";
+import {rCBX} from "../src/rCBX.sol";
 
-contract rXRPScript is Script {
-    rXRP public rxrpInstance;
+contract rCBXScript is Script {
+    rCBX public rcbxInstance;
 
     function setUp() public {}
 
     function run() public {
         vm.startBroadcast();
 
-        rxrpInstance = new rXRP();
+        rcbxInstance = new rCBX();
 
         vm.stopBroadcast();
     }
