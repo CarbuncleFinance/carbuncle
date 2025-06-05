@@ -5,6 +5,22 @@ import { ERC20 } from "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.so
 import { Ownable } from "lib/openzeppelin-contracts/contracts/access/Ownable.sol";
 import { Math } from "lib/openzeppelin-contracts/contracts/utils/math/Math.sol";
 
+/**
+BOOTING... [rCBX_CORE]
+
+[ OK ] Loading Solidity Engine
+[ OK ] Initializing Carbuncle Reflector
+[ OK ] Syncing XRPL EVM
+[ OK ] Reflection Layer: ENABLED
+[ OK ] Token Distribution Queue: ACTIVE
+
+█▀▀ █▀█ █▀▀ █▄▄ █   █ █▀▀ █░█ █░░ █░░  
+█▄▄ █▄█ ██▄ █▄█ █▄▄ █ ██▄ █▄█ █▄▄ █▄▄  
+
+rCBX Token Ready.
+Power Level: ✦✦✦✦✦
+Emit Sparkles. Execute Brilliance.
+*/
 contract rCBX is ERC20, Ownable {
     using Math for uint256;
 
