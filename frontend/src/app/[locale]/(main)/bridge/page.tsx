@@ -1,5 +1,5 @@
-import PageHeader from '@/components/features/layout/PageHeader'
-import PageLayout from '@/components/features/layout/PageLayout'
+import PageHeader from '@/components/layouts/PageHeader'
+import PageLayout from '@/components/layouts/PageLayout'
 import BridgeStepper from '@/app/[locale]/(main)/bridge/_components/BridgeStepper'
 
 export default function BridgePage() {

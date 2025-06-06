@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Noto_Sans } from 'next/font/google'
 import { APP_NAME, APP_DESCRIPTION } from '@/constants/app'
-import TopBar from '@/components/layouts/TopBar'
+import TopBar from '@/app/[locale]/(lp)/_components/TopBar'
 import AppProviders from '@/components/providers'
 // i18n
 import { hasLocale } from 'next-intl'

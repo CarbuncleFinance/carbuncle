@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-// import Divider from '@mui/material/Divider'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
@@ -25,6 +24,11 @@ export default function TopBarWalletMenu({
   const router = useRouter()
 
   const { disconnect } = useWalletConnect()
+
+  const handleGoto = (path: string) => {
+    router.push(path)
+    onClose()
+  }
 
   const handleLogout = () => {
     disconnect()
@@ -55,7 +59,16 @@ export default function TopBarWalletMenu({
         <Typography
           variant="inherit"
           sx={{ color: '#fff', cursor: 'pointer' }}
-          onClick={() => router.push('/history')}
+          onClick={() => handleGoto('/mypage')}
+        >
+          {tNavigation('mypage')}
+        </Typography>
+      </MenuItem>
+      <MenuItem dense>
+        <Typography
+          variant="inherit"
+          sx={{ color: '#fff', cursor: 'pointer' }}
+          onClick={() => handleGoto('/history')}
         >
           {tNavigation('history')}
         </Typography>

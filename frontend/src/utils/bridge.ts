@@ -44,8 +44,8 @@ export const generatePayloadHash = (params: CreateBridgeMemoParams): string => {
     destinationAddress,
     addressTo32(destinationChain),
     addressTo32(toAddress),
-    gasFeeAmount,
-    timestamp.toString()
+    gasFeeAmount
+    // timestamp.toString()
   ].join('')
 
   return keccak256(toUtf8Bytes(hashInput))

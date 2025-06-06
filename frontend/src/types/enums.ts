@@ -1,16 +1,3 @@
-/** Wallet Types */
-export enum WalletTypes {
-  GEM_WALLET = 'gem-wallet',
-  METAMASK = 'metamask'
-}
-
-export type WalletType = (typeof WalletTypes)[keyof typeof WalletTypes]
-
-export const WalletTypeNames: Record<WalletType, string> = {
-  [WalletTypes.GEM_WALLET]: 'GemWallet',
-  [WalletTypes.METAMASK]: 'MetaMask'
-}
-
 /** Languages */
 export enum Languages {
   EN = 'en',
@@ -71,4 +58,40 @@ export function getChainById(chainId: number): EVMChain | null {
     default:
       return null
   }
+}
+
+/** Environment Types */
+export enum EnvironmentTypes {
+  MAINNET = 'mainnet',
+  TESTNET = 'testnet',
+  DEVNET = 'devnet'
+}
+export type EnvironmentType =
+  (typeof EnvironmentTypes)[keyof typeof EnvironmentTypes]
+
+/** Protocol Types */
+export enum ChainTypes {
+  XRPL = 'XRPL',
+  EVM = 'EVM'
+}
+export type ChainType = (typeof ChainTypes)[keyof typeof ChainTypes]
+
+/** Chain Name Types */
+export enum ChainNameTypes {
+  XRPL = 'XRP Ledger',
+  XRPL_EVM = 'XRPL EVM'
+}
+export type ChainNameType = (typeof ChainNameTypes)[keyof typeof ChainNameTypes]
+
+/** Wallet Types */
+export enum WalletTypes {
+  GEM_WALLET = 'gem-wallet',
+  METAMASK = 'metamask'
+}
+
+export type WalletType = (typeof WalletTypes)[keyof typeof WalletTypes]
+
+export const WalletTypeNames: Record<WalletType, string> = {
+  [WalletTypes.GEM_WALLET]: 'GemWallet',
+  [WalletTypes.METAMASK]: 'MetaMask'
 }

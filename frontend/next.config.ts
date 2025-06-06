@@ -3,16 +3,7 @@ import createNextIntlPlugin from 'next-intl/plugin'
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin'
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/home',
-        permanent: true
-      }
-    ]
-  }
+  reactStrictMode: true
 }
 
 const withVanillaExtract = createVanillaExtractPlugin()

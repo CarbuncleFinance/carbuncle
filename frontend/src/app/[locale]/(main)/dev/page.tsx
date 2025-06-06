@@ -1,5 +1,5 @@
 import DevContent from '@/app/[locale]/(main)/dev/_components/dev-content'
-import PageLayout from '@/components/features/layout/PageLayout'
+import PageLayout from '@/components/layouts/PageLayout'
 
 export default function DevPage() {
   return (

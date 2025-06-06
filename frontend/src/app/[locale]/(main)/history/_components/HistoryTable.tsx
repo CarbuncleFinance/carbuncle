@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect } from 'react'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -8,12 +10,10 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import OpenInNewIcon from '@mui/icons-material/OpenInNew'
 import { useHistory } from '@/hooks/useHistory'
 import { useWallet } from '@/hooks/useWallet'
 import { shortenString } from '@/utils/string'
-import { AXELAR_SCAN_URL } from '@/constants/app'
+import { AXELAR_SCAN_URL, XRPL_SCAN_URL } from '@/constants/app'
 
 export default function HistoryTable() {
   const { address } = useWallet()
@@ -26,8 +26,12 @@ export default function HistoryTable() {
   }, [address])
 
   // 別タブを開く
-  const handleOpenInNewTab = (txHash: string) => {
-    window.open(`${AXELAR_SCAN_URL}/gmp/${txHash}`, '_blank')
+  const handleOpenInNewTab = (txHash: string, type: 'xrpl' | 'axelar') => {
+    if (type === 'axelar') {
+      window.open(`${AXELAR_SCAN_URL}/gmp/${txHash}`, '_blank')
+    } else {
+      window.open(`${XRPL_SCAN_URL}/transactions/${txHash}`, '_blank')
+    }
   }
 
   return (
@@ -54,20 +58,36 @@ export default function HistoryTable() {
                 </Typography>
               </TableCell>
               <TableCell>
-                <Typography
-                  variant="body2"
-                  component="span"
-                  sx={{ color: 'white' }}
+                <Box
+                  display="flex"
+                  gap={1}
+                  alignItems="center"
+                  justifyContent="space-between"
                 >
-                  {shortenString(row.tx_hash, 25)}
-                </Typography>
-                <IconButton
-                  size="small"
-                  onClick={() => handleOpenInNewTab(row.tx_hash)}
-                  sx={{ ml: 1, color: 'white' }}
-                >
-                  <OpenInNewIcon fontSize="small" />
-                </IconButton>
+                  <Typography
+                    variant="body2"
+                    component="span"
+                    sx={{ color: 'white' }}
+                  >
+                    {shortenString(row.tx_hash, 15)}
+                  </Typography>
+                  <Box display="flex" gap={1}>
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      onClick={() => handleOpenInNewTab(row.tx_hash, 'xrpl')}
+                    >
+                      XRPL Explorer
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      onClick={() => handleOpenInNewTab(row.tx_hash, 'axelar')}
+                    >
+                      AXELAR Explorer
+                    </Button>
+                  </Box>
+                </Box>
               </TableCell>
             </TableRow>
           ))}

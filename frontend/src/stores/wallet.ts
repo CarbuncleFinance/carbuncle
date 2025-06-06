@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { Chain, ChainProtocol } from '@/domains/blockchain/types'
+import { ChainProtocol } from '@/domains/blockchain/types'
 
 export type Wallet = {
   address: string

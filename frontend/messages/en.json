@@ -18,6 +18,7 @@
   "Navigation": {
     "bridge": "Bridge",
     "history": "History",
+    "mypage": "MyPage",
     "dev": "Dev"
   },
   "Menus": {

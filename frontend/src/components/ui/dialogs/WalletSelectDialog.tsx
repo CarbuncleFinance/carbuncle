@@ -13,7 +13,6 @@ import { WalletConnectOptionButton } from '@/components/ui/buttons/WalletConnect
 import { useWalletConnect } from '@/hooks/useWalletConnect'
 import {
   ChainProtocol,
-  getDefaultChainForProtocol,
   getSupportedWalletsForProtocol
 } from '@/domains/blockchain/types'
 import { WalletType, WalletTypeNames } from '@/types/enums'

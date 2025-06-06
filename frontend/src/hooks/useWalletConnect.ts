@@ -1,14 +1,22 @@
-import { AppErrorCode, WalletType } from '@/types/enums'
 import { ChainProtocol } from '@/domains/blockchain/types'
 import { WalletFactory } from '@/libs/adapters/walletFactory'
 import { useErrorHandler } from '@/hooks/useErrorHandler'
 import { useWalletStore, setWalletWithChainProtocol } from '@/stores/wallet'
 import { useDatabase } from '@/hooks/useDatabase'
+import { AppErrorCode, WalletType } from '@/types'
 
 export function useWalletConnect() {
   const db = useDatabase()
   const { createError } = useErrorHandler()
   const { setWallet, clearWallet } = useWalletStore()
+
+  const connect = (walletType: WalletType) => {
+    try {
+      const adapter = WalletFactory.createAdapterForWalletType(walletType)
+    } catch (error) {
+      throw error
+    }
+  }
 
   const connectWithChainProtocol = async (
     chainProtocol: ChainProtocol,
@@ -48,6 +56,7 @@ export function useWalletConnect() {
 
   return {
     connectWithChainProtocol,
+    connect,
     disconnect
   }
 }
