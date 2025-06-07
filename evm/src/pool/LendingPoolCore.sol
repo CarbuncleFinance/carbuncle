@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
-import { Ownable } from "lib/openzeppelin-contracts/contracts/access/Ownable.sol";
-import { IERC20 } from "lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
+import { Ownable } from 'lib/openzeppelin-contracts/contracts/access/Ownable.sol';
+import { IERC20 } from 'lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol';
 
 contract LendingPoolCore is Ownable {
   address public constant XRP_ADDRESS = address(0);
@@ -25,12 +25,12 @@ contract LendingPoolCore is Ownable {
   event AddressRemovedFromWhitelist(address indexed account);
 
   modifier validToken(address _token) {
-    require(_token != XRP_ADDRESS, "Invalid token");
+    require(_token != XRP_ADDRESS, 'Invalid token');
     _;
   }
 
   modifier onlyWhitelisted() {
-    require(isWhitelisted[msg.sender] || msg.sender == owner(), "Caller is not whitelisted");
+    require(isWhitelisted[msg.sender] || msg.sender == owner(), 'Caller is not whitelisted');
     _;
   }
 
@@ -58,7 +58,7 @@ contract LendingPoolCore is Ownable {
    * @param _address The address to add to the whitelist
    */
   function addToWhitelist(address _address) external onlyOwner {
-    require(_address != address(0), "Invalid address");
+    require(_address != address(0), 'Invalid address');
     isWhitelisted[_address] = true;
     emit AddressWhitelisted(_address);
   }
@@ -68,8 +68,8 @@ contract LendingPoolCore is Ownable {
    * @param _address The address to remove from the whitelist
    */
   function removeFromWhitelist(address _address) external onlyOwner {
-    require(isWhitelisted[_address], "Address is not whitelisted");
-    require(_address != owner(), "Cannot remove owner from whitelist");
+    require(isWhitelisted[_address], 'Address is not whitelisted');
+    require(_address != owner(), 'Cannot remove owner from whitelist');
     isWhitelisted[_address] = false;
     emit AddressRemovedFromWhitelist(_address);
   }
@@ -81,15 +81,15 @@ contract LendingPoolCore is Ownable {
    * @param _amount The amount of tokens to transfer
    */
   function transferToken(address _token, address _to, uint256 _amount) external validToken(_token) payable onlyWhitelisted {
-    require(_amount > 0, "Amount must be greater than 0");
+    require(_amount > 0, 'Amount must be greater than 0');
     ReserveData storage reserve = reserves[_token];
-    require(reserve.totalLiquidity >= _amount, "Insufficient liquidity");
+    require(reserve.totalLiquidity >= _amount, 'Insufficient liquidity');
 
     reserve.totalLiquidity -= _amount;
 
     if (_token == XRP_ADDRESS) {
-      (bool success, ) = _to.call{ value: _amount }("");
-      require(success, "Transfer failed");
+      (bool success, ) = _to.call{ value: _amount }('');
+      require(success, 'Transfer failed');
     } else {
       IERC20(_token).transfer(_to, _amount);
     }
@@ -103,12 +103,12 @@ contract LendingPoolCore is Ownable {
    * @param _amount The amount of tokens to transfer
    */
   function transferTokenFrom(address _token, address _from, address _to, uint256 _amount) external validToken(_token) payable onlyWhitelisted {
-    require(_amount > 0, "Amount must be greater than 0");
+    require(_amount > 0, 'Amount must be greater than 0');
 
     if (_token == XRP_ADDRESS) {
-      require(msg.value == _amount, "Invalid amount");
+      require(msg.value == _amount, 'Invalid amount');
     } else {
-      require(msg.value == 0, "XRP transfer not allowed");
+      require(msg.value == 0, 'XRP transfer not allowed');
       IERC20(_token).transferFrom(_from, _to, _amount);
     }
 
@@ -123,14 +123,14 @@ contract LendingPoolCore is Ownable {
    * @param _from The address to deposit from
    */
   function deposit(address _token, uint256 _amount, address _from) external payable validToken(_token) onlyWhitelisted {
-        require(_amount > 0, "Amount must be > 0");
+        require(_amount > 0, 'Amount must be > 0');
         
         ReserveData storage reserve = reserves[_token];
 
         if (_token == XRP_ADDRESS) {
-            require(msg.value == _amount, "XRP amount mismatch");
+            require(msg.value == _amount, 'XRP amount mismatch');
         } else {
-            require(msg.value == 0, "XRP not accepted for token deposits");
+            require(msg.value == 0, 'XRP not accepted for token deposits');
             IERC20(_token).transferFrom(_from, address(this), _amount);
         }
 
@@ -149,14 +149,14 @@ contract LendingPoolCore is Ownable {
         ReserveData storage reserve = reserves[_token];
         uint256 userBalance = reserve.userDeposits[tx.origin];
 
-        require(_amount > 0 && _amount <= userBalance, "Invalid amount");
+        require(_amount > 0 && _amount <= userBalance, 'Invalid amount');
 
         reserve.totalLiquidity -= _amount;
         reserve.userDeposits[tx.origin] -= _amount;
 
         if (_token == XRP_ADDRESS) {
-            (bool success, ) = tx.origin.call{value: _amount}("");
-            require(success, "XRP transfer failed");
+            (bool success, ) = tx.origin.call{value: _amount}('');
+            require(success, 'XRP transfer failed');
         } else {
             IERC20(_token).transfer(tx.origin, _amount);
         }
@@ -190,7 +190,7 @@ contract LendingPoolCore is Ownable {
      */
     function reduceUserDeposit(address _token, address _user, uint256 _amount) external validToken(_token) onlyWhitelisted {
         ReserveData storage reserve = reserves[_token];
-        require(reserve.userDeposits[_user] >= _amount, "Insufficient deposit");
+        require(reserve.userDeposits[_user] >= _amount, 'Insufficient deposit');
         
         reserve.totalLiquidity -= _amount;
         reserve.userDeposits[_user] -= _amount;

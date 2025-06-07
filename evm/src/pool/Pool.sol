@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
-import { LendingPoolCore } from "./pool/LendingPoolCore.sol";
-import { MockPriceOracle } from "./pool/PriceOracle.sol";
+import { LendingPoolCore } from './LendingPoolCore.sol';
+import { MockPriceOracle } from './PriceOracle.sol';
 
-contract LendingPool {
+contract Pool {
   LendingPoolCore public core;
   MockPriceOracle public oracle;
 
@@ -28,7 +28,7 @@ contract LendingPool {
   );
 
    modifier validToken(address _token) {
-    require(_token == core.XRP_ADDRESS() || _token == core.cbxToken(), "Invalid token");
+    require(_token == core.XRP_ADDRESS() || _token == core.cbxToken(), 'Invalid token');
     _;
   }
 
@@ -43,9 +43,9 @@ contract LendingPool {
 
     function validateXrpAmount(address _token, uint256 _amount) internal view {
       if (_token == core.XRP_ADDRESS()) {
-        require(msg.value == _amount, "XRP amount mismatch");
+        require(msg.value == _amount, 'XRP amount mismatch');
       } else {
-        require(msg.value == 0, "XRP not accepted for token operations");
+        require(msg.value == 0, 'XRP not accepted for token operations');
       }
   }
 
@@ -68,7 +68,7 @@ contract LendingPool {
       uint256 newBorrow = userBorrows[msg.sender][_token] + _amount;
       uint256 newBorrowValue = (newBorrow * borrowPrice) / 1e18;
       
-      require(newBorrowValue <= maxBorrow, "Exceeds collateral factor");
+      require(newBorrowValue <= maxBorrow, 'Exceeds collateral factor');
       
       userBorrows[msg.sender][_token] = newBorrow;
       core.transferToken(_token, msg.sender, _amount);
@@ -77,7 +77,7 @@ contract LendingPool {
     }
 
     function repay(address _token, uint256 _amount) external payable validToken(_token) {
-      require(userBorrows[msg.sender][_token] >= _amount, "Too much");
+      require(userBorrows[msg.sender][_token] >= _amount, 'Too much');
       core.transferTokenFrom{value: msg.value}(_token, msg.sender, address(core), _amount);
       userBorrows[msg.sender][_token] -= _amount;
       emit Repay(msg.sender, _token, _amount);
@@ -94,7 +94,7 @@ contract LendingPool {
       uint256 collateralValue = (remaining * tokenPrice) / 1e18;
       uint256 borrowValue = (borrowed * borrowPrice) / 1e18;
       
-      require(collateralValue * COLLATERAL_FACTOR / 10000 >= borrowValue, "Would undercollateralize");
+      require(collateralValue * COLLATERAL_FACTOR / 10000 >= borrowValue, 'Would undercollateralize');
       
       core.withdraw(_token, _amount);
       emit Withdraw(msg.sender, _token, _amount);
@@ -117,10 +117,10 @@ contract LendingPool {
     }
 
     function liquidate(address _user, address _token, uint256 _repayAmount) external payable validToken(_token) {
-      require(getHealthFactor(_user, _token) < 1e18, "Health factor ok");
+      require(getHealthFactor(_user, _token) < 1e18, 'Health factor ok');
       
       uint256 debt = userBorrows[_user][_token];
-      require(_repayAmount <= debt, "Too much");
+      require(_repayAmount <= debt, 'Too much');
       
       core.transferTokenFrom{value: msg.value}(_token, msg.sender, address(core), _repayAmount);
       

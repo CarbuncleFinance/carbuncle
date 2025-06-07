@@ -15,7 +15,7 @@ contract MockPriceOracle {
   /// @notice Get the price of a token (18 decimals)
   function getAssetPrice(address token) external view returns (uint256) {
     uint256 price = prices[token];
-    require(price > 0, "Price not set");
+    require(price > 0, 'Price not set');
     return price;
   }
 }

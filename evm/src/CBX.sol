@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
-import { ERC20 } from "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
-import { Ownable } from "lib/openzeppelin-contracts/contracts/access/Ownable.sol";
+import { ERC20 } from 'lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol';
+import { Ownable } from 'lib/openzeppelin-contracts/contracts/access/Ownable.sol';
 
 /**
 BOOTING... [CBX]
@@ -31,22 +31,22 @@ contract CBX is ERC20, Ownable {
   event AddressRemovedFromWhitelist(address indexed account);
 
   modifier onlyWhitelisted() {
-    require(whitelistedAddresses[msg.sender], "Caller is not whitelisted");
+    require(whitelistedAddresses[msg.sender], 'Caller is not whitelisted');
     _;
   }
 
-  constructor() ERC20("CBX", "CBX") Ownable(msg.sender) {
+  constructor() ERC20('CBX', 'CBX') Ownable(msg.sender) {
     _mint(msg.sender, 1000000000000000000000000000);
   }
 
   function addToWhitelist(address account) external onlyOwner {
-    require(!whitelistedAddresses[account], "Address already whitelisted");
+    require(!whitelistedAddresses[account], 'Address already whitelisted');
     whitelistedAddresses[account] = true;
     emit AddressWhitelisted(account);
   }
 
   function removeFromWhitelist(address account) external onlyOwner {
-    require(whitelistedAddresses[account], "Address not whitelisted");
+    require(whitelistedAddresses[account], 'Address not whitelisted');
     whitelistedAddresses[account] = false;
     emit AddressRemovedFromWhitelist(account);
   }

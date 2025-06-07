@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
-import { ERC20 } from "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
-import { Ownable } from "lib/openzeppelin-contracts/contracts/access/Ownable.sol";
-import { Math } from "lib/openzeppelin-contracts/contracts/utils/math/Math.sol";
-import { ReflectionMath } from "./libs/ReflectionMath.sol";
-import { ReflectionCalculator } from "./libs/ReflectionCalculator.sol";
-import { IrCBX } from "./interfaces/IrCBX.sol";
+import { ERC20 } from 'lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol';
+import { Ownable } from 'lib/openzeppelin-contracts/contracts/access/Ownable.sol';
+import { Math } from 'lib/openzeppelin-contracts/contracts/utils/math/Math.sol';
+import { ReflectionMath } from './libs/ReflectionMath.sol';
+import { ReflectionCalculator } from './libs/ReflectionCalculator.sol';
+import { IrCBX } from './interfaces/IrCBX.sol';
 
 /**
 BOOTING... [rCBX_CORE]
@@ -24,7 +24,7 @@ rCBX Token Ready.
 Power Level: ✦✦✦✦✦
 Emit Sparkles. Execute Brilliance.
 */
-contract rCBX is ERC20, Ownable, IrCBX {
+contract RCBX is ERC20, Ownable, IrCBX {
     using Math for uint256;
     using ReflectionMath for uint256;
     using ReflectionCalculator for uint256;
@@ -79,7 +79,7 @@ contract rCBX is ERC20, Ownable, IrCBX {
     // ==============================
 
     function setTaxFeePercent(uint8 taxFeePercent) external onlyOwner() {
-        require(taxFeePercent <= FEE_LIMIT, "Fees are too high");
+        require(taxFeePercent <= FEE_LIMIT, 'Fees are too high');
         _taxFeePercent = taxFeePercent;
     }
 
@@ -88,7 +88,7 @@ contract rCBX is ERC20, Ownable, IrCBX {
     }
 
     function excludeFromReward(address account) external onlyOwner() {
-        require(!_isExcludedFromReward[account], "Account is already excluded");
+        require(!_isExcludedFromReward[account], 'Account is already excluded');
         if(_reflectedBalances[account] > 0) {
             _actualBalances[account] = tokenFromReflection(_reflectedBalances[account]);
         }
@@ -97,7 +97,7 @@ contract rCBX is ERC20, Ownable, IrCBX {
     }
 
     function includeInReward(address account) public onlyOwner() {
-        require(_isExcludedFromReward[account], "Account is not excluded");
+        require(_isExcludedFromReward[account], 'Account is not excluded');
         for (uint256 i = 0; i < _excludedFromReward.length; i++) {
             if (_excludedFromReward[i] == account) {
                 _excludedFromReward[i] = _excludedFromReward[_excludedFromReward.length - 1];
@@ -136,7 +136,7 @@ contract rCBX is ERC20, Ownable, IrCBX {
 
     function deliver(uint256 tAmount) public {
         address sender = _msgSender();
-        require(!_isExcludedFromReward[sender], "Excluded addresses cannot call this function");
+        require(!_isExcludedFromReward[sender], 'Excluded addresses cannot call this function');
 
         (uint256 rAmount,,,,) = _getValues(tAmount);
 
@@ -150,13 +150,13 @@ contract rCBX is ERC20, Ownable, IrCBX {
     }
 
     function tokenFromReflection(uint256 rAmount) public view returns(uint256) {
-        require(rAmount <= _reflectedSupply, "Amount must be less than total reflections");
+        require(rAmount <= _reflectedSupply, 'Amount must be less than total reflections');
         uint256 currentRate =  _getRate();
         return rAmount / currentRate;
     }
 
     function reflectionFromToken(uint256 tAmount, bool deductTransferFee) public view returns(uint256) {
-        require(tAmount <= _totalSupply, "Amount must be less than supply");
+        require(tAmount <= _totalSupply, 'Amount must be less than supply');
 
         if (!deductTransferFee) {
             (uint256 rAmount,,,,) = _getValues(tAmount);
@@ -191,16 +191,16 @@ contract rCBX is ERC20, Ownable, IrCBX {
         // ゼロアドレスチェック
         if (from == address(0)) {
             // ミント時は特別な処理
-            require(to != address(0), "ERC20: mint to the zero address");
+            require(to != address(0), 'ERC20: mint to the zero address');
         } else {
             // 通常の転送時
-            require(to != address(0), "ERC20: transfer to the zero address");
+            require(to != address(0), 'ERC20: transfer to the zero address');
         }
         
-        require(amount > 0, "Transfer amount must be greater than zero");
+        require(amount > 0, 'Transfer amount must be greater than zero');
 
         if (from != owner() && to != owner()) {
-            require(amount <= _maxTxAmount, "Transfer amount exceeds the maxTxAmount.");
+            require(amount <= _maxTxAmount, 'Transfer amount exceeds the maxTxAmount.');
         }
 
         uint256 contractTokenBalance = balanceOf(address(this));
