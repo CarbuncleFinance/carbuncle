@@ -20,6 +20,7 @@ export enum AppErrorCode {
   WALLET_CONNECTION_FAILED = 'walletConnectionFailed',
   WALLET_BALANCE_FETCH_FAILED = 'walletBalanceFetchFailed',
   WALLET_TRANSACTION_FAILED = 'walletTransactionFailed',
+  WALLET_ACCOUNT_INFO_FETCH_FAILED = 'walletAccountInfoFetchFailed',
 
   // Bridge Errors
   BRIDGE_TRANSACTION_FAILED = 'bridgeTransactionFailed',

@@ -20,6 +20,15 @@ export const stringToHex = (s: string): string => {
 }
 
 /**
+ * Convert a hex string to a string
+ * @param s - The hex string to convert
+ * @returns The string
+ */
+export const hexToString = (s: string): string => {
+  return Buffer.from(s, 'hex').toString('utf8')
+}
+
+/**
  * Convert an address to a 32-byte string
  * @param address - The address to convert
  * @returns The 32-byte string

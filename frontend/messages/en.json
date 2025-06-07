@@ -52,6 +52,10 @@
       "label": "Protocol"
     }
   },
+  "Notifications": {
+    "connectedToWallet": "Connected to wallet",
+    "failedToConnectToWallet": "Failed to connect to wallet"
+  },
   "bridge": {
     "steps": {
       "chain": {
