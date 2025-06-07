@@ -1,3 +1,4 @@
+import { useConnect, useAccount, useDisconnect } from 'wagmi'
 import { useErrorHandler } from '@/hooks/useErrorHandler'
 import { useWalletStore } from '@/stores/wallet'
 import { useDatabase } from '@/hooks/useDatabase'
@@ -8,6 +9,11 @@ export function useWalletConnect() {
   const db = useDatabase()
   const { createError } = useErrorHandler()
   const { setWallet, clearWallet } = useWalletStore()
+
+  const { connect: connectEvmWagmi, connectors } = useConnect()
+  const { disconnect: disconnectEvmWagmi } = useDisconnect()
+
+  const { isConnected: isConnectedEvm, address: addressEvm } = useAccount()
 
   const connect = async (walletType: WalletType) => {
     try {
@@ -33,12 +39,31 @@ export function useWalletConnect() {
     }
   }
 
+  const connectEvm = async () => {
+    if (!connectors[0]) return
+    try {
+      await connectEvmWagmi({ connector: connectors[0] })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const disconnectEvm = async () => {
+    await disconnectEvmWagmi()
+  }
+
   const disconnect = () => {
     clearWallet()
   }
 
   return {
     connect,
-    disconnect
+    connectEvm,
+    disconnect,
+    disconnectEvm,
+    linkedWallet: {
+      isConnected: isConnectedEvm || false,
+      address: addressEvm || ''
+    }
   }
 }

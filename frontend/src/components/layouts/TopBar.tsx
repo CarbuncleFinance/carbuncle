@@ -10,7 +10,6 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { APP_NAME } from '@/constants/app'
 import LangSwitchButton from '@/components/ui/buttons/LangSwitchButton'
-import TopBarChainModeText from '@/components/layouts/TopBarChainModeText'
 import TopBarWalletMenu from '@/components/layouts/TopBarWalletMenu'
 import TopBarWalletMenuButton from '@/components/layouts/TopBarWalletMenuButton'
 import WalletSelectDialog from '@/components/ui/dialogs/WalletSelectDialog'
@@ -99,7 +98,6 @@ export default function TopBar() {
           ))}
         </Box>
         <Box sx={{ display: 'flex', gap: 1 }}>
-          {isConnected && <TopBarChainModeText />}
           <LangSwitchButton />
           {isConnected && (
             <>
