@@ -35,7 +35,7 @@ export default function BridgeStepRecipient({
   onBack,
   onNext
 }: BridgeStepRecipientProps) {
-  const t = useTranslations('bridge.steps.recipient')
+  const t = useTranslations('Bridge.steps.recipient')
 
   const { isConnected, address } = useAccount()
 

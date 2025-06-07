@@ -16,7 +16,7 @@ import { useBridgeForm } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm
 import { useWallet } from '@/hooks/useWallet'
 
 export default function BridgeStepper() {
-  const tSteps = useTranslations('bridge.steps')
+  const tSteps = useTranslations('Bridge.steps')
 
   const { address } = useWallet()
 

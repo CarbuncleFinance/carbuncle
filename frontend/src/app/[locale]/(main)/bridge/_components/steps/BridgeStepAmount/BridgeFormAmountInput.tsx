@@ -34,7 +34,7 @@ export default function BridgeFormAmountInput({
   schema,
   symbol = 'XRP'
 }: BridgeFormAmountInputProps) {
-  const t = useTranslations('bridge.steps.amount')
+  const t = useTranslations('Bridge.steps.amount')
   const tErrors = useTranslations('Errors')
 
   return (

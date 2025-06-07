@@ -56,7 +56,7 @@
     "connectedToWallet": "지갑에 연결되었습니다",
     "failedToConnectToWallet": "지갑 연결에 실패했습니다"
   },
-  "bridge": {
+  "Bridge": {
     "steps": {
       "chain": {
         "title": "체인 선택",

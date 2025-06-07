@@ -56,7 +56,7 @@
     "connectedToWallet": "Connected to wallet",
     "failedToConnectToWallet": "Failed to connect to wallet"
   },
-  "bridge": {
+  "Bridge": {
     "steps": {
       "chain": {
         "title": "Chain Selection",

@@ -36,12 +36,12 @@ export default function BridgeStepConfirmation({
   onExecute,
   isLoading = false
 }: BridgeStepConfirmationProps) {
-  const t = useTranslations('bridge.steps.confirmation')
+  const t = useTranslations('Bridge.steps.confirmation')
 
   return (
     <BridgeStepContainer>
       <BridgeStepDescription
-        namespace="bridge.steps.confirmation"
+        namespace="Bridge.steps.confirmation"
         translationKey="description"
       />
       <Box display="flex" flexDirection="column" gap={2}>

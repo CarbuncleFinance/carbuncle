@@ -56,7 +56,7 @@
     "connectedToWallet": "ウォレットに接続しました",
     "failedToConnectToWallet": "ウォレットへの接続に失敗しました"
   },
-  "bridge": {
+  "Bridge": {
     "steps": {
       "chain": {
         "title": "チェーンの選択",

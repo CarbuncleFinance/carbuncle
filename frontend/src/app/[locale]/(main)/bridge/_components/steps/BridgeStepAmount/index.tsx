@@ -40,7 +40,7 @@ export default function BridgeStepAmount({
   onNext
 }: BridgeStepAmountProps) {
   const { address, isConnected } = useWallet()
-  const t = useTranslations('bridge.steps.amount')
+  const t = useTranslations('Bridge.steps.amount')
 
   const {
     data: balance,

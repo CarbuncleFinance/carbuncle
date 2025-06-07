@@ -38,7 +38,7 @@ export default function BridgeStepChain({
   onBack,
   onNext
 }: BridgeStepChainProps) {
-  const t = useTranslations('bridge.steps.chain')
+  const t = useTranslations('Bridge.steps.chain')
 
   return (
     <BridgeStepContainer>
