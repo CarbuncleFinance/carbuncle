@@ -15,7 +15,7 @@ export default function WalletConnectEvnButton() {
     try {
       await connect({ connector: connectors[0] })
     } catch (error) {
-      console.error('Failed to connect wallet:', error)
+      console.error(error)
     }
   }, [connect, connectors])
 

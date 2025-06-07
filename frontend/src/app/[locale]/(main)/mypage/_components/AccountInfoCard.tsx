@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import { useTranslations } from 'next-intl'
 import { useWallet } from '@/hooks/useWallet'
 
 type AccountInfoCardProps = {
@@ -14,6 +15,7 @@ type AccountInfoCardProps = {
 
 export default function AccountInfoCard({ size }: AccountInfoCardProps) {
   const { address } = useWallet()
+  const t = useTranslations('MyPage.accountInfo')
 
   return (
     <Grid size={size}>
@@ -24,22 +26,22 @@ export default function AccountInfoCard({ size }: AccountInfoCardProps) {
               variant="h6"
               sx={{ fontWeight: 'bold', color: 'text.primary' }}
             >
-              アカウント情報
+              {t('title')}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              接続中のアカウント情報です。
+              {t('description')}
             </Typography>
           </Box>
           <Box display="flex" flexDirection="column" gap={3}>
             <TextField
-              label="チェーン"
+              label={t('chainLabel')}
               variant="outlined"
               value={'XRP Ledger'}
               disabled
               fullWidth
             />
             <TextField
-              label="アドレス"
+              label={t('addressLabel')}
               variant="outlined"
               value={address}
               disabled

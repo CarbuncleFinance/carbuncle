@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import { useTranslations } from 'next-intl'
 import WalletConnectEvnButton from '@/components/ui/buttons/WalletConnectEvnButton'
 
 type LinkedAccountInfoCardProps = {
@@ -17,6 +18,7 @@ export default function LinkedAccountInfoCard({
   size
 }: LinkedAccountInfoCardProps) {
   const { isConnected, address } = useAccount()
+  const t = useTranslations('MyPage.linkedAccountInfo')
 
   return (
     <Grid size={size}>
@@ -27,16 +29,16 @@ export default function LinkedAccountInfoCard({
               variant="h6"
               sx={{ fontWeight: 'bold', color: 'text.primary' }}
             >
-              連携アカウント情報
+              {t('title')}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              連携したアカウント情報です。
+              {t('description')}
             </Typography>
           </Box>
           <Box display="flex" flexDirection="column" gap={3}>
             {isConnected && (
               <TextField
-                label="チェーン"
+                label={t('chainLabel')}
                 variant="outlined"
                 value="EVM"
                 disabled
@@ -45,7 +47,7 @@ export default function LinkedAccountInfoCard({
             )}
             {isConnected && (
               <TextField
-                label="アドレス"
+                label={t('addressLabel')}
                 variant="outlined"
                 value={address}
                 disabled

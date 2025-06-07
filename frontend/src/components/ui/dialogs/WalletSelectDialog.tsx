@@ -31,6 +31,7 @@ export default function WalletSelectDialog({
   onClose
 }: WalletSelectDialogProps) {
   const t = useTranslations('Dialogs.walletSelectDialog')
+  const tWallet = useTranslations('WalletDialog')
 
   const { showNotification } = useNotification()
 
@@ -41,10 +42,16 @@ export default function WalletSelectDialog({
     try {
       await connect(walletType)
 
-      showNotification('Connected to wallet', NotificationVariant.SUCCESS)
+      showNotification(
+        tWallet('connectedToWallet'),
+        NotificationVariant.SUCCESS
+      )
     } catch (error) {
       console.error(error)
-      showNotification('Failed to connect to wallet', NotificationVariant.ERROR)
+      showNotification(
+        tWallet('failedToConnectToWallet'),
+        NotificationVariant.ERROR
+      )
     } finally {
       onClose()
     }
@@ -132,14 +139,14 @@ export default function WalletSelectDialog({
               variant="body2"
               sx={{ textAlign: 'center', color: 'text.secondary' }}
             >
-              Choosing to connect indicates that you have accepted
+              {tWallet('connectMessage')}
             </Typography>
             <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center' }}>
               <Button variant="text" size="small" sx={{ px: 1 }}>
-                Terms of Service
+                {tWallet('termsOfService')}
               </Button>
               <Button variant="text" size="small" sx={{ px: 1 }}>
-                Privacy Policy
+                {tWallet('privacyPolicy')}
               </Button>
             </Box>
           </Box>

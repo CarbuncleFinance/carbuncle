@@ -100,6 +100,47 @@
     "BRIDGE_VALIDATION_ADDRESS_REQUIRED": "목적지 주소를 입력해주세요.",
     "BRIDGE_VALIDATION_ADDRESS_INVALID": "0x로 시작하는 40자리 16진수를 입력해주세요.",
     "BRIDGE_VALIDATION_AMOUNT_REQUIRED": "송금 금액을 입력해주세요.",
-    "BRIDGE_VALIDATION_AMOUNT_INVALID": "유효한 숫자를 입력해주세요."
+    "BRIDGE_VALIDATION_AMOUNT_INVALID": "유효한 숫자를 입력해주세요.",
+    "BRIDGE_VALIDATION_AMOUNT_MUST_BE_POSITIVE": "양수를 입력해주세요."
+  },
+  "MyPage": {
+    "accountInfo": {
+      "title": "계정 정보",
+      "description": "연결된 계정의 정보입니다.",
+      "chainLabel": "체인",
+      "addressLabel": "주소"
+    },
+    "linkedAccountInfo": {
+      "title": "연결된 계정 정보",
+      "description": "연결된 계정의 정보입니다.",
+      "chainLabel": "체인",
+      "addressLabel": "주소"
+    },
+    "balanceInfo": {
+      "title": "잔액 정보",
+      "description": "연결된 계정의 잔액 정보입니다."
+    }
+  },
+  "Home": {
+    "connectWalletMessage": "먼저 지갑을 연결하여 차세대 경험을 시작하세요✨",
+    "accountInfoDescription": "연결된 계정 정보를 표시하고 있습니다.",
+    "notSet": "설정되지 않음"
+  },
+  "History": {
+    "table": {
+      "date": "날짜",
+      "type": "유형",
+      "txHash": "트랜잭션 해시",
+      "bridge": "브리지",
+      "xrplExplorer": "XRPL Explorer",
+      "axelarExplorer": "AXELAR Explorer"
+    }
+  },
+  "WalletDialog": {
+    "connectMessage": "연결을 선택하면 다음에 동의한 것으로 간주됩니다",
+    "termsOfService": "이용약관",
+    "privacyPolicy": "개인정보처리방침",
+    "connectedToWallet": "지갑에 연결되었습니다",
+    "failedToConnectToWallet": "지갑 연결에 실패했습니다"
   }
 }
