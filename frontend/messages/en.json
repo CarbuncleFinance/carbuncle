@@ -141,6 +141,8 @@
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy Policy",
     "connectedToWallet": "Connected to wallet",
-    "failedToConnectToWallet": "Failed to connect to wallet"
+    "failedToConnectToWallet": "Failed to connect to wallet",
+    "connect": "Connect Wallet",
+    "disconnect": "Disconnect"
   }
 }

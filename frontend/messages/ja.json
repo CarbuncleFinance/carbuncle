@@ -141,6 +141,8 @@
     "termsOfService": "利用規約",
     "privacyPolicy": "プライバシーポリシー",
     "connectedToWallet": "ウォレットに接続しました",
-    "failedToConnectToWallet": "ウォレットへの接続に失敗しました"
+    "failedToConnectToWallet": "ウォレットへの接続に失敗しました",
+    "connect": "ウォレット接続",
+    "disconnect": "切断"
   }
 }

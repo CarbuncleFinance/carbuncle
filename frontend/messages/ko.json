@@ -141,6 +141,8 @@
     "termsOfService": "이용약관",
     "privacyPolicy": "개인정보처리방침",
     "connectedToWallet": "지갑에 연결되었습니다",
-    "failedToConnectToWallet": "지갑 연결에 실패했습니다"
+    "failedToConnectToWallet": "지갑 연결에 실패했습니다",
+    "connect": "지갑 연결",
+    "disconnect": "연결 해제"
   }
 }
