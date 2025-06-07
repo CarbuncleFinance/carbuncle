@@ -13,7 +13,7 @@ type AccountInfoCardProps = {
 }
 
 export default function AccountInfoCard({ size }: AccountInfoCardProps) {
-  const { address, isXRPL } = useWallet()
+  const { address } = useWallet()
 
   return (
     <Grid size={size}>
@@ -34,7 +34,7 @@ export default function AccountInfoCard({ size }: AccountInfoCardProps) {
             <TextField
               label="チェーン"
               variant="outlined"
-              value={isXRPL ? 'XRP Ledger' : 'EVM'}
+              value={'XRP Ledger'}
               disabled
               fullWidth
             />

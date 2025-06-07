@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
-import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import Box from '@mui/material/Box'
@@ -14,9 +13,19 @@ import LangSwitchButton from '@/components/ui/buttons/LangSwitchButton'
 import TopBarChainModeText from '@/components/layouts/TopBarChainModeText'
 import TopBarWalletMenu from '@/components/layouts/TopBarWalletMenu'
 import TopBarWalletMenuButton from '@/components/layouts/TopBarWalletMenuButton'
-import WalletConnectButton from '@/components/ui/buttons/WalletConnectButton'
 import WalletSelectDialog from '@/components/ui/dialogs/WalletSelectDialog'
 import { useWallet } from '@/hooks/useWallet'
+
+const menus = [
+  {
+    href: '/bridge',
+    label: 'bridge'
+  },
+  {
+    href: '/dev',
+    label: 'dev'
+  }
+]
 
 const AppBar = dynamic(
   () => import('@mui/material/AppBar').then((mod) => mod.default),
@@ -25,9 +34,6 @@ const AppBar = dynamic(
 
 export default function TopBar() {
   const router = useRouter()
-
-  const pathname = usePathname()
-  const isHome = pathname.includes('/home')
 
   const t = useTranslations('Navigation')
 
@@ -78,63 +84,42 @@ export default function TopBar() {
   }
 
   return (
-    <>
-      {!isHome && (
-        <AppBar
-          position="fixed"
-          elevation={0}
-          sx={{ backgroundColor: '#000000' }}
+    <AppBar position="fixed" elevation={0}>
+      <Toolbar>
+        <Typography
+          variant="h6"
+          sx={{ mr: 2, fontWeight: '200', cursor: 'pointer' }}
+          onClick={() => handleGoTo('/')}
         >
-          <Toolbar>
-            <Typography
-              variant="h6"
-              sx={{ mr: 2, cursor: 'pointer' }}
-              onClick={() => handleGoTo('/')}
-            >
-              {APP_NAME}
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: 'flex', gap: 1 }}>
-              {[
-                {
-                  href: '/bridge',
-                  label: t('bridge')
-                },
-                {
-                  href: '/dev',
-                  label: t('dev')
-                }
-              ].map(({ href, label }) => (
-                <LinkButton key={href} href={href} label={label} />
-              ))}
-            </Box>
-            <Box sx={{ display: 'flex', gap: 1 }}>
-              {isConnected && <TopBarChainModeText />}
-              <LangSwitchButton />
-              {isConnected && (
-                <>
-                  <TopBarWalletMenuButton onClick={handleClick} />
-                  <TopBarWalletMenu
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                  />
-                </>
-              )}
-              {!isConnected && (
-                <>
-                  <WalletConnectButton
-                    onClick={(e) => handleOpenWalletSelectDialog(e)}
-                  />
-                  <WalletSelectDialog
-                    open={openWalletSelectDialog}
-                    onClose={handleCloseWalletSelectDialog}
-                  />
-                </>
-              )}
-            </Box>
-          </Toolbar>
-        </AppBar>
-      )}
-    </>
+          {APP_NAME}
+        </Typography>
+        <Box sx={{ flexGrow: 1, display: 'flex', gap: 1 }}>
+          {menus.map(({ href, label }) => (
+            <LinkButton key={href} href={href} label={label} />
+          ))}
+        </Box>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          {isConnected && <TopBarChainModeText />}
+          <LangSwitchButton />
+          {isConnected && (
+            <>
+              <TopBarWalletMenuButton onClick={handleClick} />
+              <TopBarWalletMenu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+              />
+            </>
+          )}
+          {!isConnected && (
+            <WalletSelectDialog
+              open={openWalletSelectDialog}
+              onOpen={(e) => handleOpenWalletSelectDialog(e)}
+              onClose={handleCloseWalletSelectDialog}
+            />
+          )}
+        </Box>
+      </Toolbar>
+    </AppBar>
   )
 }

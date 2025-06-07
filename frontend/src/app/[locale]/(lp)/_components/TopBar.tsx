@@ -20,7 +20,7 @@ export default function TopBar() {
   return (
     <AppBar position="fixed" elevation={0} color="transparent">
       <Toolbar>
-        <Typography variant="h6" sx={{ mr: 2 }}>
+        <Typography variant="h6" sx={{ mr: 2, fontWeight: '200' }}>
           {APP_NAME}
         </Typography>
         <Box

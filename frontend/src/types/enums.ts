@@ -86,6 +86,8 @@ export type ChainNameType = (typeof ChainNameTypes)[keyof typeof ChainNameTypes]
 /** Wallet Types */
 export enum WalletTypes {
   GEM_WALLET = 'gem-wallet',
+  XUMM = 'xumm',
+  CROSSMARK = 'crossmark',
   METAMASK = 'metamask'
 }
 
@@ -93,5 +95,7 @@ export type WalletType = (typeof WalletTypes)[keyof typeof WalletTypes]
 
 export const WalletTypeNames: Record<WalletType, string> = {
   [WalletTypes.GEM_WALLET]: 'GemWallet',
+  [WalletTypes.XUMM]: 'Xaman',
+  [WalletTypes.CROSSMARK]: 'CROSSMARK',
   [WalletTypes.METAMASK]: 'MetaMask'
 }

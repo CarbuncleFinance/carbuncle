@@ -1,51 +1,34 @@
-import { ChainProtocol } from '@/domains/blockchain/types'
-import { WalletFactory } from '@/libs/adapters/walletFactory'
 import { useErrorHandler } from '@/hooks/useErrorHandler'
-import { useWalletStore, setWalletWithChainProtocol } from '@/stores/wallet'
+import { useWalletStore } from '@/stores/wallet'
 import { useDatabase } from '@/hooks/useDatabase'
-import { AppErrorCode, WalletType } from '@/types'
+import { WalletFactory } from '@/libs/wallet/walletFactory'
+import { AppErrorCode, ChainTypes, type WalletType } from '@/types'
 
 export function useWalletConnect() {
   const db = useDatabase()
   const { createError } = useErrorHandler()
   const { setWallet, clearWallet } = useWalletStore()
 
-  const connect = (walletType: WalletType) => {
+  const connect = async (walletType: WalletType) => {
     try {
-      const adapter = WalletFactory.createAdapterForWalletType(walletType)
-    } catch (error) {
-      throw error
-    }
-  }
-
-  const connectWithChainProtocol = async (
-    chainProtocol: ChainProtocol,
-    walletType: WalletType
-  ) => {
-    try {
-      const adapter = WalletFactory.createAdapterForWalletType(walletType)
-
-      const installed = await adapter.isInstalled()
-      if (!installed) {
-        throw createError(AppErrorCode.WALLET_NOT_INSTALLED)
-      }
+      const adapter = WalletFactory.createAdapter(walletType)
 
       const address = await adapter.connect()
       if (!address) {
         throw createError(AppErrorCode.WALLET_CONNECTION_FAILED)
       }
 
-      const walletWithChain = setWalletWithChainProtocol(chainProtocol, address)
-      setWallet(walletWithChain)
-
       const wallet = await db.wallet.getOrCreate({ address })
       if (!wallet) {
         throw createError(AppErrorCode.DATABASE_ERROR)
       }
 
-      console.log(wallet)
+      setWallet({
+        address,
+        // TODO: Get the chain type from the wallet
+        chainType: ChainTypes.XRPL
+      })
     } catch (error) {
-      clearWallet()
       throw error
     }
   }
@@ -55,7 +38,6 @@ export function useWalletConnect() {
   }
 
   return {
-    connectWithChainProtocol,
     connect,
     disconnect
   }
