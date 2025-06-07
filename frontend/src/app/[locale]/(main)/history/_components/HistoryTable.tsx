@@ -10,6 +10,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
+import { useTranslations } from 'next-intl'
 import { useHistory } from '@/hooks/useHistory'
 import { useWallet } from '@/hooks/useWallet'
 import { shortenString } from '@/utils/string'
@@ -18,6 +19,7 @@ import { AXELAR_SCAN_URL, XRPL_SCAN_URL } from '@/constants/app'
 export default function HistoryTable() {
   const { address } = useWallet()
   const { data, handleGetData } = useHistory()
+  const t = useTranslations('History.table')
 
   useEffect(() => {
     if (address) {
@@ -39,9 +41,9 @@ export default function HistoryTable() {
       <Table aria-label="history-table">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Type</TableCell>
-            <TableCell>Tx Hash</TableCell>
+            <TableCell>{t('date')}</TableCell>
+            <TableCell>{t('type')}</TableCell>
+            <TableCell>{t('txHash')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -54,7 +56,7 @@ export default function HistoryTable() {
               </TableCell>
               <TableCell>
                 <Typography variant="body2" component="span">
-                  Bridge
+                  {t('bridge')}
                 </Typography>
               </TableCell>
               <TableCell>
@@ -77,14 +79,14 @@ export default function HistoryTable() {
                       size="small"
                       onClick={() => handleOpenInNewTab(row.tx_hash, 'xrpl')}
                     >
-                      XRPL Explorer
+                      {t('xrplExplorer')}
                     </Button>
                     <Button
                       variant="outlined"
                       size="small"
                       onClick={() => handleOpenInNewTab(row.tx_hash, 'axelar')}
                     >
-                      AXELAR Explorer
+                      {t('axelarExplorer')}
                     </Button>
                   </Box>
                 </Box>

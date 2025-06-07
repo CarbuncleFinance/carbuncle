@@ -3,11 +3,13 @@
 import { useConnect, useAccount, useDisconnect } from 'wagmi'
 import Button from '@mui/material/Button'
 import { useCallback } from 'react'
+import { useTranslations } from 'next-intl'
 
 export default function WalletConnectEvnButton() {
   const { connect, connectors } = useConnect()
   const { isConnected } = useAccount()
   const { disconnect } = useDisconnect()
+  const t = useTranslations('WalletDialog')
 
   const handleWalletConnect = useCallback(async () => {
     if (!connectors[0]) return
@@ -15,7 +17,7 @@ export default function WalletConnectEvnButton() {
     try {
       await connect({ connector: connectors[0] })
     } catch (error) {
-      console.error('Failed to connect wallet:', error)
+      console.error(error)
     }
   }, [connect, connectors])
 
@@ -32,7 +34,7 @@ export default function WalletConnectEvnButton() {
           onClick={handleDisconnect}
           disableElevation
         >
-          切断
+          {t('disconnect')}
         </Button>
       ) : (
         <Button
@@ -41,7 +43,7 @@ export default function WalletConnectEvnButton() {
           onClick={handleWalletConnect}
           disableElevation
         >
-          ウォレット接続
+          {t('connect')}
         </Button>
       )}
     </>

@@ -56,7 +56,7 @@
     "connectedToWallet": "Connected to wallet",
     "failedToConnectToWallet": "Failed to connect to wallet"
   },
-  "bridge": {
+  "Bridge": {
     "steps": {
       "chain": {
         "title": "Chain Selection",
@@ -100,6 +100,49 @@
     "BRIDGE_VALIDATION_ADDRESS_REQUIRED": "Please enter a destination address.",
     "BRIDGE_VALIDATION_ADDRESS_INVALID": "Please enter a valid address starting with 0x followed by 40 hexadecimal characters.",
     "BRIDGE_VALIDATION_AMOUNT_REQUIRED": "Please enter an amount.",
-    "BRIDGE_VALIDATION_AMOUNT_INVALID": "Please enter a valid number."
+    "BRIDGE_VALIDATION_AMOUNT_INVALID": "Please enter a valid number.",
+    "BRIDGE_VALIDATION_AMOUNT_MUST_BE_POSITIVE": "Please enter a positive amount."
+  },
+  "MyPage": {
+    "accountInfo": {
+      "title": "Account Information",
+      "description": "Information of the connected account.",
+      "chainLabel": "Chain",
+      "addressLabel": "Address"
+    },
+    "linkedAccountInfo": {
+      "title": "Linked Account Information",
+      "description": "Information of the linked account.",
+      "chainLabel": "Chain",
+      "addressLabel": "Address"
+    },
+    "balanceInfo": {
+      "title": "Balance Information",
+      "description": "Balance information of the connected account."
+    }
+  },
+  "Home": {
+    "connectWalletMessage": "First, connect your wallet to start the next-generation experience✨",
+    "accountInfoDescription": "Displaying connected account information.",
+    "notSet": "Not set"
+  },
+  "History": {
+    "table": {
+      "date": "Date",
+      "type": "Type",
+      "txHash": "Tx Hash",
+      "bridge": "Bridge",
+      "xrplExplorer": "XRPL Explorer",
+      "axelarExplorer": "AXELAR Explorer"
+    }
+  },
+  "WalletDialog": {
+    "connectMessage": "Choosing to connect indicates that you have accepted",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "connectedToWallet": "Connected to wallet",
+    "failedToConnectToWallet": "Failed to connect to wallet",
+    "connect": "Connect Wallet",
+    "disconnect": "Disconnect"
   }
 }
