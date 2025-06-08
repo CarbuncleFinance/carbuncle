@@ -1,9 +1,10 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { ChainType } from '@/types'
+import type { ChainType, WalletType } from '@/types'
 
 export type Wallet = {
   chainType: ChainType | null
+  walletType: WalletType | null
   address: string
 }
 
@@ -16,6 +17,7 @@ type WalletState = {
 
 export const initialWallet: Wallet = {
   chainType: null,
+  walletType: null,
   address: ''
 }
 

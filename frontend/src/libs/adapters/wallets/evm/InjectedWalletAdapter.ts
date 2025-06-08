@@ -50,4 +50,8 @@ export class InjectedWalletAdapter implements WalletAdapter {
   async sendBridgeTransaction(transaction: any): Promise<void> {
     console.log('sendBridgeTransaction', transaction)
   }
+
+  async sendTrustlineTransaction(transaction: any): Promise<void> {
+    console.log('sendTrustlineTransaction', transaction)
+  }
 }

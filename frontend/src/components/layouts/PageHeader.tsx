@@ -10,7 +10,7 @@ interface PageHeaderProps {
 export default function PageHeader({ title }: PageHeaderProps) {
   return (
     <Box mb={1}>
-      <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#fff' }}>
+      <Typography variant="h4" sx={{ fontWeight: '400' }}>
         {title}
       </Typography>
     </Box>

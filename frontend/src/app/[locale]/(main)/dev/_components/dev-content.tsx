@@ -1,15 +1,58 @@
 'use client'
 
+import { dropsToXrp } from 'xrpl'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import {
   isInstalled,
+  setAccount,
+  setTrustline,
+  type SetAccountRequest,
   type SendPaymentRequest,
+  type SetTrustlineRequest,
   sendPayment
 } from '@gemwallet/api'
 
 export default function DevContent() {
-  const handleClick = async () => {
+  const handleSetAccount = async () => {
+    try {
+      const { result: isInstalledResult } = await isInstalled()
+
+      if (!isInstalledResult) {
+        throw new Error('Wallet not installed')
+      }
+
+      const request: SetAccountRequest = {
+        setFlag: 8
+      }
+
+      const { result: setAccountResult } = await setAccount(request)
+
+      console.log('setAccountResult', setAccountResult)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleSetTrust = async () => {
+    try {
+      const response: SetTrustlineRequest = {
+        limitAmount: {
+          currency: 'XCB',
+          issuer: 'rN72avu22PqxSCRSzP4BRRHUCNodoeCnD5',
+          value: '1000000000000000000000'
+        }
+      }
+
+      const { result: setTrustlineResult } = await setTrustline(response)
+
+      console.log('setTrustlineResult', setTrustlineResult)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const handleFaucet = async () => {
     try {
       console.log('== handleClick ==')
       const installed = await isInstalled()
@@ -18,8 +61,12 @@ export default function DevContent() {
       }
 
       const transaction: SendPaymentRequest = {
-        amount: '1000000',
-        destination: 'rLWQskMM8EoPxaLsmuQxE5rYeP4uX7dhym'
+        amount: {
+          currency: 'XCB',
+          issuer: 'rN72avu22PqxSCRSzP4BRRHUCNodoeCnD5',
+          value: '100'
+        },
+        destination: 'rMX17FBE5svy7d8DMraRFHRcUUniH3Heqx'
       }
 
       const result = await sendPayment(transaction)
@@ -30,9 +77,30 @@ export default function DevContent() {
   }
 
   return (
-    <Box>
-      <Button variant="contained" color="primary" onClick={handleClick}>
-        Test
+    <Box sx={{ display: 'flex', gap: 2 }}>
+      <Button
+        variant="contained"
+        color="primary"
+        disableElevation
+        onClick={handleSetAccount}
+      >
+        Set Account
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        disableElevation
+        onClick={handleSetTrust}
+      >
+        Set Trust
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        disableElevation
+        onClick={handleFaucet}
+      >
+        Faucet
       </Button>
     </Box>
   )

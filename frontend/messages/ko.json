@@ -84,6 +84,14 @@
       "completion": "송금 완료"
     }
   },
+  "Faucet": {
+    "table": {
+      "asset": "자산",
+      "balance": "잔액",
+      "action": "액션",
+      "faucet": "Faucet"
+    }
+  },
   "Errors": {
     "walletNotInstalled": {
       "title": "지갑이 설치되지 않았습니다",

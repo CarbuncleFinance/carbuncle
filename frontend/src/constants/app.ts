@@ -17,3 +17,6 @@ export const XRPL_SCAN_URL = 'https://testnet.xrpl.org'
 export const CBX_CONTRACT = {
   address: '0x3d5f6b69bB3F8D6d44Eb4d3F3B6102C312Acc640'
 }
+
+export const XCB_CURRENCY = 'XCB'
+export const XCB_ISSUER = 'rN72avu22PqxSCRSzP4BRRHUCNodoeCnD5'

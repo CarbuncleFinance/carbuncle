@@ -18,11 +18,15 @@ import { useWallet } from '@/hooks/useWallet'
 const menus = [
   {
     href: '/bridge',
-    label: 'bridge'
+    label: 'Bridge'
+  },
+  {
+    href: '/faucet',
+    label: 'Faucet'
   },
   {
     href: '/dev',
-    label: 'dev'
+    label: 'Dev'
   }
 ]
 
@@ -74,7 +78,12 @@ export default function TopBar() {
       <Button
         variant="text"
         color="inherit"
-        sx={{ display: 'block' }}
+        sx={{
+          display: 'block',
+          fontWeight: '300',
+          textTransform: 'none',
+          fontSize: '14px'
+        }}
         onClick={() => handleGoTo(href)}
       >
         {label}
@@ -87,7 +96,7 @@ export default function TopBar() {
       <Toolbar>
         <Typography
           variant="h6"
-          sx={{ mr: 2, fontWeight: '200', cursor: 'pointer' }}
+          sx={{ mr: 4, fontWeight: '200', cursor: 'pointer' }}
           onClick={() => handleGoTo('/')}
         >
           {APP_NAME}

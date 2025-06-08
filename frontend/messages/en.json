@@ -84,6 +84,14 @@
       "completion": "Completion"
     }
   },
+  "Faucet": {
+    "table": {
+      "asset": "Asset",
+      "balance": "Wallet Balance",
+      "action": "Action",
+      "faucet": "Get Faucet"
+    }
+  },
   "Errors": {
     "walletNotInstalled": {
       "title": "Wallet is not installed",

@@ -3,6 +3,7 @@ import { type WalletType, WalletTypes } from '@/types'
 
 export interface WalletAdapter {
   connect(): Promise<string>
+  sendTrustlineTransaction(transaction: any): Promise<any>
 }
 
 export class WalletFactory {

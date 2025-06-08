@@ -2,7 +2,9 @@ import {
   isInstalled,
   getAddress,
   sendPayment,
-  type SendPaymentRequest
+  setTrustline,
+  type SendPaymentRequest,
+  type SetTrustlineRequest
 } from '@gemwallet/api'
 import { AppErrorCode } from '@/types/enums'
 import { WalletAdapter } from '@/libs/adapters/walletFactory'
@@ -59,6 +61,18 @@ export class GemWalletAdapter implements WalletAdapter {
     }
 
     const result = await sendPayment(transaction)
+    return result
+  }
+
+  async sendTrustlineTransaction(
+    transaction: SetTrustlineRequest
+  ): Promise<any> {
+    const installed = await this.isInstalled()
+    if (!installed) {
+      throw new Error(AppErrorCode.WALLET_NOT_INSTALLED)
+    }
+
+    const result = await setTrustline(transaction)
     return result
   }
 }

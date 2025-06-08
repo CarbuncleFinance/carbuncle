@@ -32,7 +32,8 @@ export function useWalletConnect() {
       setWallet({
         address,
         // TODO: Get the chain type from the wallet
-        chainType: ChainTypes.XRPL
+        chainType: ChainTypes.XRPL,
+        walletType
       })
     } catch (error) {
       throw error

@@ -16,7 +16,11 @@ export default function SectionHero() {
 
   const { isConnected, accountInfo } = useWallet()
 
-  const { connectEvm: handleConnectEvm, disconnectEvm, linkedWallet } = useWalletConnect()
+  const {
+    connectEvm: handleConnectEvm,
+    disconnectEvm,
+    linkedWallet
+  } = useWalletConnect()
 
   if (!isConnected) {
     return (
@@ -74,9 +78,7 @@ export default function SectionHero() {
             <Typography variant="body2" sx={{ mb: 1, color: 'text.secondary' }}>
               連携中のアカウント情報を表示しています。
             </Typography>
-            {!linkedWallet.isConnected && (
-              <Box>未設定</Box>
-            )}
+            {!linkedWallet.isConnected && <Box>未設定</Box>}
             {/** Address */}
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <Typography variant="body1">Address:</Typography>
@@ -85,8 +87,8 @@ export default function SectionHero() {
               </Typography>
             </Box>
           </CardContent>
-          
-            <CardActions sx={{ justifyContent: 'flex-end' }}>
+
+          <CardActions sx={{ justifyContent: 'flex-end' }}>
             {!linkedWallet.isConnected && (
               <Button
                 variant="contained"
@@ -109,7 +111,7 @@ export default function SectionHero() {
                 DISCONNECT
               </Button>
             )}
-            </CardActions>
+          </CardActions>
         </Card>
       </Grid>
     </Grid>

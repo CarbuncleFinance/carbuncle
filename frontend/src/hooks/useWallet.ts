@@ -37,6 +37,7 @@ export function useWallet() {
     shortAddress: wallet.address.slice(0, 6) + '...' + wallet.address.slice(-4),
     chainType: wallet.chainType,
     accountInfo,
+    walletType: wallet.walletType,
     handleRequestAccountInfo
   }
 }

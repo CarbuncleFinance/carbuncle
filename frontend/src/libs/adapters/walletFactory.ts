@@ -11,6 +11,7 @@ export interface WalletAdapter {
   getNativeBalance(address: string): Promise<number>
   getTokenBalance(): Promise<number>
   sendBridgeTransaction(transaction: any): Promise<any>
+  sendTrustlineTransaction(transaction: any): Promise<any>
 }
 
 export class WalletFactory {

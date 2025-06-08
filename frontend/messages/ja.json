@@ -84,6 +84,14 @@
       "completion": "送金完了"
     }
   },
+  "Faucet": {
+    "table": {
+      "asset": "資産",
+      "balance": "残高",
+      "action": "アクション",
+      "faucet": "Faucet"
+    }
+  },
   "Errors": {
     "walletNotInstalled": {
       "title": "ウォレットがインストールされていません",
