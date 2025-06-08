@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
-contract MockPriceOracle {
+import {IPriceOracle} from '../interfaces/IPriceOracle.sol';
+
+contract PriceOracle is IPriceOracle {
+  error PriceNotSet();
+
   mapping(address => uint256) public prices;
 
   event PriceUpdated(address indexed token, uint256 price);
@@ -15,7 +19,7 @@ contract MockPriceOracle {
   /// @notice Get the price of a token (18 decimals)
   function getAssetPrice(address token) external view returns (uint256) {
     uint256 price = prices[token];
-    require(price > 0, 'Price not set');
+    if (price == 0) revert PriceNotSet();
     return price;
   }
 }

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
-import { Ownable } from 'lib/openzeppelin-contracts/contracts/access/Ownable.sol';
-import { IERC20 } from 'lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol';
+import { Ownable } from '../../lib/openzeppelin-contracts/contracts/access/Ownable.sol';
+import { IERC20 } from '../../lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol';
 
 contract LendingPoolCore is Ownable {
   address public constant XRP_ADDRESS = address(0);
@@ -25,7 +25,7 @@ contract LendingPoolCore is Ownable {
   event AddressRemovedFromWhitelist(address indexed account);
 
   modifier validToken(address _token) {
-    require(_token != XRP_ADDRESS, 'Invalid token');
+    require(_token == XRP_ADDRESS || _token == cbxToken, 'Invalid token');
     _;
   }
 
@@ -58,7 +58,7 @@ contract LendingPoolCore is Ownable {
    * @param _address The address to add to the whitelist
    */
   function addToWhitelist(address _address) external onlyOwner {
-    require(_address != address(0), 'Invalid address');
+    require(!isWhitelisted[_address], 'Address already whitelisted');
     isWhitelisted[_address] = true;
     emit AddressWhitelisted(_address);
   }

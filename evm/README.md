@@ -64,3 +64,9 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+
+### Contracts
+
+|Contract|Explorer|
+|:---|:---|
+|XCB|https://explorer.testnet.xrplevm.org/address/0x5864bb1be322578c59e168aeee4dcc2dde18d43d|

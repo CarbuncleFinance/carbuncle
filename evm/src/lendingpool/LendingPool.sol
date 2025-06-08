@@ -1,12 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.30;
 
-import { LendingPoolCore } from './LendingPoolCore.sol';
-import { MockPriceOracle } from './PriceOracle.sol';
+// import {console} from 'forge-std/console.sol';
+import {Initializable} from '../../lib/openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol';
+import {OwnableUpgradeable} from '../../lib/openzeppelin-contracts-upgradeable/contracts/access/OwnableUpgradeable.sol';
+import {ReentrancyGuardUpgradeable} from '../../lib/openzeppelin-contracts-upgradeable/contracts/utils/ReentrancyGuardUpgradeable.sol';
 
-contract Pool {
+import {LendingPoolCore} from './LendingPoolCore.sol';
+import {IPriceOracle} from '../interfaces/IPriceOracle.sol';
+
+contract LendingPool is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable {
   LendingPoolCore public core;
-  MockPriceOracle public oracle;
+  IPriceOracle public oracle;
 
   // user => token => borrowed amount
   mapping(address => mapping(address => uint256)) public userBorrows;
@@ -32,9 +37,17 @@ contract Pool {
     _;
   }
 
-  constructor(address _core, address _oracle) {
+  /// @custom:oz-upgrades-unsafe-allow constructor
+  constructor() {
+    _disableInitializers();
+  }
+
+  function initialize(address _core, address _oracle) external initializer {
     core = LendingPoolCore(payable(_core));
-    oracle = MockPriceOracle(_oracle);
+    oracle = IPriceOracle(_oracle);
+
+    __Ownable_init(msg.sender);
+    __ReentrancyGuard_init();
   }
 
   function getOppositeToken(address _token) internal view returns (address) {
@@ -49,27 +62,42 @@ contract Pool {
       }
   }
 
-    function deposit(address _token, uint256 _amount, address _from) external payable validToken(_token) {
+  /**
+   * @dev Deposit tokens into the pool
+   * @param _token The token to deposit
+   * @param _amount The amount of tokens to deposit
+   * @param _from The address from which the tokens are deposited
+   */
+  function deposit(address _token, uint256 _amount, address _from)
+      external
+      payable
+      nonReentrant
+      validToken(_token)
+    {
       validateXrpAmount(_token, _amount);
       core.deposit{value: msg.value}(_token, _amount, _from);
       emit Deposit(_from, _token, _amount);
     }
 
-    function borrow(address _token, uint256 _amount) external validToken(_token) {
+    function borrow(address _token, uint256 _amount)
+      external
+      nonReentrant
+      validToken(_token)
+    {
       address collateralToken = getOppositeToken(_token);
       uint256 collateral = core.getUserDeposit(collateralToken, msg.sender);
-      
+
       uint256 collateralPrice = oracle.getAssetPrice(collateralToken);
       uint256 borrowPrice = oracle.getAssetPrice(_token);
-      
+
       uint256 collateralValue = (collateral * collateralPrice) / 1e18;
       uint256 maxBorrow = (collateralValue * COLLATERAL_FACTOR) / 10000;
       
       uint256 newBorrow = userBorrows[msg.sender][_token] + _amount;
       uint256 newBorrowValue = (newBorrow * borrowPrice) / 1e18;
-      
+
       require(newBorrowValue <= maxBorrow, 'Exceeds collateral factor');
-      
+
       userBorrows[msg.sender][_token] = newBorrow;
       core.transferToken(_token, msg.sender, _amount);
       
@@ -83,7 +111,11 @@ contract Pool {
       emit Repay(msg.sender, _token, _amount);
     }
 
-    function withdraw(address _token, uint256 _amount) external validToken(_token) {
+    function withdraw(address _token, uint256 _amount)
+      external
+      nonReentrant()
+      validToken(_token)
+    {
       address borrowToken = getOppositeToken(_token);
       uint256 borrowed = userBorrows[msg.sender][borrowToken];
       uint256 remaining = core.getUserDeposit(_token, msg.sender) - _amount;
@@ -139,4 +171,6 @@ contract Pool {
 
   // Allow contract to receive XRP
   receive() external payable {}
+
+  uint256[50] private __gap;
 }

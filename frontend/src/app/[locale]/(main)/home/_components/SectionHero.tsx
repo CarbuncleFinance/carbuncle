@@ -15,7 +15,6 @@ export default function SectionHero() {
   const t = useTranslations('Home')
 
   const { isConnected, accountInfo } = useWallet()
-  const t = useTranslations('Home')
 
   const { connectEvm: handleConnectEvm, disconnectEvm, linkedWallet } = useWalletConnect()
 
