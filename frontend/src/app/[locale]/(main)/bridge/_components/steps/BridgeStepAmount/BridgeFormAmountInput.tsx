@@ -8,23 +8,12 @@ import FormControl from '@mui/material/FormControl'
 import FormHelperText from '@mui/material/FormHelperText'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import type { ReactFormExtendedApi } from '@tanstack/react-form'
+import type { BridgeFormApi } from '@/app/[locale]/(main)/bridge/_types'
 import type { BridgeFormSchema } from '@/app/[locale]/(main)/bridge/_forms/bridgeFormSchema'
-import type { BridgeFormValues } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
+import { createFieldValidator } from '@/app/[locale]/(main)/bridge/_utils/validation'
 
 type BridgeFormAmountInputProps = {
-  form: ReactFormExtendedApi<
-    BridgeFormValues,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any
-  >
+  form: BridgeFormApi
   schema: BridgeFormSchema
   symbol?: string
 }
@@ -41,10 +30,7 @@ export default function BridgeFormAmountInput({
     <form.Field
       name="amount"
       validators={{
-        onChange: ({ value }: { value: string }) => {
-          const result = schema.shape.amount.safeParse(value)
-          return result.success ? undefined : result.error.issues[0]?.message
-        }
+        onChange: createFieldValidator('amount')
       }}
     >
       {(field) => (

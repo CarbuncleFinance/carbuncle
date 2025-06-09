@@ -14,25 +14,10 @@ import BridgeFormAmountHeader from './BridgeFormAmountHeader'
 import BridgeFormAmountInput from './BridgeFormAmountInput'
 import BridgeFormAmountPercentageButton from './BridgeFormAmountPercentageButton'
 
-import type { ReactFormExtendedApi } from '@tanstack/react-form'
-import type { BridgeFormValues } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
+import type { BaseBridgeStepProps } from '@/app/[locale]/(main)/bridge/_types'
+import { validateAndProceed } from '@/app/[locale]/(main)/bridge/_utils/validation'
 
-type BridgeStepAmountProps = {
-  form: ReactFormExtendedApi<
-    BridgeFormValues,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any
-  >
-  onBack: () => void
-  onNext: () => void
-}
+type BridgeStepAmountProps = BaseBridgeStepProps
 
 export default function BridgeStepAmount({
   form,
@@ -49,11 +34,7 @@ export default function BridgeStepAmount({
   } = useWalletBalance({ address: address || '' })
 
   const handleNext = () => {
-    form.validateField('amount', 'change')
-    const amountField = form.getFieldMeta('amount')
-    if (!amountField?.errors?.length) {
-      onNext()
-    }
+    validateAndProceed(form, 'amount', onNext)
   }
 
   const handlePercentageClick = (percentage: number) => {
