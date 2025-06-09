@@ -4,8 +4,11 @@ import SectionFaucetList from '@/app/[locale]/(main)/faucet/_components/SectionF
 
 export default function FaucetPage() {
   return (
-    <PageLayout maxWidth="lg">
-      <PageHeader title="Faucet" />
+    <PageLayout maxWidth="md">
+      <PageHeader
+        title="Faucet"
+        description="Faucet is a service that allows you to get free XRP and XCB tokens."
+      />
       <SectionFaucetList />
     </PageLayout>
   )

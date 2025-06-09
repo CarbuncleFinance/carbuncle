@@ -64,7 +64,7 @@ export default function DevContent() {
         amount: {
           currency: 'XCB',
           issuer: 'rN72avu22PqxSCRSzP4BRRHUCNodoeCnD5',
-          value: '100'
+          value: '99800'
         },
         destination: 'rMX17FBE5svy7d8DMraRFHRcUUniH3Heqx'
       }

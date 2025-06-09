@@ -1,4 +1,4 @@
-import { Client, type Payment, type TxResponse, dropsToXrp } from 'xrpl'
+import { Client, type Payment, type TxResponse, dropsToXrp, Wallet } from 'xrpl'
 import { hexToString } from '@/utils/string'
 import { AppErrorCode } from '@/types/enums'
 
@@ -38,6 +38,23 @@ export class XrplClient {
     }
   }
 
+  async getAccountLines(address: string): Promise<any> {
+    try {
+      await this.client.connect()
+      const { result } = await this.client.request({
+        command: 'account_lines',
+        account: address
+      })
+
+      return result
+    } catch (error) {
+      console.error(error)
+      throw new Error(AppErrorCode.WALLET_ACCOUNT_LINES_FETCH_FAILED)
+    } finally {
+      await this.client.disconnect()
+    }
+  }
+
   async getNativeBalance(address: string): Promise<number> {
     try {
       await this.client.connect()
@@ -56,6 +73,36 @@ export class XrplClient {
     try {
       await this.client.connect()
       const result = await this.client.submitAndWait(transaction)
+      return result
+    } catch (error) {
+      console.error(error)
+      throw new Error(AppErrorCode.WALLET_TRANSACTION_FAILED)
+    } finally {
+      await this.client.disconnect()
+    }
+  }
+
+  async sendFaucetTransaction(address: string): Promise<any> {
+    try {
+      await this.client.connect()
+      const seed = 'sEdTcuxx2UmKtshP1DxmgqLf1XRBEsc'
+      const wallet = Wallet.fromSeed(seed)
+
+      const transaction: Payment = {
+        TransactionType: 'Payment',
+        Account: wallet.address,
+        Amount: {
+          value: '10',
+          currency: 'XCB',
+          issuer: 'rN72avu22PqxSCRSzP4BRRHUCNodoeCnD5'
+        },
+        Destination: address
+      }
+
+      const result = await this.client.submitAndWait(transaction, {
+        wallet: wallet
+      })
+
       return result
     } catch (error) {
       console.error(error)

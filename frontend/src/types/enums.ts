@@ -21,6 +21,7 @@ export enum AppErrorCode {
   WALLET_BALANCE_FETCH_FAILED = 'walletBalanceFetchFailed',
   WALLET_TRANSACTION_FAILED = 'walletTransactionFailed',
   WALLET_ACCOUNT_INFO_FETCH_FAILED = 'walletAccountInfoFetchFailed',
+  WALLET_ACCOUNT_LINES_FETCH_FAILED = 'walletAccountLinesFetchFailed',
 
   // Transaction Errors
   TRANSACTION_FAILED = 'transactionFailed',

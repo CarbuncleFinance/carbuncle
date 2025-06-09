@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -14,43 +15,26 @@ import Paper from '@mui/material/Paper'
 import { XCB_CURRENCY, XCB_ISSUER } from '@/constants/app'
 import { useFaucet } from '@/app/[locale]/(main)/faucet/_hooks/useFaucet'
 import { useWallet } from '@/hooks/useWallet'
-
-// 仮のデータ型定義
-type FaucetAsset = {
-  id: string
-  balance: string
-  currency: string
-  issuer: string
-  value: string
-}
+import { useWalletBalance } from '@/hooks/useWalletBalance'
 
 export default function SectionFaucetList() {
   const t = useTranslations('Faucet.table')
 
-  // 仮のデータ
-  const assets: FaucetAsset[] = [
-    {
-      id: '1',
-      balance: '0.00',
-      currency: 'XRP',
-      issuer: 'rN72avu22PqxSCRSzP4BRRHUCNodoeCnD5',
-      value: '10'
-    },
-    {
-      id: '2',
-      balance: '0.00',
-      currency: XCB_CURRENCY,
-      issuer: XCB_ISSUER,
-      value: '10'
-    }
-  ]
+  const { walletType, address } = useWallet()
 
-  const { walletType } = useWallet()
+  const { handleTrustline, handleFaucet } = useFaucet()
 
-  const { handleTrustline } = useFaucet()
+  const { data: balances } = useWalletBalance({ address })
 
-  if (!walletType) {
+  console.log('balances', balances)
+
+  if (!walletType || !address) {
     return null
+  }
+
+  const isTrustline = (symbol: string, balances: any) => {
+    if (!balances) return false
+    return balances.some((b: any) => b.symbol === symbol)
   }
 
   return (
@@ -68,32 +52,62 @@ export default function SectionFaucetList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {assets.map((asset) => (
-            <TableRow key={asset.id}>
-              <TableCell>
-                <Typography variant="body1">{asset.currency}</Typography>
-              </TableCell>
-              <TableCell>
-                <Typography variant="body1">{asset.balance}</Typography>
-              </TableCell>
-              <TableCell align="right">
+          <TableRow>
+            <TableCell>
+              <Typography variant="body1">XCB</Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="body1">
+                {balances?.find((b) => b.symbol === XCB_CURRENCY)?.balance || 0}
+              </Typography>
+            </TableCell>
+            <TableCell align="right">
+              {isTrustline(XCB_CURRENCY, balances) ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disableElevation
+                  onClick={() => handleFaucet(address)}
+                >
+                  Faucet
+                </Button>
+              ) : (
                 <Button
                   variant="contained"
                   color="primary"
                   disableElevation
                   onClick={() =>
                     handleTrustline(walletType, {
-                      currency: asset.currency,
-                      issuer: asset.issuer,
-                      value: asset.value
+                      currency: XCB_CURRENCY,
+                      issuer: XCB_ISSUER
                     })
                   }
                 >
-                  {t('faucet')}
+                  Trustline
                 </Button>
-              </TableCell>
-            </TableRow>
-          ))}
+              )}
+              {balances?.map((b) => {
+                if (!isTrustline(b.symbol, balances)) {
+                  return (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disableElevation
+                      onClick={() =>
+                        handleTrustline(walletType, {
+                          currency: b.symbol,
+                          issuer: b.issuer
+                        })
+                      }
+                    >
+                      Faucet
+                    </Button>
+                  )
+                }
+                return null
+              })}
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>

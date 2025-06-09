@@ -4,6 +4,7 @@ import {
   setTrustline,
   type SetTrustlineRequest
 } from '@gemwallet/api'
+import { XrplClient } from '@/libs/xrplClient'
 import { WalletAdapter } from '@/libs/wallet/walletFactory'
 import { AppErrorCode } from '@/types'
 
@@ -47,6 +48,59 @@ export class GemWalletAdapter implements WalletAdapter {
       }
 
       return result
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  }
+
+  async requestAccountLines(
+    address: string
+  ): Promise<{ currency: string; balance: string }[]> {
+    try {
+      const xrplClient = new XrplClient()
+      const { lines } = await xrplClient.getAccountLines(address)
+      return lines.map((line: any) => {
+        return {
+          currency: line.currency,
+          balance: line.balance.value
+        }
+      })
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  }
+
+  async getBalances(
+    address: string
+  ): Promise<{ symbol: string; issuer: string; balance: number }[]> {
+    try {
+      const xrplClient = new XrplClient()
+      const { lines } = await xrplClient.getAccountLines(address)
+
+      console.log('lines', lines)
+
+      const balance = lines.map((line: any) => {
+        return {
+          symbol: line.currency,
+          issuer: line.account,
+          balance: Number(line.balance)
+        }
+      })
+
+      const nativeBalance = await xrplClient.getNativeBalance(address)
+
+      const balances = [
+        ...balance,
+        {
+          symbol: 'XRP',
+          issuer: '',
+          balance: nativeBalance
+        }
+      ]
+
+      return balances
     } catch (error) {
       console.error(error)
       throw error
