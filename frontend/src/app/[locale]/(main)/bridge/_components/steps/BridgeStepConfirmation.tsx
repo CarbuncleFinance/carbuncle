@@ -7,27 +7,9 @@ import BridgeStepContainer from '@/app/[locale]/(main)/bridge/_components/shared
 import BridgeStepDescription from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepDescription'
 import BridgeStepNavigation from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepNavigation'
 
-import type { ReactFormExtendedApi } from '@tanstack/react-form'
-import type { BridgeFormValues } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
+import type { BridgeStepWithExecuteProps } from '@/app/[locale]/(main)/bridge/_types'
 
-type BridgeStepConfirmationProps = {
-  form: ReactFormExtendedApi<
-    BridgeFormValues,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any
-  >
-  onBack: () => void
-  onNext: () => void
-  onExecute: () => void
-  isLoading?: boolean
-}
+type BridgeStepConfirmationProps = BridgeStepWithExecuteProps
 
 export default function BridgeStepConfirmation({
   form,

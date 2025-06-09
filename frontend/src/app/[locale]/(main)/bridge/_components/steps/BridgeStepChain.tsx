@@ -6,25 +6,9 @@ import BridgeStepDescription from '@/app/[locale]/(main)/bridge/_components/shar
 import BridgeStepNavigation from '@/app/[locale]/(main)/bridge/_components/shared/BridgeStepNavigation'
 
 import { SelectForm } from '@/components/ui/forms/SelectForm'
-import type { ReactFormExtendedApi } from '@tanstack/react-form'
-import type { BridgeFormValues } from '@/app/[locale]/(main)/bridge/_forms/useBridgeForm'
+import type { BaseBridgeStepProps } from '@/app/[locale]/(main)/bridge/_types'
 
-type BridgeStepChainProps = {
-  form: ReactFormExtendedApi<
-    BridgeFormValues,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any,
-    any
-  >
-  onBack: () => void
-  onNext: () => void
-}
+type BridgeStepChainProps = BaseBridgeStepProps
 
 const chainOptions: { value: string; label: string }[] = [
   {
