@@ -28,17 +28,21 @@ export default function BridgeStepAmount({
   const t = useTranslations('Bridge.steps.amount')
 
   const {
-    data: balance,
+    data: balanceData,
     isLoading: isBalanceLoading,
     refetch: refetchBalance
   } = useWalletBalance({ address: address || '' })
+
+  const balance = balanceData && Array.isArray(balanceData) && balanceData.length > 0 
+    ? (typeof balanceData[0] === 'number' ? balanceData[0] : Number(balanceData[0])) 
+    : 0
 
   const handleNext = () => {
     validateAndProceed(form, 'amount', onNext)
   }
 
   const handlePercentageClick = (percentage: number) => {
-    if (balance) {
+    if (balance > 0) {
       const amount = ((balance * percentage) / 100).toString()
       form.setFieldValue('amount', amount)
     }
@@ -54,7 +58,7 @@ export default function BridgeStepAmount({
       />
       <Box display="flex" flexDirection="column" gap={1}>
         <BridgeFormAmountHeader
-          balance={balance || 0}
+          balance={balance}
           isBalanceLoading={isBalanceLoading}
           refetchBalance={refetchBalance}
           isConnected={isConnected}
@@ -65,7 +69,7 @@ export default function BridgeStepAmount({
               key={percentage}
               percentage={percentage}
               handlePercentageClick={handlePercentageClick}
-              balance={balance || 0}
+              balance={balance}
               isBalanceLoading={isBalanceLoading}
             />
           ))}

@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import Button from '@mui/material/Button'
 import { useWallet } from '@/hooks/useWallet'
 import Avatar from '@mui/material/Avatar'
-import { ChainProtocol } from '@/domains/blockchain/types'
+import { ChainTypes } from '@/types/enums'
 
 interface TopBarWalletMenuButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -13,18 +13,18 @@ interface TopBarWalletMenuButtonProps {
 export default function TopBarWalletMenuButton({
   onClick
 }: TopBarWalletMenuButtonProps) {
-  const { shortAddress, chainProtocol } = useWallet()
+  const { shortAddress, chainType } = useWallet()
 
   const walletIcon = useMemo(() => {
-    switch (chainProtocol) {
-      case ChainProtocol.XRPL:
+    switch (chainType) {
+      case ChainTypes.XRPL:
         return '/images/xrpl-logo.png'
-      case ChainProtocol.EVM:
+      case ChainTypes.EVM:
         return '/images/MetaMask-icon-fox.svg'
       default:
         return '/images/xrpl-logo.png'
     }
-  }, [chainProtocol])
+  }, [chainType])
 
   return (
     <Button

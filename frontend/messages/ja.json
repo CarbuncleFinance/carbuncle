@@ -54,7 +54,9 @@
   },
   "Notifications": {
     "connectedToWallet": "ウォレットに接続しました",
-    "failedToConnectToWallet": "ウォレットへの接続に失敗しました"
+    "failedToConnectToWallet": "ウォレットへの接続に失敗しました",
+    "supplySuccess": "供給取引が正常に完了しました",
+    "supplyFailed": "供給取引に失敗しました"
   },
   "Bridge": {
     "steps": {

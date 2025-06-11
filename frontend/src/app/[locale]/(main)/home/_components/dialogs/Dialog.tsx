@@ -14,6 +14,7 @@ import Button from '@/components/ui/buttons/Button'
 import { useLendingSupply } from '@/hooks/useLendingSupply'
 import { createFieldValidator } from '@/utils/validation'
 import { BRDGE_GAS_FEE_AMOUT_XRP } from '@/constants/app'
+import { useNotification, NotificationVariant } from '@/hooks/useNotification'
 
 interface DialogProps {
   open: boolean
@@ -23,7 +24,21 @@ interface DialogProps {
 }
 
 export default function Dialog({ open, onClose, title, token }: DialogProps) {
-  const { form, isLoading, formSchema } = useLendingSupply()
+  const { showNotification } = useNotification()
+
+  const handleSuccess = () => {
+    showNotification('supplySuccess', NotificationVariant.SUCCESS)
+    onClose()
+  }
+
+  const handleError = () => {
+    showNotification('supplyFailed', NotificationVariant.ERROR)
+  }
+
+  const { form, isLoading, formSchema } = useLendingSupply(
+    handleSuccess,
+    handleError
+  )
 
   return (
     <MuiDialog open={open} onClose={onClose} fullWidth maxWidth="xs">
@@ -31,9 +46,13 @@ export default function Dialog({ open, onClose, title, token }: DialogProps) {
       <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         <Box
           component="form"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault()
-            form.handleSubmit()
+            try {
+              await form.handleSubmit()
+            } catch (error) {
+              handleError()
+            }
           }}
         >
           <Box sx={{ pt: 1 }}>
@@ -168,10 +187,9 @@ export default function Dialog({ open, onClose, title, token }: DialogProps) {
               color="primary"
               fullWidth
               size="large"
-              disabled={form.state.values.amount === ''}
-              onClick={onClose}
+              disabled={form.state.values.amount === '' || isLoading}
             >
-              Supply {token?.symbol || ''}
+              {isLoading ? 'Processing...' : `Supply ${token?.symbol || ''}`}
             </Button>
           </Box>
         </Box>
