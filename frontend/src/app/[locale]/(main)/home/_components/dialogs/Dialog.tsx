@@ -29,15 +29,6 @@ export default function Dialog({ open, onClose, title, token }: DialogProps) {
     <MuiDialog open={open} onClose={onClose} fullWidth maxWidth="xs">
       <DialogTitle>{title}</DialogTitle>
       <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-          <Typography variant="subtitle2" color="text.secondary">
-            All done!
-          </Typography>
-          <Typography variant="body1">
-            You have successfully supplied {token?.symbol || ''} to the
-            protocol.
-          </Typography>
-        </Box>
         <Box
           component="form"
           onSubmit={(e) => {
@@ -181,11 +172,6 @@ export default function Dialog({ open, onClose, title, token }: DialogProps) {
               onClick={onClose}
             >
               Supply {token?.symbol || ''}
-            </Button>
-          </Box>
-          <Box sx={{ mt: 2 }}>
-            <Button variant="text" fullWidth onClick={onClose}>
-              Ok, Close
             </Button>
           </Box>
         </Box>
