@@ -5,9 +5,13 @@ import { AppErrorCode } from '@/types/enums'
 export class XrplClient {
   private client: Client
 
-  constructor(serverUrl: string = 'wss://s.altnet.rippletest.net:51233') {
-    this.client = new Client(serverUrl)
+  constructor(endpoint: string = 'wss://testnet.xrpl-labs.com') {
+    this.client = new Client(endpoint, {
+      timeout: 10000
+    })
   }
+
+  async connect() {}
 
   async getAccountInfo(address: string): Promise<{
     account: string
@@ -39,6 +43,7 @@ export class XrplClient {
   }
 
   async getAccountLines(address: string): Promise<any> {
+    console.log('[START]getAccountLines')
     try {
       await this.client.connect()
       const { result } = await this.client.request({
@@ -52,6 +57,7 @@ export class XrplClient {
       throw new Error(AppErrorCode.WALLET_ACCOUNT_LINES_FETCH_FAILED)
     } finally {
       await this.client.disconnect()
+      console.log('[END]getAccountLines')
     }
   }
 
@@ -60,6 +66,42 @@ export class XrplClient {
       await this.client.connect()
       const balance = await this.client.getXrpBalance(address)
       return balance
+    } catch (error) {
+      throw new Error(AppErrorCode.WALLET_BALANCE_FETCH_FAILED)
+    } finally {
+      await this.client.disconnect()
+    }
+  }
+
+  async getAllBalances(address: string): Promise<
+    {
+      symbol: string
+      issuer: string
+      balance: number
+    }[]
+  > {
+    try {
+      await this.client.connect()
+
+      const balance = await this.client.getXrpBalance(address)
+      const { result } = await this.client.request({
+        command: 'account_lines',
+        account: address
+      })
+
+      const tokens = result.lines.map((line: any) => ({
+        symbol: line.currency,
+        issuer: line.account,
+        balance: line.balance
+      }))
+
+      tokens.push({
+        symbol: 'XRP',
+        issuer: '',
+        balance
+      })
+
+      return tokens
     } catch (error) {
       throw new Error(AppErrorCode.WALLET_BALANCE_FETCH_FAILED)
     } finally {

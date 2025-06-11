@@ -1,6 +1,5 @@
 'use client'
 
-import { dropsToXrp } from 'xrpl'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import {
@@ -77,31 +76,34 @@ export default function DevContent() {
   }
 
   return (
-    <Box sx={{ display: 'flex', gap: 2 }}>
-      <Button
-        variant="contained"
-        color="primary"
-        disableElevation
-        onClick={handleSetAccount}
-      >
-        Set Account
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        disableElevation
-        onClick={handleSetTrust}
-      >
-        Set Trust
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        disableElevation
-        onClick={handleFaucet}
-      >
-        Faucet
-      </Button>
-    </Box>
+    <>
+      <Box>ウォレット接続テスト</Box>
+      <Box sx={{ display: 'flex', gap: 2 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={handleSetAccount}
+        >
+          Set Account
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={handleSetTrust}
+        >
+          Set Trust
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={handleFaucet}
+        >
+          Faucet
+        </Button>
+      </Box>
+    </>
   )
 }

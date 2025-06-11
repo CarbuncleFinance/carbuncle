@@ -8,7 +8,7 @@ import { hasLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 // CSS
-// import '@/styles/index.css'
+import '@/styles/index.css'
 
 const notoSans = Noto_Sans({
   variable: '--font-noto-sans',

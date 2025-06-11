@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-import { APP_NAME } from '@/constants/app'
+import { APP_SHORT_NAME } from '@/constants/app'
 import LangSwitchButton from '@/components/ui/buttons/LangSwitchButton'
 import TopBarWalletMenu from '@/components/layouts/TopBarWalletMenu'
 import TopBarWalletMenuButton from '@/components/layouts/TopBarWalletMenuButton'
@@ -96,10 +96,16 @@ export default function TopBar() {
       <Toolbar>
         <Typography
           variant="h6"
-          sx={{ mr: 4, fontWeight: '200', cursor: 'pointer' }}
+          sx={{
+            mr: 4,
+            fontWeight: '300',
+            cursor: 'pointer',
+            fontSize: '24px',
+            color: '#fff'
+          }}
           onClick={() => handleGoTo('/')}
         >
-          {APP_NAME}
+          {APP_SHORT_NAME}
         </Typography>
         <Box sx={{ flexGrow: 1, display: 'flex', gap: 1 }}>
           {menus.map(({ href, label }) => (
