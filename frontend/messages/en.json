@@ -54,7 +54,9 @@
   },
   "Notifications": {
     "connectedToWallet": "Connected to wallet",
-    "failedToConnectToWallet": "Failed to connect to wallet"
+    "failedToConnectToWallet": "Failed to connect to wallet",
+    "supplySuccess": "Supply transaction completed successfully",
+    "supplyFailed": "Supply transaction failed"
   },
   "Bridge": {
     "steps": {
