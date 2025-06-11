@@ -45,7 +45,10 @@ const defaultValues: LendingSupplyFormValues = {
   evmAddress: '0xEE36B95F8282936E75037C88BDddAa20e15482D1'
 }
 
-export const useLendingSupply = (onSuccess?: () => void, onError?: () => void) => {
+export const useLendingSupply = (
+  onSuccess?: () => void,
+  onError?: () => void
+) => {
   const [data, setData] = useState<Tokens[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -84,7 +87,7 @@ export const useLendingSupply = (onSuccess?: () => void, onError?: () => void) =
         }
 
         console.log('result: ', result)
-        
+
         if (onSuccess) {
           onSuccess()
         }

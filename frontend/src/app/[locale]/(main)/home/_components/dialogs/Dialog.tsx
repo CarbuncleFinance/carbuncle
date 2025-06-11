@@ -25,17 +25,20 @@ interface DialogProps {
 
 export default function Dialog({ open, onClose, title, token }: DialogProps) {
   const { showNotification } = useNotification()
-  
+
   const handleSuccess = () => {
     showNotification('supplySuccess', NotificationVariant.SUCCESS)
     onClose()
   }
-  
+
   const handleError = () => {
     showNotification('supplyFailed', NotificationVariant.ERROR)
   }
-  
-  const { form, isLoading, formSchema } = useLendingSupply(handleSuccess, handleError)
+
+  const { form, isLoading, formSchema } = useLendingSupply(
+    handleSuccess,
+    handleError
+  )
 
   return (
     <MuiDialog open={open} onClose={onClose} fullWidth maxWidth="xs">
