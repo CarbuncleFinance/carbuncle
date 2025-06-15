@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useWalletStore } from '@/stores/wallet'
 import { WalletTypes } from '@/types/enums'
-import { WalletFactory } from '@/libs/wallet/walletFactory'
+import { WalletFactory } from '@/libs/adapters/walletFactory'
 
 type WalletBalanceRequest = {
   address: string

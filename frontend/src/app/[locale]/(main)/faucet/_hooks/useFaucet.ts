@@ -1,5 +1,5 @@
 import { Wallet } from 'xrpl'
-import { WalletFactory } from '@/libs/wallet/walletFactory'
+import { WalletFactory } from '@/libs/adapters/walletFactory'
 import { type WalletType } from '@/types'
 import { XrplClient } from '@/libs/xrplClient'
 

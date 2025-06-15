@@ -2,7 +2,7 @@ import { useConnect, useAccount, useDisconnect } from 'wagmi'
 import { useErrorHandler } from '@/hooks/useErrorHandler'
 import { useWalletStore } from '@/stores/wallet'
 import { useDatabase } from '@/hooks/useDatabase'
-import { WalletFactory } from '@/libs/wallet/walletFactory'
+import { WalletFactory } from '@/libs/adapters/walletFactory'
 import { AppErrorCode, ChainTypes, type WalletType } from '@/types'
 
 export function useWalletConnect() {
