@@ -1,4 +1,4 @@
-# Carbuncle Finance
+# SkrrtVault
 
 リアルワールドの業務フローをWeb3で再現する、分散型金融（DeFi）プロトコル。銀行口座と財布という2つの資産管理手段を、DeFiプロトコルと自己管理型ウォレットとして実装し、ユーザーが慣れ親しんだ形で資産を管理できる新しい金融体験を提供します。
 
@@ -34,7 +34,7 @@ Carbuncle Financeは、現実世界の「銀行口座」と「財布」の役割
 
 ## アーキテクチャ概要
 
-![Image](https://github.com/user-attachments/assets/77799558-1a3e-44a1-b39b-df0cef1cee88)
+![Image](https://github.com/user-attachments/assets/db45bbd4-1752-4af6-bc94-8747eb249fe6)
 
 ### レイヤー構成
 
