@@ -36,35 +36,6 @@ export enum AppErrorCode {
   UNKNOWN_ERROR = 'unknownError'
 }
 
-import {
-  Chain,
-  XRPLChain,
-  EVMChain,
-  ChainProtocol,
-  ETHEREUM_MAINNET,
-  POLYGON_MAINNET
-} from '@/domains/blockchain/types'
-import { ETHEREUM_CHAIN_ID, POLYGON_CHAIN_ID } from '@/constants/blockchain'
-
-export function isXRPLChain(chain: Chain): chain is XRPLChain {
-  return chain.protocol === ChainProtocol.XRPL
-}
-
-export function isEVMChain(chain: Chain): chain is EVMChain {
-  return chain.protocol === ChainProtocol.EVM
-}
-
-export function getChainById(chainId: number): EVMChain | null {
-  switch (chainId) {
-    case ETHEREUM_CHAIN_ID:
-      return ETHEREUM_MAINNET
-    case POLYGON_CHAIN_ID:
-      return POLYGON_MAINNET
-    default:
-      return null
-  }
-}
-
 /** Environment Types */
 export enum EnvironmentTypes {
   MAINNET = 'mainnet',
@@ -104,3 +75,11 @@ export const WalletTypeNames: Record<WalletType, string> = {
   [WalletTypes.CROSSMARK]: 'CROSSMARK',
   [WalletTypes.METAMASK]: 'MetaMask'
 }
+
+/** Axelar Bridge Message Types */
+export enum MessageTypes {
+  INTERCHAIN_TRANSFER = 0,
+  DEPLOY_INTERCHAIN_TOKEN = 1,
+  LINK_TOKEN = 5
+}
+export type MessageType = (typeof MessageTypes)[keyof typeof MessageTypes]
