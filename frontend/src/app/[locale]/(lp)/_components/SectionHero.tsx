@@ -41,7 +41,7 @@ const CountUp = ({ end, duration = 2 }: { end: number; duration?: number }) => {
 
 export default function SectionHero() {
   return (
-    <Box pt={10} sx={{ textAlign: 'center' }}>
+    <Box pt={10} pb={5} sx={{ textAlign: 'center' }}>
       <Box mb={10}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
