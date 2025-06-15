@@ -1,5 +1,5 @@
 import { AbiCoder } from 'ethers'
-import { MessageTypes } from '@/utils/bridge'
+import { MessageTypes } from '@/types/enums'
 
 type CreateInterchainTransferPayloadParams = {
   //

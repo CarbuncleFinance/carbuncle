@@ -49,7 +49,7 @@ export default function SectionHero() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           <Typography variant="h2" pb={2} sx={{ fontWeight: 'semibold' }}>
-            Redefining Real-World Finance with Web3.
+          　Lend and Earn with Just Your XRPL Wallet.
           </Typography>
         </motion.div>
         <motion.div
