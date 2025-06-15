@@ -34,7 +34,7 @@ Carbuncle Financeは、現実世界の「銀行口座」と「財布」の役割
 
 ## アーキテクチャ概要
 
-![Image](https://github.com/user-attachments/assets/3d9c88e0-4c70-4ab4-9941-1274ae5a71c9)
+![Image](https://github.com/user-attachments/assets/77799558-1a3e-44a1-b39b-df0cef1cee88)
 
 ### レイヤー構成
 
