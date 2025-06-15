@@ -10,6 +10,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
+import { useTranslations } from 'next-intl'
 import Button from '@/components/ui/buttons/Button'
 import Card from '@/components/ui/cards/Card'
 import { useWallet } from '@/hooks/useWallet'
@@ -20,6 +21,7 @@ interface GridBorrowCardProps {
 
 export default function GridBorrowCard({ size }: GridBorrowCardProps) {
   const { isConnected } = useWallet()
+  const t = useTranslations('Market')
 
   if (!isConnected) {
     return null
@@ -27,14 +29,14 @@ export default function GridBorrowCard({ size }: GridBorrowCardProps) {
 
   return (
     <Grid size={size}>
-      <Card title="YOUR BORROWS">
+      <Card title={t('cards.yourBorrows')}>
         <TableContainer>
           <Table aria-label="account info table">
             <TableHead>
               <TableRow>
-                <TableCell>Asset</TableCell>
-                <TableCell>Balance</TableCell>
-                <TableCell>APY</TableCell>
+                <TableCell>{t('tables.asset')}</TableCell>
+                <TableCell>{t('tables.balance')}</TableCell>
+                <TableCell>{t('tables.apy')}</TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
@@ -57,10 +59,10 @@ export default function GridBorrowCard({ size }: GridBorrowCardProps) {
                 <TableCell>
                   <Box sx={{ display: 'flex', gap: 1 }}>
                     <Button variant="contained" color="primary" size="small">
-                      Supply
+                      {t('buttons.supply')}
                     </Button>
                     <Button variant="outlined" color="primary" size="small">
-                      Withdraw
+                      {t('buttons.withdraw')}
                     </Button>
                   </Box>
                 </TableCell>
