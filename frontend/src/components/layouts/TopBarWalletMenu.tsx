@@ -19,16 +19,10 @@ export default function TopBarWalletMenu({
   onClose
 }: TopBarWalletMenuProps) {
   const t = useTranslations('Menus.walletMenu')
-  const tNavigation = useTranslations('Navigation')
 
   const router = useRouter()
 
   const { disconnect } = useWalletConnect()
-
-  const handleGoto = (path: string) => {
-    router.push(path)
-    onClose()
-  }
 
   const handleLogout = () => {
     disconnect()
@@ -55,24 +49,6 @@ export default function TopBarWalletMenu({
         }
       }}
     >
-      <MenuItem dense>
-        <Typography
-          variant="inherit"
-          sx={{ color: '#fff', cursor: 'pointer' }}
-          onClick={() => handleGoto('/mypage')}
-        >
-          {tNavigation('mypage')}
-        </Typography>
-      </MenuItem>
-      <MenuItem dense>
-        <Typography
-          variant="inherit"
-          sx={{ color: '#fff', cursor: 'pointer' }}
-          onClick={() => handleGoto('/history')}
-        >
-          {tNavigation('history')}
-        </Typography>
-      </MenuItem>
       <MenuItem dense>
         <Typography
           variant="inherit"
