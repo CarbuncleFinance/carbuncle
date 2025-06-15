@@ -143,6 +143,6 @@ export function getDefaultChainForProtocol(protocol: ChainProtocol): Chain {
 
 export function getSupportedWalletsForProtocol(protocol: ChainProtocol) {
   const defaultChain = getDefaultChainForProtocol(protocol)
-  const { WalletFactory } = require('@/libs/adapters/walletFactory')
+  const { WalletFactory } = require('@/libs/wallet/walletFactory')
   return WalletFactory.getSupportedWalletsForChain(defaultChain)
 }

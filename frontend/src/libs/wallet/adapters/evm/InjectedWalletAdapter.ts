@@ -1,7 +1,7 @@
 import { connect, disconnect, getAccount } from 'wagmi/actions'
 import { config } from '@/wagmi.config'
 import { AppErrorCode } from '@/types/enums'
-import { WalletAdapter } from '@/libs/adapters/walletFactory'
+import { WalletAdapter } from '@/libs/wallet/walletFactory'
 
 declare global {
   interface Window {
@@ -53,5 +53,13 @@ export class InjectedWalletAdapter implements WalletAdapter {
 
   async sendTrustlineTransaction(transaction: any): Promise<void> {
     console.log('sendTrustlineTransaction', transaction)
+  }
+
+  async requestAccountLines(request: any): Promise<any> {
+    throw new Error('Account lines not supported for EVM wallets')
+  }
+
+  async getBalances(address: string): Promise<any[]> {
+    return []
   }
 }
