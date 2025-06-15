@@ -22,6 +22,7 @@
     "@tanstack/zod-form-adapter": "^0.42.1",
     "@vanilla-extract/css": "^1.17.2",
     "@vanilla-extract/recipes": "^0.5.5",
+    "@xrplf/isomorphic": "^1.0.1",
     "dayjs": "^1.11.13",
     "ethers": "^6.14.3",
     "framer-motion": "^12.16.0",
