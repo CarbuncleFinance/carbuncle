@@ -1,6 +1,6 @@
-![Image](https://github.com/user-attachments/assets/1a0d0f2c-4f75-4248-b17c-9de8dc5d1807)
-
 # SkrrtVault
+
+![Image](https://github.com/user-attachments/assets/193e30c8-0acc-437d-9090-1c2220032089)
 
 ## Abstract
 
