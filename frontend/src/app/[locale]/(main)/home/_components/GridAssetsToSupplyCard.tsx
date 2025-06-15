@@ -11,6 +11,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
+import { useTranslations } from 'next-intl'
 import Button from '@/components/ui/buttons/Button'
 import Card from '@/components/ui/cards/Card'
 import Dialog from '@/app/[locale]/(main)/home/_components/dialogs/Dialog'
@@ -28,6 +29,7 @@ export default function GridAssetsToSupplyCard({
   walletBalances
 }: GridAssetsToSupplyCardProps) {
   const { isConnected } = useWallet()
+  const t = useTranslations('Market')
 
   const [token, setToken] = useState<any>(null)
   const [openDialog, setOpenDialog] = useState(false)
@@ -47,15 +49,15 @@ export default function GridAssetsToSupplyCard({
 
   return (
     <Grid size={size}>
-      <Card title="ASSETS TO SUPPLY">
+      <Card title={t('cards.assetsToSupply')}>
         <TableContainer>
           <Table aria-label="account info table">
             <TableHead>
               <TableRow>
-                <TableCell>Asset</TableCell>
-                <TableCell>Balance</TableCell>
-                <TableCell>APY</TableCell>
-                <TableCell>Can be collateral</TableCell>
+                <TableCell>{t('tables.asset')}</TableCell>
+                <TableCell>{t('tables.balance')}</TableCell>
+                <TableCell>{t('tables.apy')}</TableCell>
+                <TableCell>{t('tables.canBeCollateral')}</TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
@@ -76,7 +78,9 @@ export default function GridAssetsToSupplyCard({
                   </TableCell>
                   <TableCell>{asset.balance}</TableCell>
                   <TableCell>{asset.apy} %</TableCell>
-                  <TableCell>{asset.collateral ? 'Yes' : 'No'}</TableCell>
+                  <TableCell>
+                    {asset.collateral ? t('tables.yes') : t('tables.no')}
+                  </TableCell>
                   <TableCell>
                     <Box sx={{ display: 'flex', gap: 1 }}>
                       <Button
@@ -86,7 +90,7 @@ export default function GridAssetsToSupplyCard({
                         disabled={asset.name !== 'XRP'}
                         onClick={() => handleOpenDialog(asset)}
                       >
-                        Supply
+                        {t('buttons.supply')}
                       </Button>
                     </Box>
                   </TableCell>
@@ -100,7 +104,7 @@ export default function GridAssetsToSupplyCard({
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
-        title={`Supply ${token?.symbol || ''}`}
+        title={`${t('dialog.supply')} ${token?.symbol || ''}`}
         token={token}
         address={address}
       />

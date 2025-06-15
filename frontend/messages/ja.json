@@ -136,6 +136,41 @@
     "accountInfoDescription": "接続中のアカウント情報を表示しています。",
     "notSet": "未設定"
   },
+  "Market": {
+    "pageTitle": "XRPマーケット",
+    "dialog": {
+      "walletBalance": "ウォレット残高",
+      "amount": "金額",
+      "transactionOverview": "取引概要",
+      "supplyApy": "供給APY",
+      "collateralization": "担保化",
+      "healthFactor": "ヘルスファクター",
+      "bridgeFee": "ブリッジ手数料",
+      "processing": "処理中...",
+      "supply": "供給",
+      "error": "エラー"
+    },
+    "tables": {
+      "asset": "資産",
+      "balance": "残高",
+      "apy": "APY",
+      "canBeCollateral": "担保可能",
+      "yes": "はい",
+      "no": "いいえ"
+    },
+    "cards": {
+      "assetsToSupply": "供給可能資産",
+      "yourSupplies": "あなたの供給",
+      "yourBorrows": "あなたの借入"
+    },
+    "buttons": {
+      "supply": "供給",
+      "withdraw": "引き出し"
+    },
+    "messages": {
+      "connectWallet": "ウォレットを接続してください"
+    }
+  },
   "History": {
     "table": {
       "date": "日付",

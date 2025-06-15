@@ -10,6 +10,7 @@ import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import FormHelperText from '@mui/material/FormHelperText'
 import OutlinedInput from '@mui/material/OutlinedInput'
+import { useTranslations } from 'next-intl'
 import Button from '@/components/ui/buttons/Button'
 import { createFieldValidator } from '@/utils/validation'
 import { BRDGE_GAS_FEE_AMOUT_XRP } from '@/constants/app'
@@ -32,6 +33,7 @@ export default function Dialog({
   address
 }: DialogProps) {
   const { showNotification } = useNotification()
+  const t = useTranslations('Market.dialog')
 
   const handleSuccess = () => {
     showNotification('supplySuccess', NotificationVariant.SUCCESS)
@@ -69,7 +71,7 @@ export default function Dialog({
               color="text.secondary"
               sx={{ mt: 0.5, mb: 1, textAlign: 'right' }}
             >
-              Wallet balance: {token?.balance || 0} {token?.symbol || ''}
+              {t('walletBalance')}: {token?.balance || 0} {token?.symbol || ''}
             </Typography>
             <form.Field
               name="amount"
@@ -84,9 +86,11 @@ export default function Dialog({
                   fullWidth
                   sx={{ mb: 2 }}
                 >
-                  <InputLabel htmlFor="bridge-amount-input">Amount</InputLabel>
+                  <InputLabel htmlFor="bridge-amount-input">
+                    {t('amount')}
+                  </InputLabel>
                   <OutlinedInput
-                    label="Amount"
+                    label={t('amount')}
                     id="bridge-amount-input"
                     type="text"
                     autoFocus={false}
@@ -115,7 +119,7 @@ export default function Dialog({
                     }}
                   />
                   <FormHelperText>
-                    {field.state.meta.errors.length > 0 ? 'Error' : ''}
+                    {field.state.meta.errors.length > 0 ? t('error') : ''}
                   </FormHelperText>
                 </FormControl>
               )}
@@ -123,7 +127,7 @@ export default function Dialog({
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 2 }}>
             <Typography variant="subtitle2" color="text.secondary">
-              Transaction overview
+              {t('transactionOverview')}
             </Typography>
             <Box
               sx={{
@@ -136,19 +140,21 @@ export default function Dialog({
               }}
             >
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="body1">Supply APY</Typography>
+                <Typography variant="body1">{t('supplyApy')}</Typography>
                 <Typography variant="body1">5%</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="body1">Collateralization</Typography>
+                <Typography variant="body1">
+                  {t('collateralization')}
+                </Typography>
                 <Typography variant="body1">Yes</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="body1">Health factor</Typography>
+                <Typography variant="body1">{t('healthFactor')}</Typography>
                 <Typography variant="body1">1.5</Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="body1">Bridge fee</Typography>
+                <Typography variant="body1">{t('bridgeFee')}</Typography>
                 <Typography variant="body1">
                   {BRDGE_GAS_FEE_AMOUT_XRP} XRP
                 </Typography>
@@ -164,7 +170,9 @@ export default function Dialog({
               size="large"
               disabled={form.state.values.amount === '' || isLoading}
             >
-              {isLoading ? 'Processing...' : `Supply ${token?.symbol || ''}`}
+              {isLoading
+                ? t('processing')
+                : `${t('supply')} ${token?.symbol || ''}`}
             </Button>
           </Box>
         </Box>

@@ -136,6 +136,41 @@
     "accountInfoDescription": "Displaying connected account information.",
     "notSet": "Not set"
   },
+  "Market": {
+    "pageTitle": "XRP Market",
+    "dialog": {
+      "walletBalance": "Wallet balance",
+      "amount": "Amount",
+      "transactionOverview": "Transaction overview",
+      "supplyApy": "Supply APY",
+      "collateralization": "Collateralization",
+      "healthFactor": "Health factor",
+      "bridgeFee": "Bridge fee",
+      "processing": "Processing...",
+      "supply": "Supply",
+      "error": "Error"
+    },
+    "tables": {
+      "asset": "Asset",
+      "balance": "Balance",
+      "apy": "APY",
+      "canBeCollateral": "Can be collateral",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "cards": {
+      "assetsToSupply": "ASSETS TO SUPPLY",
+      "yourSupplies": "YOUR SUPPLIES",
+      "yourBorrows": "YOUR BORROWS"
+    },
+    "buttons": {
+      "supply": "Supply",
+      "withdraw": "Withdraw"
+    },
+    "messages": {
+      "connectWallet": "Please, connect your wallet"
+    }
+  },
   "History": {
     "table": {
       "date": "Date",

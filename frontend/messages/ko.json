@@ -134,6 +134,41 @@
     "accountInfoDescription": "연결된 계정 정보를 표시하고 있습니다.",
     "notSet": "설정되지 않음"
   },
+  "Market": {
+    "pageTitle": "XRP 마켓",
+    "dialog": {
+      "walletBalance": "지갑 잔액",
+      "amount": "금액",
+      "transactionOverview": "거래 개요",
+      "supplyApy": "공급 APY",
+      "collateralization": "담보화",
+      "healthFactor": "헬스 팩터",
+      "bridgeFee": "브리지 수수료",
+      "processing": "처리 중...",
+      "supply": "공급",
+      "error": "오류"
+    },
+    "tables": {
+      "asset": "자산",
+      "balance": "잔액",
+      "apy": "APY",
+      "canBeCollateral": "담보 가능",
+      "yes": "예",
+      "no": "아니오"
+    },
+    "cards": {
+      "assetsToSupply": "공급 가능한 자산",
+      "yourSupplies": "귀하의 공급",
+      "yourBorrows": "귀하의 대출"
+    },
+    "buttons": {
+      "supply": "공급",
+      "withdraw": "인출"
+    },
+    "messages": {
+      "connectWallet": "지갑을 연결해주세요"
+    }
+  },
   "History": {
     "table": {
       "date": "날짜",
