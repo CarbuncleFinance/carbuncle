@@ -1,5 +1,5 @@
 {
-  "name": "carbuncle",
+  "name": "skrrt-vault",
   "private": true,
   "workspaces": [
     "frontend/*"

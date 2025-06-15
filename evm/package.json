@@ -1,5 +1,5 @@
 {
-  "name": "carbuncle-evm",
+  "name": "skrrtvault-evm",
   "private": true,
   "scripts": {
     "lint": "prettier . --check",
