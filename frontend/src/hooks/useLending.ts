@@ -124,12 +124,14 @@ export const useLending = (address: string) => {
   // ===============================
 
   useEffect(() => {
+    if (!address) return;
     fetchWalletBalance()
-  }, [fetchWalletBalance])
+  }, [fetchWalletBalance, address])
 
   useEffect(() => {
+    if (!address) return;
     fetchSupplyBalance()
-  }, [fetchSupplyBalance])
+  }, [fetchSupplyBalance, address])
 
   return {
     isLoading,

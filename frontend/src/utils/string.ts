@@ -51,3 +51,5 @@ export const padAddressTo32Bytes = (
   const paddingLength = hashLength * 2 - address32.length // 1バイト = 2文字
   return '0'.repeat(paddingLength) + address32
 }
+
+
