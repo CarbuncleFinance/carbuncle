@@ -36,6 +36,8 @@ Carbuncle Financeは、現実世界の「銀行口座」と「財布」の役割
 
 ![Image](https://github.com/user-attachments/assets/77799558-1a3e-44a1-b39b-df0cef1cee88)
 
+![Image](https://github.com/user-attachments/assets/5ebc9e1c-c485-4613-8152-4b77338754a3)
+
 ### レイヤー構成
 
 | レイヤー   | 目的                         | 対応チェーン                |
