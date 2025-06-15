@@ -69,4 +69,5 @@ $ cast --help
 
 |Contract|Explorer|
 |:---|:---|
-|XCB|https://explorer.testnet.xrplevm.org/address/0x5864bb1be322578c59e168aeee4dcc2dde18d43d|
+|SkrrtRouter|https://explorer.testnet.xrplevm.org/address/0x6b6961C65cc34De9e72Cc4FFC91514037E5ae14b|
+|Lending|https://explorer.testnet.xrplevm.org/address/0xa55EC9E93137069245BE493521f747a914636bE5|

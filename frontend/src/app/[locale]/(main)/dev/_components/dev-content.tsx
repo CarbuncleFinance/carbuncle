@@ -11,6 +11,8 @@ import {
   type SetTrustlineRequest,
   sendPayment
 } from '@gemwallet/api'
+import { Wallet } from 'xrpl'
+import { XrplClient } from '@/libs/xrplClient'
 
 export default function DevContent() {
   const handleSetAccount = async () => {
@@ -75,6 +77,26 @@ export default function DevContent() {
     }
   }
 
+  const handleSendMessage = async () => {
+    try {
+      console.log('== handleSendMessage ==')
+      const wallet = Wallet.generate()
+      console.log('wallet', wallet)
+
+      const xrplClient = new XrplClient()
+      const fundedWallet = await xrplClient.fundWallet(
+        'rnjyMRQTM2eYJcrjm1hXdfaUY6vhjAk4pC',
+        wallet
+      )
+      console.log('fundedWallet', fundedWallet)
+
+      const balance = await xrplClient.getNativeBalance(wallet.address)
+      console.log('balance', balance)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <>
       <Box>ウォレット接続テスト</Box>
@@ -102,6 +124,14 @@ export default function DevContent() {
           onClick={handleFaucet}
         >
           Faucet
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          disableElevation
+          onClick={handleSendMessage}
+        >
+          Send Message
         </Button>
       </Box>
     </>

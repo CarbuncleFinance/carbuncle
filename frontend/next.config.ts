@@ -3,7 +3,11 @@ import createNextIntlPlugin from 'next-intl/plugin'
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin'
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true
+  reactStrictMode: true,
+  webpack: (config) => {
+    config.ignoreWarnings = [{ message: /Critical dependency/ }]
+    return config
+  }
 }
 
 const withVanillaExtract = createVanillaExtractPlugin()

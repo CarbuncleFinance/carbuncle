@@ -14,12 +14,17 @@ import Typography from '@mui/material/Typography'
 import Button from '@/components/ui/buttons/Button'
 import Card from '@/components/ui/cards/Card'
 import { useWallet } from '@/hooks/useWallet'
+import { TokenBalance } from '@/types'
 
 interface GridSupplyCardProps {
   size: number
+  supplyBalances: TokenBalance[]
 }
 
-export default function GridSupplyCard({ size }: GridSupplyCardProps) {
+export default function GridSupplyCard({
+  size,
+  supplyBalances
+}: GridSupplyCardProps) {
   const { isConnected } = useWallet()
 
   const [openDialog, setOpenDialog] = useState(false)
@@ -50,42 +55,37 @@ export default function GridSupplyCard({ size }: GridSupplyCardProps) {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow>
-                <TableCell
-                  sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
-                >
-                  <Avatar
-                    alt="XRP"
-                    src="/icons/XRP.png"
-                    sx={{ width: 32, height: 32 }}
-                  />
-                  <Typography variant="body1" sx={{ ml: 0.5 }}>
-                    XRP
-                  </Typography>
-                </TableCell>
-                <TableCell>100</TableCell>
-                <TableCell>100</TableCell>
-                <TableCell>
-                  <Box sx={{ display: 'flex', gap: 1 }}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="small"
-                      onClick={handleOpenDialog}
-                    >
-                      Supply
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      size="small"
-                      onClick={handleOpenDialog}
-                    >
-                      Withdraw
-                    </Button>
-                  </Box>
-                </TableCell>
-              </TableRow>
+              {supplyBalances.map((asset: any) => (
+                <TableRow key={asset.symbol}>
+                  <TableCell
+                    sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+                  >
+                    <Avatar
+                      alt={asset.name}
+                      src={asset.icon}
+                      sx={{ width: 32, height: 32 }}
+                    />
+                    <Typography variant="body1" sx={{ ml: 0.5 }}>
+                      {asset.symbol}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>{asset.balance}</TableCell>
+                  <TableCell>{asset.apy} %</TableCell>
+                  <TableCell>
+                    <Box sx={{ display: 'flex', gap: 1 }}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        disabled
+                        onClick={() => handleOpenDialog()}
+                      >
+                        Withdraw
+                      </Button>
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

@@ -15,16 +15,19 @@ import Button from '@/components/ui/buttons/Button'
 import Card from '@/components/ui/cards/Card'
 import Dialog from '@/app/[locale]/(main)/home/_components/dialogs/Dialog'
 import { useWallet } from '@/hooks/useWallet'
-import { useLendingSupply } from '@/hooks/useLendingSupply'
 
 interface GridAssetsToSupplyCardProps {
   size: number
+  address: string
+  walletBalances: any
 }
 
 export default function GridAssetsToSupplyCard({
-  size
+  size,
+  address,
+  walletBalances
 }: GridAssetsToSupplyCardProps) {
-  const { isConnected, address } = useWallet()
+  const { isConnected } = useWallet()
 
   const [token, setToken] = useState<any>(null)
   const [openDialog, setOpenDialog] = useState(false)
@@ -42,14 +45,6 @@ export default function GridAssetsToSupplyCard({
     return null
   }
 
-  const { data, fetchData } = useLendingSupply()
-
-  useEffect(() => {
-    if (isConnected) {
-      fetchData()
-    }
-  }, [isConnected])
-
   return (
     <Grid size={size}>
       <Card title="ASSETS TO SUPPLY">
@@ -65,7 +60,7 @@ export default function GridAssetsToSupplyCard({
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((asset) => (
+              {walletBalances.map((asset: any) => (
                 <TableRow key={asset.symbol}>
                   <TableCell
                     sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
@@ -88,6 +83,7 @@ export default function GridAssetsToSupplyCard({
                         variant="contained"
                         color="primary"
                         size="small"
+                        disabled={asset.name !== 'XRP'}
                         onClick={() => handleOpenDialog(asset)}
                       >
                         Supply
@@ -106,6 +102,7 @@ export default function GridAssetsToSupplyCard({
         onClose={handleCloseDialog}
         title={`Supply ${token?.symbol || ''}`}
         token={token}
+        address={address}
       />
     </Grid>
   )

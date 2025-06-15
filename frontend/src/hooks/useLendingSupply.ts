@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useForm } from '@tanstack/react-form'
 import { LIST_ASSETS } from '@/constants/app'
 import { useWallet } from '@/hooks/useWallet'
@@ -9,7 +9,7 @@ import {
   BRDGE_GAS_FEE_AMOUT_XRP,
   AXELAR_GATEWAY_WALLET
 } from '@/constants/app'
-import { xrpToDrops } from 'xrpl'
+import { xrpToDrops, decodeAccountID } from 'xrpl'
 import { z } from 'zod'
 import { SendPaymentRequest } from '@gemwallet/api'
 import { isInstalled, sendPayment } from '@gemwallet/api'
@@ -59,12 +59,34 @@ export const useLendingSupply = (
     onSubmit: async ({ value }) => {
       setIsLoading(true)
       try {
+        /*
         const memos = createBridgeMemo({
           bridgeType: BridgeTypes.INTERCHAIN_TRANSFER,
           destinationAddress: SQUID_ROUTER_CONTRACT.address,
           destinationChain: 'xrpl-evm',
           gasFeeAmount: xrpToDrops(BRDGE_GAS_FEE_AMOUT_XRP).toString(),
           toAddress: value.evmAddress
+        })
+
+        const transaction: SendPaymentRequest = {
+          amount: xrpToDrops(
+            Number(value.amount) + Number(BRDGE_GAS_FEE_AMOUT_XRP)
+          ).toString(),
+          destination: AXELAR_GATEWAY_WALLET.address,
+          memos: memos
+        }
+        */
+
+        const accountIDBytes = decodeAccountID(address ?? '')
+        console.log('accountIDBytes', accountIDBytes)
+
+        const memos = createBridgeMemo({
+          bridgeType: BridgeTypes.CALL_CONTRACT,
+          destinationAddress: '0xe432150cce91c13a887f7D836923d5597adD8E31',
+          destinationChain: 'xrpl-evm',
+          gasFeeAmount: xrpToDrops(BRDGE_GAS_FEE_AMOUT_XRP).toString(),
+          // toAddress: `0x${[...accountIDBytes].map((x) => x.toString(16).padStart(2, '0')).join('')}`
+          toAddress: '0xEE36B95F8282936E75037C88BDddAa20e15482D1'
         })
 
         const transaction: SendPaymentRequest = {
@@ -103,7 +125,7 @@ export const useLendingSupply = (
     }
   })
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     console.log('address: ', address)
 
     const xrplClient = new XrplClient()
@@ -132,7 +154,7 @@ export const useLendingSupply = (
     })
 
     setData(tokens)
-  }
+  }, [address])
 
   return {
     data,

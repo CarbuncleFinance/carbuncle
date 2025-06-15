@@ -11,19 +11,26 @@ import FormControl from '@mui/material/FormControl'
 import FormHelperText from '@mui/material/FormHelperText'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import Button from '@/components/ui/buttons/Button'
-import { useLendingSupply } from '@/hooks/useLendingSupply'
 import { createFieldValidator } from '@/utils/validation'
 import { BRDGE_GAS_FEE_AMOUT_XRP } from '@/constants/app'
 import { useNotification, NotificationVariant } from '@/hooks/useNotification'
+import { useSupplyForm } from '@/forms/useSupplyForm'
 
 interface DialogProps {
   open: boolean
   onClose: () => void
   title: string
   token: any
+  address: string
 }
 
-export default function Dialog({ open, onClose, title, token }: DialogProps) {
+export default function Dialog({
+  open,
+  onClose,
+  title,
+  token,
+  address
+}: DialogProps) {
   const { showNotification } = useNotification()
 
   const handleSuccess = () => {
@@ -35,7 +42,8 @@ export default function Dialog({ open, onClose, title, token }: DialogProps) {
     showNotification('supplyFailed', NotificationVariant.ERROR)
   }
 
-  const { form, isLoading, formSchema } = useLendingSupply(
+  const { form, schema, isLoading } = useSupplyForm(
+    address,
     handleSuccess,
     handleError
   )
@@ -66,7 +74,7 @@ export default function Dialog({ open, onClose, title, token }: DialogProps) {
             <form.Field
               name="amount"
               validators={{
-                onChange: createFieldValidator('amount', formSchema)
+                onChange: createFieldValidator('amount', schema)
               }}
             >
               {(field) => (
@@ -104,39 +112,6 @@ export default function Dialog({ open, onClose, title, token }: DialogProps) {
                     aria-describedby="bridge-amount-input-helper-text"
                     inputProps={{
                       'aria-label': 'bridge-amount-input'
-                    }}
-                  />
-                  <FormHelperText>
-                    {field.state.meta.errors.length > 0 ? 'Error' : ''}
-                  </FormHelperText>
-                </FormControl>
-              )}
-            </form.Field>
-            <form.Field
-              name="evmAddress"
-              validators={{
-                onChange: createFieldValidator('evmAddress', formSchema)
-              }}
-            >
-              {(field) => (
-                <FormControl
-                  error={field.state.meta.errors.length > 0}
-                  variant="outlined"
-                  fullWidth
-                >
-                  <InputLabel htmlFor="bridge-evm-address-input">
-                    EVM address
-                  </InputLabel>
-                  <OutlinedInput
-                    label="EVM address"
-                    id="bridge-evm-address-input"
-                    type="text"
-                    autoFocus={false}
-                    value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    aria-describedby="bridge-evm-address-input-helper-text"
-                    inputProps={{
-                      'aria-label': 'bridge-evm-address-input'
                     }}
                   />
                   <FormHelperText>

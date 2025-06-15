@@ -5,9 +5,9 @@
     "frontend/*"
   ],
   "scripts": {
-    "dev": "bun run --workspace frontend dev",
-    "build": "bun run --workspace frontend build",
-    "start": "bun run --workspace frontend start",
+    "dev": "pnpm --filter frontend dev",
+    "build": "pnpm --filter frontend build",
+    "start": "pnpm --filter frontend start",
     "lint": "biome check .",
     "format": "biome format --write .",
     "db:start": "supabase start",
@@ -15,10 +15,5 @@
     "db:reset": "supabase db reset",
     "db:status": "supabase status",
     "db:gen": "supabase gen types typescript > ./frontend/src/types/database.ts --local"
-  },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "supabase": "^2.24.3"
-  },
-  "packageManager": "yarn@4.9.1+sha512.f95ce356460e05be48d66401c1ae64ef84d163dd689964962c6888a9810865e39097a5e9de748876c2e0bf89b232d583c33982773e9903ae7a76257270986538"
+  }
 }

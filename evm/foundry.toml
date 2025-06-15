@@ -20,7 +20,9 @@ fs_permissions = [
 ]
 
 remappings = [
-  '@openzeppelin/=lib/openzeppelin-contracts/'
+  '@openzeppelin/=lib/openzeppelin-contracts/',
+  '@axelar-network/axelar-gmp-sdk-solidity/=lib/axelar-gmp-sdk-solidity/',
+  '@axelar-network/interchain-token-service/=lib/interchain-token-service/'
 ]
 
 [fuzz]

@@ -1,7 +1,14 @@
 import type { Memo as GemWalletMemo } from '@gemwallet/api'
 import { addressTo32, padAddressTo32Bytes, stringToHex } from '@/utils/string'
+import { createDeployInterchainTokenPayload } from '@/utils/payload'
 import { keccak256, toUtf8Bytes } from 'ethers'
 import dayjs from 'dayjs'
+
+export enum MessageTypes {
+  INTERCHAIN_TRANSFER = 0,
+  DEPLOY_INTERCHAIN_TOKEN = 1,
+  LINK_TOKEN = 5
+}
 
 export enum BridgeTypes {
   ADD_GAS = 'add_gas',
@@ -105,13 +112,32 @@ export const createBridgeMemo = ({
     toAddress
   })
 
+  const memodata = createDeployInterchainTokenPayload({
+    messageType: MessageTypes.DEPLOY_INTERCHAIN_TOKEN,
+    name: 'MockToken',
+    symbol: 'MKT',
+    decimals: 18,
+    minter: '0x'
+  })
+
+  /*
+  const memodata = AbiCoder.defaultAbiCoder().encode(
+    ['string'],
+    ['Hello World']
+  )
+  */
+
+  console.log('memodata', memodata)
+
   const payloadMemo: GemWalletMemo = {
     memo: {
       memoType: stringToHex('payload'),
+      /*
       memoData: [
         paddedAddress.padStart(64, '0').toUpperCase(),
         hash.slice(2).padStart(64, '0').toUpperCase()
-      ].join('')
+      ].join('')*/
+      memoData: memodata.slice(2)
     }
   }
 

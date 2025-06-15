@@ -1,9 +1,17 @@
-import { Client, type Payment, type TxResponse, dropsToXrp, Wallet } from 'xrpl'
+import {
+  Client,
+  type Payment,
+  type TxResponse,
+  dropsToXrp,
+  Wallet,
+  xrpToDrops
+} from 'xrpl'
 import { hexToString } from '@/utils/string'
 import { AppErrorCode } from '@/types/enums'
 
 export class XrplClient {
   private client: Client
+  private isConnected: boolean = false
 
   constructor(endpoint: string = 'wss://testnet.xrpl-labs.com') {
     this.client = new Client(endpoint, {
@@ -11,15 +19,37 @@ export class XrplClient {
     })
   }
 
-  async connect() {}
+  private async ensureConnection() {
+    if (!this.isConnected) {
+      try {
+        await this.client.connect()
+        this.isConnected = true
+      } catch (error) {
+        console.error('Failed to connect:', error)
+        throw new Error(AppErrorCode.WALLET_CONNECTION_FAILED)
+      }
+    }
+  }
+
+  private async disconnect() {
+    if (this.isConnected) {
+      try {
+        await this.client.disconnect()
+        this.isConnected = false
+      } catch (error) {
+        console.error('Failed to disconnect:', error)
+      }
+    }
+  }
 
   async getAccountInfo(address: string): Promise<{
     account: string
     balance: number
     domain: string
   }> {
+    console.log('[START]getAccountInfo')
     try {
-      await this.client.connect()
+      await this.ensureConnection()
       const { result } = await this.client.request({
         command: 'account_info',
         account: address
@@ -37,15 +67,13 @@ export class XrplClient {
     } catch (error) {
       console.error(error)
       throw new Error(AppErrorCode.WALLET_ACCOUNT_INFO_FETCH_FAILED)
-    } finally {
-      await this.client.disconnect()
     }
   }
 
   async getAccountLines(address: string): Promise<any> {
     console.log('[START]getAccountLines')
     try {
-      await this.client.connect()
+      await this.ensureConnection()
       const { result } = await this.client.request({
         command: 'account_lines',
         account: address
@@ -56,20 +84,20 @@ export class XrplClient {
       console.error(error)
       throw new Error(AppErrorCode.WALLET_ACCOUNT_LINES_FETCH_FAILED)
     } finally {
-      await this.client.disconnect()
       console.log('[END]getAccountLines')
     }
   }
 
   async getNativeBalance(address: string): Promise<number> {
+    console.log('[START]getNativeBalance')
     try {
-      await this.client.connect()
+      await this.ensureConnection()
       const balance = await this.client.getXrpBalance(address)
       return balance
     } catch (error) {
       throw new Error(AppErrorCode.WALLET_BALANCE_FETCH_FAILED)
     } finally {
-      await this.client.disconnect()
+      console.log('[END]getNativeBalance')
     }
   }
 
@@ -81,7 +109,7 @@ export class XrplClient {
     }[]
   > {
     try {
-      await this.client.connect()
+      await this.ensureConnection()
 
       const balance = await this.client.getXrpBalance(address)
       const { result } = await this.client.request({
@@ -104,29 +132,29 @@ export class XrplClient {
       return tokens
     } catch (error) {
       throw new Error(AppErrorCode.WALLET_BALANCE_FETCH_FAILED)
-    } finally {
-      await this.client.disconnect()
     }
   }
 
   async sendPaymentTransaction(
     transaction: Payment
   ): Promise<TxResponse<Payment>> {
+    console.log('[START]sendPaymentTransaction')
     try {
-      await this.client.connect()
+      await this.ensureConnection()
       const result = await this.client.submitAndWait(transaction)
       return result
     } catch (error) {
       console.error(error)
       throw new Error(AppErrorCode.WALLET_TRANSACTION_FAILED)
     } finally {
-      await this.client.disconnect()
+      console.log('[END]sendPaymentTransaction')
     }
   }
 
   async sendFaucetTransaction(address: string): Promise<any> {
+    console.log('[START]sendFaucetTransaction')
     try {
-      await this.client.connect()
+      await this.ensureConnection()
       const seed = 'sEdTcuxx2UmKtshP1DxmgqLf1XRBEsc'
       const wallet = Wallet.fromSeed(seed)
 
@@ -150,7 +178,33 @@ export class XrplClient {
       console.error(error)
       throw new Error(AppErrorCode.WALLET_TRANSACTION_FAILED)
     } finally {
-      await this.client.disconnect()
+      console.log('[END]sendFaucetTransaction')
+    }
+  }
+
+  async fundWallet(address: string, wallet: Wallet): Promise<any> {
+    console.log('[START]fundWallet')
+    try {
+      await this.ensureConnection()
+      const fundedWallet = await this.client.fundWallet(wallet)
+
+      const transaction: Payment = {
+        TransactionType: 'Payment',
+        Account: wallet.address,
+        Amount: xrpToDrops(9),
+        Destination: address
+      }
+
+      await this.client.submitAndWait(transaction, {
+        wallet
+      })
+
+      return fundedWallet
+    } catch (error) {
+      console.error(error)
+      throw new Error(AppErrorCode.WALLET_TRANSACTION_FAILED)
+    } finally {
+      console.log('[END]fundWallet')
     }
   }
 }

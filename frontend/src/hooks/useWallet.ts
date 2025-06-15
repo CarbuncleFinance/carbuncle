@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useWalletStore } from '@/stores/wallet'
 import { XrplClient } from '@/libs/xrplClient'
 
@@ -9,21 +9,24 @@ type AccountInfo = {
 }
 
 export function useWallet() {
+  const xrplClient = useRef<XrplClient>(new XrplClient())
+
   const { wallet } = useWalletStore()
 
   const [accountInfo, setAccountInfo] = useState<AccountInfo | null>(null)
 
-  const handleRequestAccountInfo = async () => {
+  const handleRequestAccountInfo = useCallback(async () => {
     try {
-      const xrplClient = new XrplClient()
-      const accountInfo = await xrplClient.getAccountInfo(wallet.address)
+      const accountInfo = await xrplClient.current.getAccountInfo(
+        wallet.address
+      )
 
       setAccountInfo(accountInfo)
     } catch (error) {
       console.error(error)
       throw error
     }
-  }
+  }, [wallet.address])
 
   useEffect(() => {
     if (wallet.address) {
