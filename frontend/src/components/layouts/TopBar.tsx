@@ -17,14 +17,6 @@ import { useWallet } from '@/hooks/useWallet'
 
 const menus = [
   {
-    href: '/bridge',
-    label: 'Bridge'
-  },
-  {
-    href: '/faucet',
-    label: 'Faucet'
-  },
-  {
     href: '/dev',
     label: 'Dev'
   }

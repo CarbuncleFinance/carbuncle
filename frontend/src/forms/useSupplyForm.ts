@@ -40,7 +40,7 @@ type SupplyFormValues = {
 }
 
 const defaultValues: SupplyFormValues = {
-  amount: '2',
+  amount: '2'
 }
 
 export const useSupplyForm = (
